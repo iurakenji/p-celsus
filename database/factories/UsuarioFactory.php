@@ -17,17 +17,23 @@ class UsuarioFactory extends Factory
      */
     public function definition(): array
     {
+        $nome = $this->faker->name(20);
+        $login = $this->faker->userName(20);
+        $conselho = $this->faker->randomElement(['CRF','CRM','COREN', 'CRN', '']);
+        $genero = $this->faker->randomElement(['M','F','O']);
+        $titulo = $this->faker->randomElement(['Farmacêutica(o)','Médica(o)','Enfermeira(o)', 'Nutricionista', 'Analista', '']);
         return [
-            'login' => fake()->name(20),
-            'nome' => fake()->name(),
+            'login' => $login,
+            'nome' => $nome,
             'email' => fake()->unique()->safeEmail(),
             'tipo_acesso_id' => rand(1,3),
-            'conselho' => array_rand(['CRF','CRM','COREN'],1),
+            'conselho' => $conselho,
             'registro' => rand(10000,999999),
-            'genero' => array_rand(['M','F','O'],1),
-            'titulo' => Str::random(10),
+            'genero' => $genero,
+            'titulo' => $titulo,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'slug' => Str::slug($nome),
             'remember_token' => Str::random(10),
         ];
     }
