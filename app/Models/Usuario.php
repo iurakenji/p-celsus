@@ -27,8 +27,10 @@ class Usuario extends Authenticatable
         'tipo_acesso_id',
         'conselho',
         'registro',
+        'genero',
         'titulo',
         'email',
+        'ativo',
     ];
 
     /**

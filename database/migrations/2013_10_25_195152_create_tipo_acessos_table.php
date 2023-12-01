@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('tipo_acessos', function (Blueprint $table) {
             $table->id();
-            $table->string('nome',20);
+            $table->string('nome',25);
             $table->text('descricao');
             $table->timestamps();
         });

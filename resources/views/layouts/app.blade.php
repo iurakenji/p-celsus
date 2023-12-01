@@ -1,7 +1,11 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Controllers\PagesController;
+use Illuminate\Support\Facades\Auth;
 
+$user = Auth::user();
 ?>
 
 <!DOCTYPE html>
@@ -34,11 +38,11 @@ use Controllers\PagesController;
     <div class="nav_wrapper">
         <a href=" {{ route('home') }} " class="brand-logo" style="margin-left: 1%">p-Celsus</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href=" {{ route('usuarios') }} ">Usuarios</a></li>
-                    <li><a href=" # ">Fornecedores</a></li>
                     <li><a href=" # ">Matérias-Primas</a></li>
                     <li><a href=" # ">Análises</a></li>
                     <li><a href=" # ">Lotes</a></li>
+                    <li><a href=" # ">Fornecedores</a></li>
+                    <li><a href=" {{ route('usuarios') }} ">Usuários</a></li>
                 </ul>
     </div>
     </nav>
@@ -52,12 +56,12 @@ use Controllers\PagesController;
         @endcomponent
     @show
 
-    <div class="col s12"  style="height: 85vh;">
+    <div class="col s12"  style="height: auto;">
         @yield('conteudo')
     </div>
     </div>
     <div class="row container">
-        <small class="page-footer" style="color: black"><center>p-celsus - Controle de Qualidade Essentia Pharma - Logado como {{ $usuario_atual ?? 'Anônimo'}}.<b>  </b> <a href='/php/logout.php'>(sair)</a> </center></small>
+        <small class="page-footer" style="color: black"><center>p-celsus - Controle de Qualidade Essentia Pharma - Logado como <b>{{ $user['login'] ?? 'Anônimo'}}.</b> <a href='{{ route('login.logout') }}'>(sair)</a> </center></small>
     </div>
     </body>
     <!--JavaScript at end of body for optimized loading-->

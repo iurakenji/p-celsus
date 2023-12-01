@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +16,22 @@ use App\Http\Controllers\LoginController;
 |
 */
 
-Route::get('/', [PagesController::class,'index'])->name('index');
+route::get("/request", function (\Illuminate\Http\Request $request) {
+    $r = $request;
+    dd($r);
+    return 'Sim';
+});
 
-Route::get('/home', [PagesController::class,'home'])->name('home');
-Route::get('/usuarios', [PagesController::class,'usuarios'])->name('usuarios');
-Route::get('/usuarios/{slug}', [PagesController::class,'usuarios_detalhes'])->name('usuarios_detalhes');
+Route::get('/', [PagesController::class, 'index'])->name('index');
 
-Route::view('login', 'login.form')->name('login.form');
-route::post('/auth', [LoginController::class,'auth'])->name('login.auth');
+Route::get('/home', [PagesController::class, 'home'])->name('home');
+
+Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
+
+Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
+
+Route::get('/usuario/{slug}', [PagesController::class, 'usuario'])->name('usuario');
+
+Route::get('/usuarios/usuarios', [PagesController::class, 'usuarios'])->name('usuarios');
+
 

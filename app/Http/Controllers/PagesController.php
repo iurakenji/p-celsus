@@ -13,6 +13,12 @@ class PagesController extends Controller
         return view('login.form');
     }
 
+    public function home() {
+
+        return view('home');
+    }
+
+
     public function usuarios() {
 
         $usuarios = Usuario::paginate(15);
@@ -21,11 +27,11 @@ class PagesController extends Controller
 
     }
 
-    public function usuarios_detalhes($slug) {
+    public function usuario($slug) {
 
         $usuario = Usuario::where('slug', $slug)->first();
 
-       return view('usuarios.detalhes', compact('usuario'));
+       return view('usuarios.usuario', compact('usuario'));
 
     }
 

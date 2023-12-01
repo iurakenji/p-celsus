@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\tipo_acesso>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tipo_acesso>
  */
-class TipoAcessoFactory extends Factory
+class Tipo_AcessoFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,7 @@ class TipoAcessoFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+
         ];
     }
 }

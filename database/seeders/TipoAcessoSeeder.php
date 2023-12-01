@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+
 
 class TipoAcessoSeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class TipoAcessoSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+       DB::table('tipo_acessos')->insert(['nome' => 'CQ - Técnico', 'descricao' => '']);
+       DB::table('tipo_acessos')->insert(['nome' => 'CQ - Farmacêutico', 'descricao' => '']);
+       DB::table('tipo_acessos')->insert(['nome' => 'GQ', 'descricao' => '']);
     }
 }

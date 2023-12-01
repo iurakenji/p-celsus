@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Tipo_acesso;
 use App\Models\Usuario;
 use Illuminate\Database\Seeder;
 
@@ -13,11 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         Usuario::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(TipoAcessoSeeder::class);
+        $this->call(UsuarioSeeder::class);
+        Usuario::factory(30)->create();
     }
 }

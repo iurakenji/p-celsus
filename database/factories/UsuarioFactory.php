@@ -22,6 +22,7 @@ class UsuarioFactory extends Factory
         $conselho = $this->faker->randomElement(['CRF','CRM','COREN', 'CRN', '']);
         $genero = $this->faker->randomElement(['M','F','O']);
         $titulo = $this->faker->randomElement(['Farmacêutica(o)','Médica(o)','Enfermeira(o)', 'Nutricionista', 'Analista', '']);
+        $ativo = $this->faker->boolean();
         return [
             'login' => $login,
             'nome' => $nome,
@@ -34,6 +35,7 @@ class UsuarioFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'slug' => Str::slug($nome),
+            'ativo' => $ativo,
             'remember_token' => Str::random(10),
         ];
     }

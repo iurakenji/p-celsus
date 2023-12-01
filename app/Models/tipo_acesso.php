@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipo_acesso extends Model
+class Tipo_acesso extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nome', 'descricao'];
 }
+
