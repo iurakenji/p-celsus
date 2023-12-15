@@ -34,4 +34,5 @@ Route::get('/usuario/{slug}', [PagesController::class, 'usuario'])->name('usuari
 
 Route::get('/usuarios/usuarios', [PagesController::class, 'usuarios'])->name('usuarios');
 
+Route::get('/mps', [PagesController::class, 'mps'])->name('mps');
 

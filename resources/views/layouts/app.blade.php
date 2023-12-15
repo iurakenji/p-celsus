@@ -38,7 +38,7 @@ $user = Auth::user();
     <div class="nav_wrapper">
         <a href=" {{ route('home') }} " class="brand-logo" style="margin-left: 1%">p-Celsus</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href=" # ">Matérias-Primas</a></li>
+                    <li><a href=" {{ route('mps') }} ">Matérias-Primas</a></li>
                     <li><a href=" # ">Análises</a></li>
                     <li><a href=" # ">Lotes</a></li>
                     <li><a href=" # ">Fornecedores</a></li>

@@ -35,4 +35,10 @@ class PagesController extends Controller
 
     }
 
+    public function mps() {
+
+       return view('mps.mps');
+
+    }
+
 }
