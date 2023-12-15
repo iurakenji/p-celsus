@@ -3,6 +3,7 @@
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+//Route::resource('usuario', UsuarioController::class);
 
-route::get("/request", function (\Illuminate\Http\Request $request) {
+Route::get("/request", function (\Illuminate\Http\Request $request) {
     $r = $request;
     dd($r);
     return 'Sim';
@@ -30,8 +32,8 @@ Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->na
 
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
+Route::post('/usuario/upsert', [UsuarioController::class, 'upsert'])->name('usuario_upsert');
 Route::get('/usuario/{slug}', [PagesController::class, 'usuario'])->name('usuario');
-
 Route::get('/usuarios/usuarios', [PagesController::class, 'usuarios'])->name('usuarios');
 
 Route::get('/mps', [PagesController::class, 'mps'])->name('mps');

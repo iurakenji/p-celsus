@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Mp extends Model
 {
@@ -15,8 +16,6 @@ class Mp extends Model
     }
 
     public $incrementing = false;
-
-    protected $primaryKey = 'codigo';
 
     protected $fillable = [
         'codigo',
@@ -49,6 +48,8 @@ class Mp extends Model
         'patenteado',
         'fornecedor_id'
 ];
+
+protected $primaryKey = 'codigo';
 
     protected $attributes = [
         'tipo' => 'Sólido',

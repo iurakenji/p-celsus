@@ -12,48 +12,42 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mps', function (Blueprint $table) {
-            $table->codigo();
+            $table->bigInteger('codigo');
             $table->string('nome',150);
             $table->string('nome_fc',150);
-            $table->enum('tipo',['Sólido','Líquido','Semi-sólido']);
-            //$table->enum('forma',['Sólido','Líquido','Semi-sólido']); ???? Verificar
-            $table->string('cas',15);
-            $table->string('nome_popular',15);
+            $table->enum('tipo',['Sólido','Líquido','Semi-Sólido']);
+            $table->string('forma');
+            $table->string('cas',50);
+            $table->string('nome_popular',100);
+            $table->string('parte_usada',100);
+            $table->boolean('mp_vegetal');
+            $table->string('dci',100);
+            $table->string('dcb',100);
+            $table->boolean('port_344');
+            $table->string('lista_344',20);
+            $table->boolean('pol_fed');
+            $table->boolean('pol_civ');
+            $table->boolean('exerc');
+            $table->string('cor',100);
+            $table->string('odor',100);
+            $table->string('sabor',100);
+            $table->boolean('bancada');
+            $table->boolean('tratado');
+            $table->boolean('hormonio');
+            $table->boolean('citostatico');
+            $table->boolean('enzima');
+            $table->boolean('lacto');
+            $table->boolean('tintura');
+            $table->string('grupodescarte_id',15)->constrained();
+            $table->text('obs');
+            $table->string('patenteado',15);
+            $table->string('fornecedor_id',15)->constrained();
 
-            $table->foreignId('tipo_acesso_id')->constrained();
-            $table->string('conselho',15);
-            $table->string('registro',25);
             $table->enum('genero',['M','F','O']);
-            $table->string('titulo',50);
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('slug');
             $table->boolean('ativo');
             $table->rememberToken();
             $table->timestamps();
-            'parte_usada',
-            'dci',
-            'dcb',
-            'port_344',
-            'lista_344',
-            'pol_fed',
-            'pol_civ',
-            'exerc',
-            'cor',
-            'odor',
-            'bancada',
-            'tratado',
-            'hormonio',
-            'citostatico',
-            'enzima',
-            'lacto',
-            'tintura',
-            'producao',
-            'grupodescarte_id',
-            'obs',
-            'patenteado',
-            'fornecedor_id'
+
         });
     }
 

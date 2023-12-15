@@ -4,14 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class grupoDescarte extends Model
+class GrupoDescarte extends Model
 {
     use HasFactory;
 
-    public function grupodescarte(): HasMany
+    public function grupoDescarte(): HasMany
     {
-        return $this->HasMany(Grupodescarte::class);
+        return $this->hasMany(GrupoDescarte::class);
     }
 
     protected $fillable = [
