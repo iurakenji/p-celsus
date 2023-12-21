@@ -25,7 +25,7 @@ Usuários
                     <td>{{ $usuario->nome }} </a></li>
                     <td>{{ $usuario->titulo }} </a></li>
                     <td>{{ $usuario->tipo_acesso_id }} </a></li>
-                    <td><a href=" {{ route('usuario', $usuario->slug) }} " class="list"> Detalhes </a></li>
+                    <td><a href=" {{ route('usuarios.show', $usuario->slug) }} " class="list"> Detalhes </a></li>
                 </tr>
 
         @endforeach

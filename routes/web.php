@@ -18,23 +18,18 @@ use Illuminate\Support\Facades\Route;
 */
 //Route::resource('usuario', UsuarioController::class);
 
-Route::get("/request", function (\Illuminate\Http\Request $request) {
-    $r = $request;
-    dd($r);
-    return 'Sim';
-});
-
-Route::get('/', [PagesController::class, 'index'])->name('index');
-
 Route::get('/home', [PagesController::class, 'home'])->name('home');
 
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
-
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
-Route::post('/usuario/upsert', [UsuarioController::class, 'upsert'])->name('usuario_upsert');
-Route::get('/usuario/{slug}', [PagesController::class, 'usuario'])->name('usuario');
-Route::get('/usuarios/usuarios', [PagesController::class, 'usuarios'])->name('usuarios');
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::get('/usuarios/{slug}', [UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/{slug}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::put('/usuarios/{slug}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::delete('/usuarios/{slug}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
 
 Route::get('/mps', [PagesController::class, 'mps'])->name('mps');
 

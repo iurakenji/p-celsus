@@ -15,7 +15,9 @@ class UsuarioController extends Controller
      */
     public function index()
     {
+        $usuarios = Usuario::paginate(15);
 
+        return view('usuarios.usuarios', compact('usuarios'));
     }
 
     /**
@@ -37,9 +39,12 @@ class UsuarioController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(usuario $usuario)
+    public function show(Usuario $usuario)
     {
-        //
+        dd($usuario->slug);
+        $usuario = Usuario::where('login', $usuario->slug)->first();
+
+      // return view('usuarios.show', compact('usuario'));
     }
 
     /**
@@ -56,43 +61,43 @@ class UsuarioController extends Controller
     public function upsert(Request $request)
     {
         $dados = $request->all();
-        $dados['password'] = Hash::make('123456');
+        $dados['password'] = Hash::make($dados['password']);
         $usuario = Usuario::upsert(
             [
-                'login' => $usuario['login'],
-                'nome' => $usuario['nome'],
+                'login' => $dados['login'],
+                'nome' => $dados['nome'],
                 'tipo_acesso_id' => 1,
-                'conselho' => $usuario['conselho'],
-                'registro' => $usuario['registro'],
-                'titulo' => $usuario['titulo'],
-                'email' => $usuario['email'],
-                'password' => $usuario['password'],
-                'slug' => Str::slug($usuario['nome']),
+                'conselho' => $dados['conselho'],
+                'registro' => $dados['registro'],
+                'titulo' => $dados['titulo'],
+                'email' => $dados['email'],
+                'password' => $dados['password'],
+                'slug' => Str::slug($dados['nome']),
                 'ativo' => 1
             ],
             [
                 'id'
             ],
             [
-                'login' => $usuario['login'],
-                'nome' => $usuario['nome'],
+                'login' => $dados['login'],
+                'nome' => $dados['nome'],
                 'tipo_acesso_id' => 1,
-                'conselho' => $usuario['conselho'],
-                'registro' => $usuario['registro'],
-                'titulo' => $usuario['titulo'],
-                'email' => $usuario['email'],
-                'password' => $usuario['password'],
-                'slug' => Str::slug($usuario['nome']),
+                'conselho' => $dados['conselho'],
+                'registro' => $dados['registro'],
+                'titulo' => $dados['titulo'],
+                'email' => $dados['email'],
+                'password' => $dados['password'],
+                'slug' => Str::slug($dados['nome']),
                 'ativo' => 1
             ]
         );
-        return route('usuario', $usuario->slug);
+        return redirect()->route('usuario.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(usuario $usuario)
+    public function destroy(Usuario $usuario)
     {
         //
     }

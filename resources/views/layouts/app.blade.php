@@ -42,7 +42,7 @@ $user = Auth::user();
                     <li><a href=" # ">Análises</a></li>
                     <li><a href=" # ">Lotes</a></li>
                     <li><a href=" # ">Fornecedores</a></li>
-                    <li><a href=" {{ route('usuarios') }} ">Usuários</a></li>
+                    <li><a href=" {{ route('usuarios.index') }} ">Usuários</a></li>
                 </ul>
     </div>
     </nav>

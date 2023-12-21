@@ -9,7 +9,7 @@ Usuários
     <div class="row center" style="margin: 0px 20px ">
         <h5>{{ $usuario->nome }}</h5><br>
 
-        <form action=" {{ route('usuario_upsert') }} " method="post" style="margin: auto;">
+        <form action=" {{ route('usuario.upsert') }} " method="post" style="margin: auto;">
             @csrf
             <div class="row">
                 <div class="input-field col s6">
@@ -65,6 +65,6 @@ Usuários
     </div>
 
     <footer class="row left">
-        <a href="{{ route('usuarios') }}">Voltar</a>
+        <a href="{{ route('usuarios.index') }}">Voltar</a>
     </footer>
 @endsection
