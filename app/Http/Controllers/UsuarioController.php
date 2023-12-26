@@ -41,16 +41,15 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        dd($usuario->slug);
-        $usuario = Usuario::where('login', $usuario->slug)->first();
-
-      // return view('usuarios.show', compact('usuario'));
+        //$usu = Usuario::where('login', $usuario->slug)->first();
+        //dd($usuario);
+       return view('usuarios.show', compact('usuario'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(usuario $usuario)
+    public function edit(Usuario $usuario)
     {
         //
     }

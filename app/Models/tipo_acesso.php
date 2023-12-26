@@ -12,7 +12,7 @@ class Tipo_acesso extends Model
     use HasFactory;
 
     public function usuario(): HasMany {
-        return $this->hasMany(Usuario::class);
+        return $this->hasMany(Usuario::class,'tipo_acesso');
     }
 
     protected $fillable = ['nome', 'descricao'];

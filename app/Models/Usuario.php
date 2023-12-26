@@ -13,8 +13,8 @@ class Usuario extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function tipoAcesso(): BelongsTo {
-        return $this->belongsTo(Usuario::class);
+    public function tipo_Acesso(): BelongsTo {
+        return $this->belongsTo(Tipo_acesso::class, 'tipo_acesso_id');
     }
 
     /**

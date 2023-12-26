@@ -9,7 +9,7 @@ Usuários
     <div class="row center" style="margin: 0px 20px ">
         <h5>{{ $usuario->nome }}</h5><br>
 
-        <form action=" {{ route('usuario.upsert') }} " method="post" style="margin: auto;">
+        <form action=" {{ route('usuarios.edit', ['usuario' => $usuario->id]) }} " method="post" style="margin: auto;">
             @csrf
             <div class="row">
                 <div class="input-field col s6">
@@ -27,10 +27,9 @@ Usuários
                 </div>
                 <div class="input-field col s2">
                 <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
-                    <option value="" disabled selected>Selecionar</option>
-                    <option value="1">Técnico</option>
-                    <option value="2">Farmacêutico</option>
-                    <option value="3">GQ</option>
+                    @foreach($tipo_acessos as $tipo_acesso)
+                        <option value="{{ $tipo_acesso->id }}" {{$usuario->tipo_acesso_id == $$tipo_acesso->id ? 'selected' : '' }}>{{ $tipo_acesso->name }}</option>
+                    @endforeach
                 </select>
                 </div>
                 <div class="input-field col s2">
