@@ -14,7 +14,7 @@ class Usuario extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     public function tipoAcesso(): BelongsTo {
-        return $this->belongsTo(Usuario::class,"tipo_acesso_id");
+        return $this->belongsTo(Usuario::class);
     }
 
     /**
