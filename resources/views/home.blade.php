@@ -9,13 +9,13 @@ Página Principal
 @section('conteudo')
 
 <div class="row">
-    <div class="col s12 m3">
-      <div class="card-panel teal">
-        <span class="white-text">I am a very simple card. I am good at containing small bits of information.
-        I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
-        </span>
+    <a href="{{ route('tipo_acessos.index') }}">
+    <div class="col s12 m2">
+      <div class="card-panel teal hoverable center-align white-text valign-wrapper">
+        <i class="material-icons">perm_identity</i>  Tipos de Acessos
       </div>
     </div>
+    </a>
   </div>
 
 @endsection

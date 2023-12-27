@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@php
+    use App\Models\tipo_acesso;
+@endphp
+
 @section('titulo')
-Usuários
+Usuário {{ $usuario->nome }}
 @endsection
 
 @section('conteudo')
@@ -9,7 +13,7 @@ Usuários
     <div class="row center" style="margin: 0px 20px ">
         <h5>{{ $usuario->nome }}</h5><br>
 
-        <form action=" {{ route('usuarios.edit', ['usuario' => $usuario->id]) }} " method="post" style="margin: auto;">
+        <form action=" {{ route('usuarios.edit', ['usuario' => $usuario->id]) }} " method="get" style="margin: auto;">
             @csrf
             <div class="row">
                 <div class="input-field col s6">
@@ -27,8 +31,8 @@ Usuários
                 </div>
                 <div class="input-field col s2">
                 <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
-                    @foreach($tipo_acessos as $tipo_acesso)
-                        <option value="{{ $tipo_acesso->id }}" {{$usuario->tipo_acesso_id == $$tipo_acesso->id ? 'selected' : '' }}>{{ $tipo_acesso->name }}</option>
+                    @foreach (Tipo_Acesso::all() as $tipo_acesso)
+                        <option value="{{ $tipo_acesso->id }}" {{$usuario->tipo_acesso_id == $tipo_acesso->id ? 'selected' : '' }}>{{ $tipo_acesso->name }}</option>
                     @endforeach
                 </select>
                 </div>

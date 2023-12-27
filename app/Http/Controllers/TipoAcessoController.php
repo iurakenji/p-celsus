@@ -12,7 +12,9 @@ class TipoAcessoController extends Controller
      */
     public function index()
     {
-        //
+        $tipo_acessos = Tipo_Acesso::paginate(15);
+
+        return view('tipo_acessos.tipo_acessos', compact('tipo_acessos'));
     }
 
     /**
@@ -36,7 +38,7 @@ class TipoAcessoController extends Controller
      */
     public function show(tipo_acesso $tipo_acesso)
     {
-        //
+        return view('tipo_acessos.show', compact('tipo_acesso'));
     }
 
     /**
