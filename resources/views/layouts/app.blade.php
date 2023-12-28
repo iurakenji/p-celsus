@@ -36,9 +36,9 @@ $user = Auth::user();
     @section('header')
     <nav style = "color:azure; margin-bottom: 0px; padding: 0px 0px 10px 0px; background-color: #8a7741;">
     <div class="nav_wrapper">
-        <a href=" {{ route('home') }} " class="brand-logo" style="margin-left: 1%">p-Celsus</a>
+        <a href=" {{ route('home') }} " class="brand-logo" style="margin-left: 1%">ρ-Celsus</a>
                 <ul class="right hide-on-med-and-down">
-                    <li><a href=" {{ route('mps') }} ">Matérias-Primas</a></li>
+                    <li><a href=" {{ route('mps.index') }} ">Matérias-Primas</a></li>
                     <li><a href=" # ">Análises</a></li>
                     <li><a href=" # ">Lotes</a></li>
                     <li><a href=" # ">Fornecedores</a></li>
@@ -61,7 +61,7 @@ $user = Auth::user();
     </div>
     </div>
     <div class="row container">
-        <small class="page-footer" style="color: black"><center>p-celsus - Controle de Qualidade Essentia Pharma - Logado como <b>{{ $user['login'] ?? 'Anônimo'}}.</b> <a href='{{ route('login.logout') }}'>(sair)</a> </center></small>
+        <small class="footer-copyright" style="color: black"><center>ρ-celsus - Controle de Qualidade Essentia Pharma - Logado como <b>{{ $user['login'] ?? 'Anônimo'}}.</b> <a href='{{ route('login.logout') }}'>(sair)</a> </center></small>
     </div>
     </body>
     <!--JavaScript at end of body for optimized loading-->

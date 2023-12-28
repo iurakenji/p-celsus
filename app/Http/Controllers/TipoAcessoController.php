@@ -22,7 +22,7 @@ class TipoAcessoController extends Controller
      */
     public function create()
     {
-        //
+        return view('tipo_acessos.create');
     }
 
     /**
@@ -30,7 +30,14 @@ class TipoAcessoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tipo_acesso = new Tipo_Acesso;
+
+       $tipo_acesso->nome = $request->nome;
+       $tipo_acesso->descricao = $request->descricao;
+
+       $tipo_acesso->save();
+
+       return redirect('/tipo_acessos');
     }
 
     /**
@@ -52,16 +59,23 @@ class TipoAcessoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, tipo_acesso $tipo_acesso)
+    public function update(Request $request, string $id)
     {
-        //
+       $tipo_acesso = Tipo_Acesso::find($id);
+
+       $tipo_acesso->nome = $request->nome;
+       $tipo_acesso->descricao = $request->descricao;
+
+       $tipo_acesso->save();
+
+       return redirect('/tipo_acessos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(tipo_acesso $tipo_acesso)
+    public function destroy(string $id)
     {
-        //
+        Tipo_Acesso::destroy($id);
     }
 }

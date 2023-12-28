@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\MpController;
 use App\Http\Controllers\TipoAcessoController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,5 +42,5 @@ Route::get('/tipo_acessos/{tipo_acesso}/edit', [TipoAcessoController::class, 'ed
 Route::put('/tipo_acessos/{tipo_acesso}', [TipoAcessoController::class, 'update'])->name('tipo_acessos.update');
 Route::delete('/tipo_acessos/{tipo_acesso}', [TipoAcessoController::class, 'destroy'])->name('tipo_acessos.destroy');
 
-Route::get('/mps', [PagesController::class, 'mps'])->name('mps');
+Route::get('/mps', [MpController::class, 'index'])->name('mps.index');
 

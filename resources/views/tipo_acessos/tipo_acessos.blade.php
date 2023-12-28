@@ -8,7 +8,7 @@ Usuários
 
     <div class="row center" style="margin: 0px 20px">
         <h5>Tipos de Acesso</h5><br>
-        <table>
+        <table class="highlight">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -19,9 +19,9 @@ Usuários
             <tbody>
                 @foreach ($tipo_acessos as $tipo_acesso)
                 <tr>
-                    <td>{{ $tipo_acesso->nome }} </a></li>
-                    <td>{{ $tipo_acesso->descricao }} </a></li>
-                    <td><a href=" {{ route('tipo_acessos.show', ['tipo_acesso' => $tipo_acesso->id]) }} " class="list"> Detalhes </a></li>
+                    <td style="width: 35%">{{ $tipo_acesso->nome }}</td>
+                    <td style="width: 55%">{{ $tipo_acesso->descricao }}</td>
+                    <td style="width: 10%"><a href=" {{ route('tipo_acessos.show', ['tipo_acesso' => $tipo_acesso->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
 
         @endforeach
@@ -35,4 +35,14 @@ Usuários
 
     </div>
 
+    <a href="{{ route('tipo_acessos.create') }}">
+        <div class="row">
+            <div class="col s12 m3 right">
+                <div class="waves-effect waves-light btn lime darken-4 hoverable center-align white-text container">
+                        <i class="material-icons">add</i>
+                        Novo Registro
+                </div>
+            </div>
+        </div>
+    </a>
 @endsection

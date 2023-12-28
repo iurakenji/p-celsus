@@ -16,6 +16,13 @@ Página Principal
       </div>
     </div>
     </a>
-  </div>
+    <a href="{{ route('mps.index') }}">
+        <div class="col s12 m2">
+          <div class="card-panel teal hoverable center-align white-text valign-wrapper">
+            <i class="material-icons">all_out</i>  Matérias-Primas
+          </div>
+        </div>
+        </a>
+</div>
 
 @endsection
