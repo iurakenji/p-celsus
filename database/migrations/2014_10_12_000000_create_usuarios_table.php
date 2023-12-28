@@ -16,11 +16,11 @@ return new class extends Migration
             $table->string('login',20)->unique();
             $table->string('nome',100);
             $table->foreignId('tipo_acesso_id')->constrained();
-            $table->string('conselho',15);
-            $table->string('registro',25);
+            $table->string('conselho',15)->nullable();
+            $table->string('registro',25)->nullable();
             $table->enum('genero',['M','F','O']);
-            $table->string('titulo',50);
-            $table->string('email')->unique();
+            $table->string('titulo',50)->nullable();
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('slug');
