@@ -8,7 +8,7 @@ Usuários
 
     <div class="row center" style="margin: 0px 20px">
         <h5>Usuários</h5><br>
-        <table>
+        <table class="highlight">
             <thead>
                 <tr>
                     <th>Login</th>

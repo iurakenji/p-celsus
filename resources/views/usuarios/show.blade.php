@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
-@php
-    use App\Models\tipo_acesso;
-@endphp
-
 @section('titulo')
 Usuário {{ $usuario->nome }}
 @endsection
+
+@php
+    use App\Models\tipo_acesso;
+
+    $tipo_acessos = tipo_acesso::all('id', 'nome');
+@endphp
 
 @section('conteudo')
 
     <div class="row center" style="margin: 0px 20px ">
         <h5>{{ $usuario->nome }}</h5><br>
+    </div>
 
-        <form action=" {{ route('usuarios.edit', ['usuario' => $usuario->id]) }} " method="get" style="margin: auto;">
+        <form action=" {{ route('usuarios.edit', ['usuario' => $usuario->id]) }} " method="post" style="margin: auto;">
             @csrf
             <div class="row">
                 <div class="input-field col s6">
@@ -31,8 +34,8 @@ Usuário {{ $usuario->nome }}
                 </div>
                 <div class="input-field col s2">
                 <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
-                    @foreach (Tipo_Acesso::all() as $tipo_acesso)
-                        <option value="{{ $tipo_acesso->id }}" {{$usuario->tipo_acesso_id == $tipo_acesso->id ? 'selected' : '' }}>{{ $tipo_acesso->name }}</option>
+                    @foreach ($tipo_acessos as $tipo)
+                        <option value="{{ $tipo['id'] }}" {{$usuario->tipo_acesso_id == $tipo['id'] ? 'selected' : '' }}>{{ $tipo['nome'] }}</option>
                     @endforeach
                 </select>
                 </div>
@@ -59,15 +62,39 @@ Usuário {{ $usuario->nome }}
                 <input type="password" id="password" name="password" value="{{ $usuario->password }}">
                 </div>
             </div>
+            <div class="row center">
             <label>
-            <input type="checkbox" id="ativo" name="ativo" value="{{ $usuario->ativo }}" />
+            <input type="checkbox" id="ativo" name="ativo" value="1" @checked(old('ativo', $usuario->ativo)) />
             <span>Acesso Ativo</span>
-            </label><br><br>
-            <input type="submit" value="Salvar" class="waves-effect waves-light btn lime darken-4" name="bt_entrar"><br><br>
-        </form>
-    </div>
+            </label></div><br><br>
+            <div class="row">
+                <div class="col s12 m2 left">
+                    <a href="{{ route('usuarios.index') }}">
+                        <div class="waves-effect waves-light btn lime darken-4
+                        hoverable center-align white-text valign-wrapper container">
+                            <i class="material-icons">arrow_back</i>
+                            Voltar
+                        </div>
+                    </a>
+                </div>
 
-    <footer class="row left">
-        <a href="{{ route('usuarios.index') }}">Voltar</a>
-    </footer>
+                <div class="col s12 m2 right">
+                    <button class="waves-effect teal darken-4
+                    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
+                        <i class="material-icons">save</i>  Salvar
+                    </button>
+                </div>
+            </form>
+            <form action=" {{ route('usuarios.destroy', ['usuario' => $usuario->id]) }}" method="POST">
+                @csrf
+                <input type="hidden" name="_method" value="DELETE">
+                <div class="col s12 m2 right">
+                    <button class="waves-effect red lighten-1
+                    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Apagar">
+                        <i class="material-icons">delete</i>  Apagar
+                    </button>
+            
+                </div>
+            </form>
+        </div>
 @endsection

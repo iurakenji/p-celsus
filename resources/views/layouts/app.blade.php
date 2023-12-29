@@ -60,8 +60,8 @@ $user = Auth::user();
         @yield('conteudo')
     </div>
     </div>
-    <div class="row container">
-        <small class="footer-copyright" style="color: black"><center>ρ-celsus - Controle de Qualidade Essentia Pharma - Logado como <b>{{ $user['login'] ?? 'Anônimo'}}.</b> <a href='{{ route('login.logout') }}'>(sair)</a> </center></small>
+    <div class="row container footer-copyright">
+        <footer class="text-black footer-copyright"><center>ρ-celsus - Controle de Qualidade Essentia Pharma - Logado como <b>{{ $user['login'] ?? 'Anônimo'}}.</b> <a href='{{ route('login.logout') }}'>(sair)</a> </center></footer>
     </div>
     </body>
     <!--JavaScript at end of body for optimized loading-->

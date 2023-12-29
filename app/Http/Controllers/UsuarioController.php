@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tipo_acesso;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
 use Illuminate\Support\Facades\DB;
@@ -41,8 +42,6 @@ class UsuarioController extends Controller
      */
     public function show(Usuario $usuario)
     {
-        //$usu = Usuario::where('login', $usuario->slug)->first();
-        //dd($usuario);
        return view('usuarios.show', compact('usuario'));
     }
 
@@ -57,40 +56,16 @@ class UsuarioController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function upsert(Request $request)
+    public function update(Request $request, string $id)
     {
-        $dados = $request->all();
-        $dados['password'] = Hash::make($dados['password']);
-        $usuario = Usuario::upsert(
-            [
-                'login' => $dados['login'],
-                'nome' => $dados['nome'],
-                'tipo_acesso_id' => 1,
-                'conselho' => $dados['conselho'],
-                'registro' => $dados['registro'],
-                'titulo' => $dados['titulo'],
-                'email' => $dados['email'],
-                'password' => $dados['password'],
-                'slug' => Str::slug($dados['nome']),
-                'ativo' => 1
-            ],
-            [
-                'id'
-            ],
-            [
-                'login' => $dados['login'],
-                'nome' => $dados['nome'],
-                'tipo_acesso_id' => 1,
-                'conselho' => $dados['conselho'],
-                'registro' => $dados['registro'],
-                'titulo' => $dados['titulo'],
-                'email' => $dados['email'],
-                'password' => $dados['password'],
-                'slug' => Str::slug($dados['nome']),
-                'ativo' => 1
-            ]
-        );
-        return redirect()->route('usuario.index');
+        $usuario = Usuario::find($id);
+
+       $usuario->nome = $request->nome;
+       $usuario->descricao = $request->descricao;
+
+       $usuario->save();
+
+       return redirect('/usuarios');
     }
 
     /**

@@ -47,7 +47,7 @@ Tipo de Acesso - {{ $tipo_acesso->nome }}
     <input type="hidden" name="_method" value="DELETE">
     <div class="col s12 m2 right">
         <button class="waves-effect red lighten-1
-        white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
+        white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Apagar">
             <i class="material-icons">delete</i>  Apagar
         </button>
 
