@@ -77,5 +77,6 @@ class TipoAcessoController extends Controller
     public function destroy(string $id)
     {
         Tipo_Acesso::destroy($id);
+        return redirect('/tipo_acessos');
     }
 }

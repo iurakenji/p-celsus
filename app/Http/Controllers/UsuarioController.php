@@ -26,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function create()
     {
-        //
+        return view('usuarios.create');
     }
 
     /**
@@ -34,7 +34,23 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $usuario = new Usuario;
+
+        $usuario->login = $request->login;
+        $usuario->nome = $request->nome;
+        $usuario->tipo_acesso_id = $request->tipo_acesso;
+        $usuario->conselho = $request->conselho;
+        $usuario->registro = $request->registro;
+        $usuario->genero = $request->genero;
+        $usuario->titulo = $request->titulo;
+        $usuario->email = $request->email;
+        $usuario->ativo = $request->ativo;
+        $usuario->slug = Str::slug($request->nome);
+        $usuario->password = Hash::make($request->password);
+        
+       $usuario->save();
+
+       return redirect('/usarios');
     }
 
     /**
@@ -60,8 +76,16 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::find($id);
 
+       $usuario->login = $request->login;
        $usuario->nome = $request->nome;
-       $usuario->descricao = $request->descricao;
+       $usuario->tipo_acesso_id = $request->tipo_acesso;
+       $usuario->conselho = $request->conselho;
+       $usuario->registro = $request->registro;
+       $usuario->genero = $request->genero;
+       $usuario->titulo = $request->titulo;
+       $usuario->email = $request->email;
+       $usuario->ativo = $request->ativo;
+       $usuario->slug = Str::slug($request->nome);
 
        $usuario->save();
 
@@ -71,8 +95,9 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(string $id)
     {
-        //
+        Usuario::destroy($id);
+        return redirect('/usuarios');
     }
 }

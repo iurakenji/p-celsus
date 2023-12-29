@@ -39,4 +39,15 @@ Usuários
 
     </div>
 
+    <a href="{{ route('usuarios.create') }}">
+        <div class="row">
+            <div class="col s12 m3 right">
+                <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
+                        <i class="material-icons">add</i>
+                        Novo Registro
+                </div>
+            </div>
+        </div>
+    </a>
+    
 @endsection
