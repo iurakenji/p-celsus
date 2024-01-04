@@ -6,6 +6,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\MpController;
 use App\Http\Controllers\TipoAcessoController;
+use App\Http\Controllers\SetorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,13 +37,10 @@ Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('u
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
 
 route::resource('tipo_acessos',TipoAcessoController::class);
-/*Route::get('/tipo_acessos', [TipoAcessoController::class, 'index'])->name('tipo_acessos.index');
-Route::get('/tipo_acessos/create', [TipoAcessoController::class, 'create'])->name('tipo_acessos.create');
-Route::post('/tipo_acessos', [TipoAcessoController::class, 'store'])->name('tipo_acessos.store');
-Route::get('/tipo_acessos/{tipo_acesso}', [TipoAcessoController::class, 'show'])->name('tipo_acessos.show');
-Route::get('/tipo_acessos/{tipo_acesso}/edit', [TipoAcessoController::class, 'edit'])->name('tipo_acessos.edit');
-Route::put('/tipo_acessos/{tipo_acesso}', [TipoAcessoController::class, 'update'])->name('tipo_acessos.update');
-Route::delete('/tipo_acessos/{tipo_acesso}', [TipoAcessoController::class, 'destroy'])->name('tipo_acessos.destroy');*/
 
-Route::get('/mps', [MpController::class, 'index'])->name('mps.index');
+route::resource('mps',TipoAcessoController::class);
+
+
+
+Route::get('/setors', [SetorController::class, 'index'])->name('setors.index');
 

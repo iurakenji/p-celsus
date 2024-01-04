@@ -19,7 +19,6 @@ class UsuarioSeeder extends Seeder
         'password' => Hash::make('123456'),
         'slug' => 'kendjiiura', 'ativo' => true
             ]);
-
         DB::table('usuarios')->insert(['login' => 'daiane.waltrick','nome' => 'Daiane Waltrick',
         'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
         'genero' => 'F', 'titulo' => 'Técnica', 'email' => null,

@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Usuario>
@@ -17,13 +16,23 @@ class UsuarioFactory extends Factory
      */
     public function definition(): array
     {
+        return [
+
+        ];
+    }
+}
+
+
+/*
+    public function definition(): array
+    {
       /*  $nome = $this->faker->name(20);
         $login = $this->faker->userName(20);
         $conselho = $this->faker->randomElement(['CRF','CRM','COREN', 'CRN', '']);
         $genero = $this->faker->randomElement(['M','F','O']);
         $titulo = $this->faker->randomElement(['Farmacêutica(o)','Médica(o)','Enfermeira(o)', 'Nutricionista', 'Analista', '']);
-        $ativo = $this->faker->boolean();*/
-        return [/*
+        $ativo = $this->faker->boolean();
+        return [
             'login' => $login,
             'nome' => $nome,
             'email' => fake()->unique()->safeEmail(),
@@ -36,7 +45,7 @@ class UsuarioFactory extends Factory
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'slug' => Str::slug($nome),
             'ativo' => $ativo,
-            'remember_token' => Str::random(10),*/
+            'remember_token' => Str::random(10),
         ];
     }
 
@@ -48,5 +57,7 @@ class UsuarioFactory extends Factory
        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
-    }*/
+    }
 }
+
+*/
