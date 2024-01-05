@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\risco;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RiscoController extends Controller
 {
@@ -12,7 +13,9 @@ class RiscoController extends Controller
      */
     public function index()
     {
-        //
+        $riscos = Risco::paginate(15);
+
+        return view('riscos.riscos', compact('riscos'));
     }
 
     /**
@@ -20,7 +23,7 @@ class RiscoController extends Controller
      */
     public function create()
     {
-        //
+        return view('riscos.create');
     }
 
     /**
@@ -28,21 +31,28 @@ class RiscoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $risco = new Risco;
+
+       $risco->nome = $request->nome;
+       $risco->descricao = $request->descricao;
+       $risco->imagem = $request->imagem;
+       $risco->save();
+
+       return redirect('/riscos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(risco $risco)
+    public function show(Risco $risco)
     {
-        //
+        return view('riscos.show', compact('risco'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(risco $risco)
+    public function edit(Risco $risco)
     {
         //
     }
@@ -50,16 +60,25 @@ class RiscoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, risco $risco)
+    public function update(Request $request, string $id)
     {
-        //
+       $risco = Risco::find($id);
+
+       $risco->nome = $request->nome;
+       $risco->descricao = $request->descricao;
+       $risco->imagem = $request->imagem;
+
+       $risco->save();
+
+       return redirect('/riscos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(risco $risco)
+    public function destroy(string $id)
     {
-        //
+        Risco::destroy($id);
+        return redirect('/riscos');
     }
 }

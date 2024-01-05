@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class risco extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nome', 'descricao'];
 }

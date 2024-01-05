@@ -12,7 +12,9 @@ class AcaoController extends Controller
      */
     public function index()
     {
-        //
+        $acaos = Acao::paginate(15);
+
+        return view('acaos.acaos', compact('acaos'));
     }
 
     /**
@@ -20,7 +22,7 @@ class AcaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('acaos.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class AcaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $acao = new Acao;
+
+       $acao->nome = $request->nome;
+       $acao->descricao = $request->descricao;
+
+       $acao->save();
+
+       return redirect('/acaos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(acao $acao)
+    public function show(Acao $acao)
     {
-        //
+        return view('acaos.show', compact('acao'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(acao $acao)
+    public function edit(Acao $acao)
     {
         //
     }
@@ -50,16 +59,24 @@ class AcaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, acao $acao)
+    public function update(Request $request, string $id)
     {
-        //
+       $acao = Acao::find($id);
+
+       $acao->nome = $request->nome;
+       $acao->descricao = $request->descricao;
+
+       $acao->save();
+
+       return redirect('/acaos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(acao $acao)
+    public function destroy(string $id)
     {
-        //
+        Acao::destroy($id);
+        return redirect('/acaos');
     }
 }

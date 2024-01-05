@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class LocalController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $locals = Local::paginate(15);
+
+        return view('locals.locals', compact('locals'));
     }
 
     /**
@@ -20,7 +22,7 @@ class LocalController extends Controller
      */
     public function create()
     {
-        //
+        return view('locals.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class LocalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $local = new Local;
+
+       $local->nome = $request->nome;
+       $local->descricao = $request->descricao;
+
+       $local->save();
+
+       return redirect('/locals');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(local $local)
+    public function show(Local $local)
     {
-        //
+        return view('locals.show', compact('local'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(local $local)
+    public function edit(Local $local)
     {
         //
     }
@@ -50,16 +59,24 @@ class LocalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, local $local)
+    public function update(Request $request, string $id)
     {
-        //
+       $local = Local::find($id);
+
+       $local->nome = $request->nome;
+       $local->descricao = $request->descricao;
+
+       $local->save();
+
+       return redirect('/locals');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(local $local)
+    public function destroy(string $id)
     {
-        //
+        Local::destroy($id);
+        return redirect('/locals');
     }
 }

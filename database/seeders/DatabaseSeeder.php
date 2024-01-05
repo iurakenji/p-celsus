@@ -18,6 +18,11 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoAcessoSeeder::class);
         $this->call(UsuarioSeeder::class);
         $this->call(SetorSeeder::class);
+        $this->call(ArmazenamentoSeeder::class);
+        $this->call(FornecedorSeeder::class);
+        $this->call(LocalSeeder::class);
+        $this->call(ReferenciaSeeder::class);
+        $this->call(RiscoSeeder::class);
         //Usuario::factory(30)->create();
     }
 }

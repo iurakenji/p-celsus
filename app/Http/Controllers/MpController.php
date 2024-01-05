@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class MpController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $mps = Mp::paginate(15);
+
+        return view('mps.mps', compact('mps'));
     }
 
     /**
@@ -20,7 +22,7 @@ class MpController extends Controller
      */
     public function create()
     {
-        //
+        return view('mps.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class MpController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mp = new Mp;
+
+       $mp->nome = $request->nome;
+       $mp->descricao = $request->descricao;
+
+       $mp->save();
+
+       return redirect('/mps');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(mp $mp)
+    public function show(Mp $mp)
     {
-        //
+        return view('mps.show', compact('mp'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(mp $mp)
+    public function edit(Mp $mp)
     {
         //
     }
@@ -50,16 +59,24 @@ class MpController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, mp $mp)
+    public function update(Request $request, string $id)
     {
-        //
+       $mp = Mp::find($id);
+
+       $mp->nome = $request->nome;
+       $mp->descricao = $request->descricao;
+
+       $mp->save();
+
+       return redirect('/mps');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(mp $mp)
+    public function destroy(string $id)
     {
-        //
+        Mp::destroy($id);
+        return redirect('/mps');
     }
 }

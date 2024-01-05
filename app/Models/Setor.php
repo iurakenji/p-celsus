@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Setor extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['nome', 'descricao'];
 }

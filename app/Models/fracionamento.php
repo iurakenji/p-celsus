@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class fracionamento extends Model
 {
     use HasFactory;
+
+
 }

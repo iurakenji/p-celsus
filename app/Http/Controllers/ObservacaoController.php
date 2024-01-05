@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class ObservacaoController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $observacaos = Observacao::paginate(15);
+
+        return view('observacaos.observacaos', compact('observacaos'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ObservacaoController extends Controller
      */
     public function create()
     {
-        //
+        return view('observacaos.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class ObservacaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $observacao = new Observacao;
+
+       $observacao->nome = $request->nome;
+       $observacao->descricao = $request->descricao;
+
+       $observacao->save();
+
+       return redirect('/observacaos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(observacao $observacao)
+    public function show(Observacao $observacao)
     {
-        //
+        return view('observacaos.show', compact('observacao'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(observacao $observacao)
+    public function edit(Observacao $observacao)
     {
         //
     }
@@ -50,16 +59,24 @@ class ObservacaoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, observacao $observacao)
+    public function update(Request $request, string $id)
     {
-        //
+       $observacao = Observacao::find($id);
+
+       $observacao->nome = $request->nome;
+       $observacao->descricao = $request->descricao;
+
+       $observacao->save();
+
+       return redirect('/observacaos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(observacao $observacao)
+    public function destroy(string $id)
     {
-        //
+        Observacao::destroy($id);
+        return redirect('/observacaos');
     }
 }

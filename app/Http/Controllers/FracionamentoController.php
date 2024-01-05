@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class FracionamentoController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $fracionamentos = Fracionamento::paginate(15);
+
+        return view('fracionamentos.fracionamentos', compact('fracionamentos'));
     }
 
     /**
@@ -20,7 +22,7 @@ class FracionamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('fracionamentos.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class FracionamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fracionamento = new Fracionamento;
+
+       $fracionamento->nome = $request->nome;
+       $fracionamento->descricao = $request->descricao;
+
+       $fracionamento->save();
+
+       return redirect('/fracionamentos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(fracionamento $fracionamento)
+    public function show(Fracionamento $fracionamento)
     {
-        //
+        return view('fracionamentos.show', compact('fracionamento'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(fracionamento $fracionamento)
+    public function edit(Fracionamento $fracionamento)
     {
         //
     }
@@ -50,16 +59,24 @@ class FracionamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, fracionamento $fracionamento)
+    public function update(Request $request, string $id)
     {
-        //
+       $fracionamento = Fracionamento::find($id);
+
+       $fracionamento->nome = $request->nome;
+       $fracionamento->descricao = $request->descricao;
+
+       $fracionamento->save();
+
+       return redirect('/fracionamentos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(fracionamento $fracionamento)
+    public function destroy(string $id)
     {
-        //
+        Fracionamento::destroy($id);
+        return redirect('/fracionamentos');
     }
 }

@@ -12,7 +12,9 @@ class ArmazenamentoController extends Controller
      */
     public function index()
     {
-        //
+        $armazenamentos = Armazenamento::paginate(15);
+
+        return view('armazenamentos.armazenamentos', compact('armazenamentos'));
     }
 
     /**
@@ -20,7 +22,7 @@ class ArmazenamentoController extends Controller
      */
     public function create()
     {
-        //
+        return view('armazenamentos.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class ArmazenamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $armazenamento = new Armazenamento;
+
+       $armazenamento->nome = $request->nome;
+       $armazenamento->descricao = $request->descricao;
+
+       $armazenamento->save();
+
+       return redirect('/armazenamentos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(armazenamento $armazenamento)
+    public function show(Armazenamento $armazenamento)
     {
-        //
+        return view('armazenamentos.show', compact('armazenamento'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(armazenamento $armazenamento)
+    public function edit(Armazenamento $armazenamento)
     {
         //
     }
@@ -50,16 +59,24 @@ class ArmazenamentoController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, armazenamento $armazenamento)
+    public function update(Request $request, string $id)
     {
-        //
+       $armazenamento = Armazenamento::find($id);
+
+       $armazenamento->nome = $request->nome;
+       $armazenamento->descricao = $request->descricao;
+
+       $armazenamento->save();
+
+       return redirect('/armazenamentos');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(armazenamento $armazenamento)
+    public function destroy(string $id)
     {
-        //
+        Armazenamento::destroy($id);
+        return redirect('/armazenamentos');
     }
 }

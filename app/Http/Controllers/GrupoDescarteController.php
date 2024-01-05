@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class GrupoDescarteController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $grupodescartes = GrupoDescarte::paginate(15);
+
+        return view('grupodescartes.grupodescartes', compact('grupodescartes'));
     }
 
     /**
@@ -20,7 +22,7 @@ class GrupoDescarteController extends Controller
      */
     public function create()
     {
-        //
+        return view('grupodescartes.create');
     }
 
     /**
@@ -28,21 +30,28 @@ class GrupoDescarteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $grupodescarte = new GrupoDescarte;
+
+       $grupodescarte->nome = $request->nome;
+       $grupodescarte->descricao = $request->descricao;
+
+       $grupodescarte->save();
+
+       return redirect('/grupodescartes');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(grupoDescarte $grupoDescarte)
+    public function show(GrupoDescarte $grupodescarte)
     {
-        //
+        return view('grupodescartes.show', compact('grupodescarte'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(grupoDescarte $grupoDescarte)
+    public function edit(GrupoDescarte $grupodescarte)
     {
         //
     }
@@ -50,16 +59,24 @@ class GrupoDescarteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, grupoDescarte $grupoDescarte)
+    public function update(Request $request, string $id)
     {
-        //
+       $grupodescarte = GrupoDescarte::find($id);
+
+       $grupodescarte->nome = $request->nome;
+       $grupodescarte->descricao = $request->descricao;
+
+       $grupodescarte->save();
+
+       return redirect('/grupodescartes');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(grupoDescarte $grupoDescarte)
+    public function destroy(string $id)
     {
-        //
+        GrupoDescarte::destroy($id);
+        return redirect('/grupodescartes');
     }
 }

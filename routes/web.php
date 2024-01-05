@@ -7,6 +7,15 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\MpController;
 use App\Http\Controllers\TipoAcessoController;
 use App\Http\Controllers\SetorController;
+use App\Http\Controllers\RiscoController;
+use App\Http\Controllers\AcaoController;
+use App\Http\Controllers\ArmazenamentoController;
+use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\GrupoDescarteController;
+use App\Http\Controllers\LocalController;
+use App\Http\Controllers\ObservacaoController;
+use App\Http\Controllers\ReferenciaController;
+use App\Http\Controllers\FracionamentoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,7 +51,21 @@ route::resource('mps',TipoAcessoController::class);
 
 route::resource('setors',SetorController::class);
 
+route::resource('riscos',RiscoController::class);
 
+route::resource('acaos',AcaoController::class);
 
-//Route::get('/mps', [SetorController::class, 'index'])->name('setors.index');
+route::resource('armazenamentos',ArmazenamentoController::class);
+
+route::resource('fornecedors',FornecedorController::class);
+
+route::resource('grupodescartes',GrupoDescarteController::class);
+
+route::resource('locals',LocalController::class);
+
+route::resource('observacaos',ObservacaoController::class);
+
+route::resource('referencias',ReferenciaController::class);
+
+route::resource('fracionamentos',FracionamentoController::class);
 
