@@ -7,12 +7,14 @@ use Illuminate\Http\Request;
 
 class SetorController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $setors = Setor::paginate(15);
+
+        return view('setors.setors', compact('setors'));
     }
 
     /**
@@ -20,7 +22,7 @@ class SetorController extends Controller
      */
     public function create()
     {
-        //
+        return view('setors.create');
     }
 
     /**
@@ -28,7 +30,14 @@ class SetorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $setor = new Setor;
+
+       $setor->nome = $request->nome;
+       $setor->descricao = $request->descricao;
+
+       $setor->save();
+
+       return redirect('/setors');
     }
 
     /**
@@ -36,13 +45,13 @@ class SetorController extends Controller
      */
     public function show(Setor $setor)
     {
-        //
+        return view('setors.show', compact('setor'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Setor $setor)
+    public function edit(setor $setor)
     {
         //
     }
@@ -50,16 +59,24 @@ class SetorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Setor $setor)
+    public function update(Request $request, string $id)
     {
-        //
+       $setor = Setor::find($id);
+
+       $setor->nome = $request->nome;
+       $setor->descricao = $request->descricao;
+
+       $setor->save();
+
+       return redirect('/setors');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Setor $setor)
+    public function destroy(string $id)
     {
-        //
+        Setor::destroy($id);
+        return redirect('/setors');
     }
 }

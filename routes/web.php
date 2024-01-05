@@ -40,7 +40,9 @@ route::resource('tipo_acessos',TipoAcessoController::class);
 
 route::resource('mps',TipoAcessoController::class);
 
+route::resource('setors',SetorController::class);
 
 
-Route::get('/setors', [SetorController::class, 'index'])->name('setors.index');
+
+//Route::get('/mps', [SetorController::class, 'index'])->name('setors.index');
 
