@@ -47,7 +47,7 @@ Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->nam
 
 route::resource('tipo_acessos',TipoAcessoController::class);
 
-route::resource('mps',TipoAcessoController::class);
+route::resource('mps',MpController::class);
 
 route::resource('setors',SetorController::class);
 
