@@ -85,6 +85,18 @@ Página Principal
         <i class="medium material-icons">group</i>  Fornecedores</div>
     </div>
   </a>
+  <a href="{{ route('tipos.index') }}">
+    <div class="col s12 m2 center-align">
+      <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
+        <i class="medium material-icons">list</i>  Tipos de Insumos</div>
+    </div>
+  </a>
+  <a href="{{ route('dados') }}">
+    <div class="col s12 m2 center-align">
+      <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
+        <i class="medium material-icons">import_export</i>  Dados</div>
+    </div>
+  </a>
 
 </div>
 

@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('grupodescartes', function (Blueprint $table) {
+        Schema::create('controlados', function (Blueprint $table) {
             $table->id();
-            $table->string('nome',100);
-            $table->text('orientacoes')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('grupo_descartes');
+        Schema::dropIfExists('controlados');
     }
 };

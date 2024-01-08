@@ -19,11 +19,4 @@ class PagesController extends Controller
         return view('home');
     }
 
-
-    public function mps() {
-
-       return view('mps.mps');
-
-    }
-
 }

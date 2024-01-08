@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Mp;
+use App\Models\Tipo;
 use Illuminate\Http\Request;
 
-class MpController extends Controller
+class TipoController extends Controller
 {
      /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $mps = Mp::paginate(15);
+        $tipos = Tipo::paginate(15);
 
-        return view('mps.mps', compact('mps'));
+        return view('tipos.tipos', compact('tipos'));
     }
 
     /**
@@ -22,7 +22,7 @@ class MpController extends Controller
      */
     public function create()
     {
-        return view('mps.create');
+        return view('tipos.create');
     }
 
     /**
@@ -30,30 +30,28 @@ class MpController extends Controller
      */
     public function store(Request $request)
     {
-        $mp = new Mp;
+        $tipo = new Tipo;
 
-       $mp->nome = $request->nome;
-       $mp->descricao = $request->descricao;
+       $tipo->nome = $request->nome;
+       $tipo->descricao = $request->descricao;
 
-       $mp->save();
+       $tipo->save();
 
-       return redirect('/mps');
+       return redirect('/tipos');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Mp $mp)
+    public function show(Tipo $tipo)
     {
-        return view('mps.show', compact('mp'));
+        return view('tipos.show', compact('tipo'));
     }
-
-
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mp $mp)
+    public function edit(Tipo $tipo)
     {
         //
     }
@@ -63,14 +61,14 @@ class MpController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       $mp = Mp::find($id);
+       $tipo = Tipo::find($id);
 
-       $mp->nome = $request->nome;
-       $mp->descricao = $request->descricao;
+       $tipo->nome = $request->nome;
+       $tipo->descricao = $request->descricao;
 
-       $mp->save();
+       $tipo->save();
 
-       return redirect('/mps');
+       return redirect('/tipos');
     }
 
     /**
@@ -78,7 +76,7 @@ class MpController extends Controller
      */
     public function destroy(string $id)
     {
-        Mp::destroy($id);
-        return redirect('/mps');
+        Tipo::destroy($id);
+        return redirect('/tipos');
     }
 }

@@ -12,40 +12,30 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mps', function (Blueprint $table) {
+            $table->id();
             $table->bigInteger('codigo');
             $table->string('nome',150);
-            $table->string('nome_fc',150);
-            $table->enum('tipo',['Sólido','Líquido','Semi-Sólido']);
-            $table->string('forma');
-            $table->string('cas',50);
-            $table->string('nome_popular',100);
-            $table->string('parte_usada',100);
-            $table->boolean('mp_vegetal');
-            $table->string('dci',100);
-            $table->string('dcb',100);
-            $table->boolean('port_344');
-            $table->string('lista_344',20);
-            $table->boolean('pol_fed');
-            $table->boolean('pol_civ');
-            $table->boolean('exerc');
-            $table->string('cor',100);
-            $table->string('odor',100);
-            $table->string('sabor',100);
-            $table->boolean('bancada');
-            $table->boolean('tratado');
-            $table->boolean('hormonio');
-            $table->boolean('citostatico');
-            $table->boolean('enzima');
-            $table->boolean('lacto');
-            $table->boolean('tintura');
-            $table->string('grupodescarte_id',15)->constrained();
-            $table->text('obs');
-            $table->string('patenteado',15);
-            $table->string('fornecedor_id',15)->constrained();
-
-            $table->enum('genero',['M','F','O']);
-            $table->boolean('ativo');
-            $table->rememberToken();
+            $table->string('nome_fc',150)->nullable();
+            $table->enum('forma',['Sólido','Líquido','Semi-Sólido', 'Semi-Acabado', 'Produto Final', 'Outros'])->default('Sólido');
+            $table->foreignId('tipo_id')->constrained()->default('N/A');
+            $table->string('cas',50)->nullable();
+            $table->string('nome_popular',100)->default('N/A')->nullable();
+            $table->string('parte_usada',100)->default('N/A')->nullable();
+            $table->boolean('mp_vegetal')->default('0');
+            $table->string('dci',100)->nullable();
+            $table->string('dcb',100)->nullable();
+            $table->boolean('bancada')->default('0');
+            $table->boolean('tratado')->default('0');
+            $table->boolean('hormonio')->default('0');
+            $table->boolean('citostatico')->default('0');
+            $table->boolean('enzima')->default('0');
+            $table->boolean('lacto')->default('0');
+            $table->boolean('tintura')->default('0');
+            $table->boolean('producao')->default('0');
+            $table->foreignId('grupodescarte_id')->nullable()->constrained();
+            $table->string('patenteado',15)->default('0');
+            $table->foreignId('fornecedor_id')->nullable()->constrained();
+            $table->softDeletes();
             $table->timestamps();
 
         });
