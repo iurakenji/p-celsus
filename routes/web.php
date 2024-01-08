@@ -16,6 +16,8 @@ use App\Http\Controllers\LocalController;
 use App\Http\Controllers\ObservacaoController;
 use App\Http\Controllers\ReferenciaController;
 use App\Http\Controllers\FracionamentoController;
+use App\Http\Controllers\DadoController;
+use App\Http\Controllers\TipoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +33,8 @@ use Illuminate\Support\Facades\Route;
 //Route::resource('usuario', UsuarioController::class);
 
 Route::get('/home', [PagesController::class, 'home'])->name('home');
+
+Route::get('/dados', [DadoController::class, 'dados'])->name('dados');
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
@@ -68,4 +72,6 @@ route::resource('observacaos',ObservacaoController::class);
 route::resource('referencias',ReferenciaController::class);
 
 route::resource('fracionamentos',FracionamentoController::class);
+
+route::resource('tipos',TipoController::class);
 

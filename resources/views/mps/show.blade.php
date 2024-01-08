@@ -10,21 +10,42 @@ Matérias-Primas - {{ $mp->nome }}
 
 </div>
 <div class="row center" style="margin: 0px 20px ">
+
     <h5>{{ $mp->nome }}</h5><br>
 
     <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">
+
         <div class="row">
-            <div class="input-field col s4">
-                <input placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $mp->nome }}">
-                <label for='nome'>Nome: </label>
+            <div class="input-field col s2">
+                <input type="text" id="codigo" name="codigo" value="{{ $mp->codigo }}">
+                <label for='codigo'>Código: </label>
             </div>
-            <div class="input-field col s8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
-            <input type="text" id="descricao" name="descricao" value="{{ $mp->descricao }}">
+            <div class="input-field col s10">
+            <label for='nome' title='Nome'>Nome: </label>
+            <input type="text" id="nome" name="nome" value="{{ $mp->nome }}">
             </div>
-        </div><br><br>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12">
+                <input type="text" id="nome_fc" name="nome_fc" value="{{ $mp->nome_fc }}">
+                <label for='nome_fc'>Nome Alternativo / Fórmula Certa: </label>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
+                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Sólido' ? 'selected' : '' }}>'Sólido'</option>
+                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Líquido' ? 'selected' : '' }}>'Líquido'</option>
+                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Semi-Sólido' ? 'selected' : '' }}>'Semi-Sólido'</option>
+                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Semi-Acabado' ? 'selected' : '' }}>'Semi-Acabado'</option>
+                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Produto Final' ? 'selected' : '' }}>'Produto Final'</option>
+                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Outros' ? 'selected' : '' }}>'Outros'</option>
+                </select>
+                <label for='forma'>Forma: </label>
+        </div>
+
 </div>
 <div class="col s12 m2 left">
     <a href="{{ route('mps.index') }}">

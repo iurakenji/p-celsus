@@ -5,14 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Mp extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    public function tipo(): BelongsTo {
+        return $this->belongsTo(Tipo::class);
+    }
 
     public function grupodescarte(): BelongsTo
     {
         return $this->belongsTo(Grupodescarte::class);
+    }
+
+    public function fornecedor(): BelongsTo
+    {
+        return $this->belongsTo(Fornecedor::class);
     }
 
     public $incrementing = false;
@@ -28,13 +40,6 @@ class Mp extends Model
         'parte_usada',
         'dci',
         'dcb',
-        'port_344',
-        'lista_344',
-        'pol_fed',
-        'pol_civ',
-        'exerc',
-        'cor',
-        'odor',
         'bancada',
         'tratado',
         'hormonio',
@@ -44,19 +49,14 @@ class Mp extends Model
         'tintura',
         'producao',
         'grupodescarte_id',
-        'obs',
         'patenteado',
         'fornecedor_id'
 ];
 
-protected $primaryKey = 'codigo';
+protected $primaryKey = 'id';
 
     protected $attributes = [
         'tipo' => 'Sólido',
-        'port_344' => '0',
-        'pol_fed' => '0',
-        'pol_civ' => '0',
-        'exerc' => '0',
         'bancada' => '0',
         'tratado' => '0',
         'hormonio' => '0',
