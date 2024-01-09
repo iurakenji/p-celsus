@@ -5,18 +5,27 @@
 Matérias-Primas - {{ $mp->nome }}
 @endsection
 
+@php
+    use App\Models\Tipo;
+    use App\Models\Fornecedor;
+    use App\Models\GrupoDescarte;
+
+    $tipos = Tipo::all('id', 'nome');
+    $fornecedors = Fornecedor::all('id', 'nome');
+    $grupodescartes = GrupoDescarte::all('id', 'nome');
+@endphp
+
 @section('conteudo')
 <div class="row">
 
 </div>
-<div class="row center" style="margin: 0px 20px ">
+<div class="row center">
 
     <h5>{{ $mp->nome }}</h5><br>
-
-    <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post">
+</div>
+    <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post"  style="margin: 0px 20px" >
         @csrf
         <input type="hidden" name="_method" value="PUT">
-
         <div class="row">
             <div class="input-field col s2">
                 <input type="text" id="codigo" name="codigo" value="{{ $mp->codigo }}">
@@ -26,27 +35,190 @@ Matérias-Primas - {{ $mp->nome }}
             <label for='nome' title='Nome'>Nome: </label>
             <input type="text" id="nome" name="nome" value="{{ $mp->nome }}">
             </div>
-        </div>
-
-        <div class="row">
             <div class="input-field col s12">
                 <input type="text" id="nome_fc" name="nome_fc" value="{{ $mp->nome_fc }}">
                 <label for='nome_fc'>Nome Alternativo / Fórmula Certa: </label>
+            </div>
+
+            <div class="input-field col s1">
+                <label for='tipo'>Forma: </label>
+                </div>
+            <div class="input-field col s5">
+                <select class="browser-default" id="forma" name="forma">
+                        <option value="Sólido" {{$mp->forma == 'Sólido' ? 'selected' : '' }}>Sólido</option>
+                        <option value="Líquido" {{$mp->forma == 'Líquido' ? 'selected' : '' }}>Líquido</option>
+                        <option value="Semi-Sólido" {{$mp->forma == 'Semi-Sólido' ? 'selected' : '' }}>Semi-Sólido</option>
+                        <option value="Semi-Acabado" {{$mp->forma == 'Semi-Acabado' ? 'selected' : '' }}>Semi-Acabado</option>
+                        <option value="Produto Final" {{$mp->forma == 'Produto Final' ? 'selected' : '' }}>Produto Final</option>
+                        <option value="Outros" {{$mp->forma == 'Outros' ? 'selected' : '' }}>Outros</option>
+                </select>
+            </div>
+            <div class="input-field col s1">
+                <label for='tipo'>Tipo: </label>
+            </div>
+            <div class="input-field col s5">
+                <select class="browser-default" id="tipo_id" name="tipo_id">
+                    @foreach ($tipos as $tipo)
+                        <option value="{{ $tipo['id'] }}" {{$mp->tipo->nome == $tipo['id'] ? 'selected' : '' }}>{{ $tipo['nome'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="input-field col s4">
+                <input type="text" id="cas" name="cas" value="{{ $mp->cas }}">
+                <label for='cas'>CAS: </label>
+            </div>
+            <div class="input-field col s4">
+                <input type="text" id="dci" name="dci" value="{{ $mp->dci }}">
+                <label for='dci'>DCI: </label>
+            </div>
+            <div class="input-field col s4">
+                <input type="text" id="dcb" name="dcb" value="{{ $mp->dcb }}">
+                <label for='dcb'>DCB: </label>
+            </div>
+
+            <div class="input-field col s2">
+                <label for="mp_vegetal">
+                <input type="checkbox" id="mp_vegetal" name="mp_vegetal" value="1" @checked(old('mp_vegetal', $mp->mp_vegetal)) />
+                <span>Matéria-Prima Vegetal</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <input type="text" id="parte_usada" name="parte_usada" value="{{ $mp->parte_usada }}">
+                <label for='parte_usada'>Parte Usada: </label>
+            </div>
+            <div class="input-field col s8">
+                <input type="text" id="nome_popular" name="nome_popular" value="{{ $mp->nome_popular }}">
+                <label for='nome_popular'>Outros Nomes (científico / popular / etc.): </label>
+            </div>
+
+            <div class="input-field col s2">
+                <label for="bancada">
+                <input type="checkbox" id="bancada" name="bancada" value="1" @checked(old('bancada', $mp->bancada)) />
+                <span>MP de Bancada</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="tratado" name="tratado" value="0" @checked(old('tratado', $mp->tratado)) />
+                <span>Matéria-Prima Tratada</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="producao" name="producao" value="0" @checked(old('producao', $mp->producao)) />
+                <span>Produção</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="citostatico" name="citostatico" value="0" @checked(old('citostatico', $mp->citostatico)) />
+                <span>Citostático</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="hormonio" name="hormonio" value="0" @checked(old('hormonio', $mp->hormonio)) />
+                <span>Hormônio</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="enzima" name="enzima" value="0" @checked(old('enzima', $mp->enzima)) />
+                <span>Enzima</span>
+                </label>
+            </div>
+
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="lacto" name="lacto" value="0" @checked(old('lacto', $mp->lacto)) />
+                <span>Lactobacilo / Probiótico</span>
+                </label>
+            </div>
+            <div class="input-field col s2">
+                <label>
+                <input type="checkbox" id="tintura" name="tintura" value="0" @checked(old('tintura', $mp->tintura)) />
+                <span>Tintura / Extrato Glicólico</span>
+                </label>
+            </div>
+            <div class="input-field col s8">
+                <label>
+                <input type="checkbox" id="micronizado" name="micronizado" value="0" @checked(old('micronizado', $mp->micronizado)) />
+                <span>Micronizado</span>
+                </label>
+            </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
-                <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
-                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Sólido' ? 'selected' : '' }}>'Sólido'</option>
-                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Líquido' ? 'selected' : '' }}>'Líquido'</option>
-                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Semi-Sólido' ? 'selected' : '' }}>'Semi-Sólido'</option>
-                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Semi-Acabado' ? 'selected' : '' }}>'Semi-Acabado'</option>
-                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Produto Final' ? 'selected' : '' }}>'Produto Final'</option>
-                        <option value="{{ $mp->tipo }}" {{$mp->tipo == 'Outros' ? 'selected' : '' }}>'Outros'</option>
-                </select>
-                <label for='forma'>Forma: </label>
+            <div class="input-field col s1">
+                <label>
+                <input type="checkbox" id="patenteado" name="patenteado" value="0" @checked(old('patenteado', $mp->patenteado)) />
+                <span>Patenteado</span>
+                </label>
+            </div>
+            <div class="input-field col s1">
+                <label for='tipo'>Fornecedor: </label>
+            </div>
+            <div class="input-field col s5">
+                <select class="browser-default" id="fornecedor" name="fornecedor">
+                    @if ($mp->fornecedor_id == null)
+                        @foreach ($fornecedors as $fornecedor)
+                            <option value={{ $fornecedor['id'] }} >{{ $fornecedor['nome'] }}</option>
+                        @endforeach
+                    @else
+                        @foreach ($fornecedors as $fornecedor)
+                            <option value="{{ $mp->fornecedor->nome }}" {{$mp->fornecedor_id == $fornecedor['id'] ? 'selected' : '' }}>{{ $fornecedor['nome'] }}</option>
+                        @endforeach    
+                    @endif
+                    </select>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="input-field col s1">
+                <label>
+                <input type="checkbox" id="p344" name="p344" value="0" @checked(old('p344', $mp->p344)) />
+                <span>Contr. Port. 344</span>
+                </label>
+            </div>
+            <div class="input-field col s1">
+                <label>
+                <input type="checkbox" id="pf" name="pf" value="0" @checked(old('pf', $mp->pf)) />
+                <span>Contr. PF</span>
+                </label>
+            </div>
+
+            <div class="input-field col s1">
+                <label>
+                <input type="checkbox" id="pc" name="pc" value="0" @checked(old('pc', $mp->pc)) />
+                <span>Contr. PC</span>
+                </label>
+            </div>
+            <div class="input-field col s1">
+                <label>
+                <input type="checkbox" id="ex" name="ex" value="0" @checked(old('ex', $mp->ex)) />
+                <span>Contr. Exército</span>
+                </label>
+            </div>
+
+            <div class="input-field offset-s3 col s1">
+                <label for='tipo'>Grupo de Descarte: </label>
+            </div>
+            <div class="input-field col s4">
+                <select class="browser-default" id="grupodescarte" name="grupodescarte">
+                    @if ($mp->grupodescarte_id == null)
+                        @foreach ($grupodescartes as $grupodescarte)
+                            <option value={{ $grupodescarte['id'] }} >{{ $grupodescarte['nome'] }}</option>
+                        @endforeach
+                    @else
+                        @foreach ($grupodescartes as $grupodescarte)
+                            <option value="{{ $mp->grupodescarte->nome }}" {{$mp->grupodescarte_id == $grupodescarte['id'] ? 'selected' : '' }}>{{ $grupodescarte['nome'] }}</option>
+                        @endforeach    
+                    @endif
+                    </select>
+            </div>
+
         </div>
 
-</div>
 <div class="col s12 m2 left">
     <a href="{{ route('mps.index') }}">
         <div class="waves-effect waves-light btn lime darken-4

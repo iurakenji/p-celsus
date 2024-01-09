@@ -15,6 +15,8 @@ class GrupoDescarte extends Model
         return $this->hasMany(GrupoDescarte::class);
     }
 
+    protected $table = 'grupodescartes';
+
     protected $fillable = [
         'nome',
         'orientacoes',

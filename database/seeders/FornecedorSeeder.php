@@ -13,6 +13,7 @@ class FornecedorSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::table('fornecedors')->insert(['nome' => '', 'telefone' => '', 'cep' => '', 'cnpj' => '']);
         DB::table('fornecedors')->insert(['nome' => 'Active Pharmaceutica', 'telefone' => '', 'cep' => '', 'cnpj' => '']);
         DB::table('fornecedors')->insert(['nome' => 'Adicel Matriz',  'telefone' => '', 'cep' => '', 'cnpj' => '']);
         DB::table('fornecedors')->insert(['nome' => 'Agargel',  'telefone' => '', 'cep' => '', 'cnpj' => '']);

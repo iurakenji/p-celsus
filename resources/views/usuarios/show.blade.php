@@ -35,8 +35,8 @@ Usuário {{ $usuario->nome }}
                 </div>
                 <div class="input-field col s2">
                 <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
-                    @foreach ($tipo_acessos as $tipo)
-                        <option value="{{ $tipo['id'] }}" {{$usuario->tipo_acesso_id == $tipo['id'] ? 'selected' : '' }}>{{ $tipo['nome'] }}</option>
+                    @foreach ($tipos as $tipo)
+                        <option value="{{ $tipo['id'] }}" {{$usuario->tipo_acesso_id == $tipo_acesso['id'] ? 'selected' : '' }}>{{ $tipo['nome'] }}</option>
                     @endforeach
                 </select>
                 </div>
@@ -74,7 +74,7 @@ Usuário {{ $usuario->nome }}
                   </p>
             </div>
             <div class="row center">
-            <label>
+            <label for="ativo">
             <input type="checkbox" id="ativo" name="ativo" value="1" @checked(old('ativo', $usuario->ativo)) />
             <span>Acesso Ativo</span>
             </label></div><br><br>

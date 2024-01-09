@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
 
 
         DB::unprepared(file_get_contents('storage\app\public\mp.sql'));
-        $mpAntigos = DB::table('mp')->select('codigo','nome','nome_fc','tipo','cas','nome_popular','parte_usada','mp_vegetal','dcb_dci','m_potes', 'hormonio', 'citostatico', 'lacto', 'tintura', 'enzima', 'producao')->get();
+        $mpAntigos = DB::table('mp')->select('codigo','nome','nome_fc','tipo','cas','nome_popular','parte_usada','mp_vegetal','dcb_dci','m_potes', 'hormonio', 'citostatico', 'controlado', 'pfed', 'pc', 'exercito','micronizado', 'lacto', 'tintura', 'enzima', 'producao')->get();
             foreach ($mpAntigos as $mpAntigo) {
 
                 DB::table('mps')->insert([
@@ -53,7 +53,13 @@ class DatabaseSeeder extends Seeder
                     'tintura' => ($mpAntigo->tintura == 'Sim' ? 1 : 0),
                     'enzima' => ($mpAntigo->enzima == 'Sim' ? 1 : 0),
                     'producao' => ($mpAntigo->producao == 'Sim' ? 1 : 0),
+                    'micronizado' => ($mpAntigo->micronizado == 'Sim' ? 1 : 0),
+                    'p344' => ($mpAntigo->controlado == 'Sim' ? 1 : 0),
+                    'pf' => ($mpAntigo->pfed == 'Sim' ? 1 : 0),
+                    'pc' => ($mpAntigo->pc == 'Sim' ? 1 : 0),
+                    'ex' => ($mpAntigo->exercito == 'Sim' ? 1 : 0),
                     'grupodescarte_id' => 1,
+                    'fornecedor_id' => 1,
                 ]);
             }
         Schema::drop('mp');

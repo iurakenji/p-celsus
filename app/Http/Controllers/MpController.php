@@ -12,7 +12,7 @@ class MpController extends Controller
      */
     public function index()
     {
-        $mps = Mp::paginate(15);
+        $mps = Mp::paginate(10);
 
         return view('mps.mps', compact('mps'));
     }
@@ -32,8 +32,31 @@ class MpController extends Controller
     {
         $mp = new Mp;
 
+       $mp->codigo = $request->codigo;
        $mp->nome = $request->nome;
-       $mp->descricao = $request->descricao;
+       $mp->nome_fc = $request->nome_fc;
+       $mp->forma = $request->forma;
+       $mp->tipo_id = $request->tipo_id;
+       $mp->cas = $request->cas;
+       $mp->nome_popular = $request->nome_popular;
+       $mp->parte_usada = $request->parte_usada;
+       $mp->mp_vegetal = $request->mp_vegetal;
+       $mp->dci = $request->dci;
+       $mp->dcb = $request->dcb;
+       $mp->bancada = $request->bancada;
+       $mp->hormonio = $request->hormonio;
+       $mp->citostatico = $request->citostatico;
+       $mp->lacto = $request->lacto;
+       $mp->tintura = $request->tintura;
+       $mp->enzima = $request->enzima;
+       $mp->producao = $request->producao;
+       $mp->micronizado = $request->micronizado;
+       $mp->p344 = $request->p344;
+       $mp->pf = $request->pf;
+       $mp->pc = $request->pc;
+       $mp->ex = $request->ex;
+       $mp->grupodescarte_id = $request->grupodescarte_id;
+       $mp->fornecedor_id = $request->fornecedor_id;
 
        $mp->save();
 
@@ -65,8 +88,31 @@ class MpController extends Controller
     {
        $mp = Mp::find($id);
 
+       $mp->codigo = $request->codigo;
        $mp->nome = $request->nome;
-       $mp->descricao = $request->descricao;
+       $mp->nome_fc = $request->nome_fc;
+       $mp->forma = $request->forma;
+       $mp->tipo_id = $request->tipo_id;
+       $mp->cas = $request->cas;
+       $mp->nome_popular = $request->nome_popular;
+       $mp->parte_usada = $request->parte_usada;
+       $mp->mp_vegetal = $request->mp_vegetal;
+       $mp->dci = $request->dci;
+       $mp->dcb = $request->dcb;
+       $mp->bancada = $request->bancada;
+       $mp->hormonio = $request->hormonio;
+       $mp->citostatico = $request->citostatico;
+       $mp->lacto = $request->lacto;
+       $mp->tintura = $request->tintura;
+       $mp->enzima = $request->enzima;
+       $mp->producao = $request->producao;
+       $mp->micronizado = $request->micronizado;
+       $mp->p344 = $request->p344;
+       $mp->pf = $request->pf;
+       $mp->pc = $request->pc;
+       $mp->ex = $request->ex;
+       $mp->grupodescarte_id = $request->grupodescarte_id;
+       $mp->fornecedor_id = $request->fornecedor_id;
 
        $mp->save();
 
