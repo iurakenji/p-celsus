@@ -34,7 +34,7 @@ return new class extends Migration
             $table->boolean('producao')->default('0');
             $table->boolean('micronizado')->default('0');
             $table->foreignId('grupodescarte_id')->nullable()->constrained();
-            $table->string('patenteado',15)->default('0');
+            $table->boolean('patenteado')->default('0');
             $table->foreignId('fornecedor_id')->nullable()->constrained();
             $table->boolean('p344')->default('0');
             $table->boolean('pf')->default('0');

@@ -35,8 +35,8 @@ Usuário {{ $usuario->nome }}
                 </div>
                 <div class="input-field col s2">
                 <select class="browser-default" id="tipo_acesso" name="tipo_acesso">
-                    @foreach ($tipos as $tipo)
-                        <option value="{{ $tipo['id'] }}" {{$usuario->tipo_acesso_id == $tipo_acesso['id'] ? 'selected' : '' }}>{{ $tipo['nome'] }}</option>
+                    @foreach ($tipo_acessos as $tipo_acesso)
+                        <option value="{{ $tipo_acesso['id'] }}" {{$usuario->tipo_acesso_id == $tipo_acesso['id'] ? 'selected' : '' }}>{{ $tipo_acesso['nome'] }}</option>
                     @endforeach
                 </select>
                 </div>
@@ -104,7 +104,7 @@ Usuário {{ $usuario->nome }}
                     white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Apagar">
                         <i class="material-icons">delete</i>  Apagar
                     </button>
-            
+
                 </div>
             </form>
         </div>

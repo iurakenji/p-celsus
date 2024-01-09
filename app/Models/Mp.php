@@ -27,13 +27,13 @@ class Mp extends Model
         return $this->belongsTo(Fornecedor::class);
     }
 
-    public $incrementing = false;
+   // public $incrementing = false;
 
     protected $fillable = [
         'codigo',
         'nome',
         'nome_fc',
-        'tipo',
+        'tipo_id',
         'forma',
         'cas',
         'nome_popular',
@@ -56,7 +56,6 @@ class Mp extends Model
 protected $primaryKey = 'id';
 
     protected $attributes = [
-        'tipo' => 'Sólido',
         'bancada' => '0',
         'tratado' => '0',
         'hormonio' => '0',

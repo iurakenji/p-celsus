@@ -100,58 +100,58 @@ Matérias-Primas - {{ $mp->nome }}
             </div>
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="tratado" name="tratado" value="0" @checked(old('tratado', $mp->tratado)) />
+                <input type="checkbox" id="tratado" name="tratado" value="1" @checked(old('tratado', $mp->tratado)) />
                 <span>Matéria-Prima Tratada</span>
                 </label>
             </div>
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="producao" name="producao" value="0" @checked(old('producao', $mp->producao)) />
+                <input type="checkbox" id="producao" name="producao" value="1" @checked(old('producao', $mp->producao)) />
                 <span>Produção</span>
                 </label>
             </div>
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="citostatico" name="citostatico" value="0" @checked(old('citostatico', $mp->citostatico)) />
+                <input type="checkbox" id="citostatico" name="citostatico" value="1" @checked(old('citostatico', $mp->citostatico)) />
                 <span>Citostático</span>
                 </label>
             </div>
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="hormonio" name="hormonio" value="0" @checked(old('hormonio', $mp->hormonio)) />
+                <input type="checkbox" id="hormonio" name="hormonio" value="1" @checked(old('hormonio', $mp->hormonio)) />
                 <span>Hormônio</span>
                 </label>
             </div>
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="enzima" name="enzima" value="0" @checked(old('enzima', $mp->enzima)) />
+                <input type="checkbox" id="enzima" name="enzima" value="1" @checked(old('enzima', $mp->enzima)) />
                 <span>Enzima</span>
                 </label>
             </div>
 
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="lacto" name="lacto" value="0" @checked(old('lacto', $mp->lacto)) />
+                <input type="checkbox" id="lacto" name="lacto" value="1" @checked(old('lacto', $mp->lacto)) />
                 <span>Lactobacilo / Probiótico</span>
                 </label>
             </div>
             <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="tintura" name="tintura" value="0" @checked(old('tintura', $mp->tintura)) />
+                <input type="checkbox" id="tintura" name="tintura" value="1" @checked(old('tintura', $mp->tintura)) />
                 <span>Tintura / Extrato Glicólico</span>
                 </label>
             </div>
             <div class="input-field col s8">
                 <label>
-                <input type="checkbox" id="micronizado" name="micronizado" value="0" @checked(old('micronizado', $mp->micronizado)) />
+                <input type="checkbox" id="micronizado" name="micronizado" value="1" @checked(old('micronizado', $mp->micronizado)) />
                 <span>Micronizado</span>
                 </label>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s1">
+            <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="patenteado" name="patenteado" value="0" @checked(old('patenteado', $mp->patenteado)) />
+                <input type="checkbox" id="patenteado" name="patenteado" value="1" @checked(old('patenteado', $mp->patenteado)) />
                 <span>Patenteado</span>
                 </label>
             </div>
@@ -167,40 +167,40 @@ Matérias-Primas - {{ $mp->nome }}
                     @else
                         @foreach ($fornecedors as $fornecedor)
                             <option value="{{ $mp->fornecedor->nome }}" {{$mp->fornecedor_id == $fornecedor['id'] ? 'selected' : '' }}>{{ $fornecedor['nome'] }}</option>
-                        @endforeach    
+                        @endforeach
                     @endif
                     </select>
             </div>
 
         </div>
         <div class="row">
-            <div class="input-field col s1">
+            <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="p344" name="p344" value="0" @checked(old('p344', $mp->p344)) />
+                <input type="checkbox" id="p344" name="p344" value="1" @checked(old('p344', $mp->p344)) />
                 <span>Contr. Port. 344</span>
                 </label>
             </div>
             <div class="input-field col s1">
                 <label>
-                <input type="checkbox" id="pf" name="pf" value="0" @checked(old('pf', $mp->pf)) />
+                <input type="checkbox" id="pf" name="pf" value="1" @checked(old('pf', $mp->pf)) />
                 <span>Contr. PF</span>
                 </label>
             </div>
 
             <div class="input-field col s1">
                 <label>
-                <input type="checkbox" id="pc" name="pc" value="0" @checked(old('pc', $mp->pc)) />
+                <input type="checkbox" id="pc" name="pc" value="1" @checked(old('pc', $mp->pc)) />
                 <span>Contr. PC</span>
                 </label>
             </div>
-            <div class="input-field col s1">
+            <div class="input-field col s2">
                 <label>
-                <input type="checkbox" id="ex" name="ex" value="0" @checked(old('ex', $mp->ex)) />
+                <input type="checkbox" id="ex" name="ex" value="1" @checked(old('ex', $mp->ex)) />
                 <span>Contr. Exército</span>
                 </label>
             </div>
 
-            <div class="input-field offset-s3 col s1">
+            <div class="input-field col s2">
                 <label for='tipo'>Grupo de Descarte: </label>
             </div>
             <div class="input-field col s4">
@@ -212,7 +212,7 @@ Matérias-Primas - {{ $mp->nome }}
                     @else
                         @foreach ($grupodescartes as $grupodescarte)
                             <option value="{{ $mp->grupodescarte->nome }}" {{$mp->grupodescarte_id == $grupodescarte['id'] ? 'selected' : '' }}>{{ $grupodescarte['nome'] }}</option>
-                        @endforeach    
+                        @endforeach
                     @endif
                     </select>
             </div>

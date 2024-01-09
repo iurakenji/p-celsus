@@ -6,18 +6,31 @@ Matérias-Primas
 
 @section('conteudo')
 
-<br>
+<br><br>
 <div class="row">
-    <div class="row">
-        <div class="col s12 m3 right container">
+    <form action=" {{ route('mps.index') }} " method="GET">
+        <div class="col m4 offset-m1">
             <a href="{{ route('mps.create') }}">
-            <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
+            <div class="waves-effect waves-light btn blue-grey darken-4 hoverable center-align white-text container">
                     <i class="material-icons">add</i>
                     Novo Registro
             </div>
         </a>
         </div>
-    </div>
+
+        <div class="col offset-m1 m3">
+            <div class="input-field">
+                <input type="text" id="chave" name="chave">
+                <label for='codigo'>Pesquisar: </label>
+            </div>
+        </div>
+            <div class="col m3" type="submit"  name="bt_salvar" value="Salvar">
+                    <div class="waves-effect waves-light btn blue-grey darken-4 hoverable center-align white-text container">
+                        Pesquisar
+                    </div>
+            </div>
+        </form>
+
 </div>
 
 
@@ -51,6 +64,5 @@ Matérias-Primas
     <div class="row center">
 
 {{ $mps->links('includes.pagination') }}
-
     </div>
 @endsection

@@ -49,29 +49,39 @@ Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
 
-route::resource('tipo_acessos',TipoAcessoController::class);
+//route::resource('mps',MpController::class);
+Route::get('/mps', [MpController::class, 'index'])->name('mps.index');
+Route::get('/mps/create', [MpController::class, 'create'])->name('mps.create');
+Route::post('/mps', [MpController::class, 'store'])->name('mps.store');
+Route::get('/mps/{mp}', [MpController::class, 'show'])->name('mps.show');
+Route::get('/mps/{mp}/edit', [MpController::class, 'edit'])->name('mps.edit');
+Route::put('/mps/{mp}', [MpController::class, 'update'])->name('mps.update');
+Route::delete('/mps/{mp}', [MpController::class, 'destroy'])->name('mps.destroy');
 
-route::resource('mps',MpController::class);
+Route::resources([
 
-route::resource('setors',SetorController::class);
+'tipo_acessos' => TipoAcessoController::class,
 
-route::resource('riscos',RiscoController::class);
+'setors' => SetorController::class,
 
-route::resource('acaos',AcaoController::class);
+'riscos' => RiscoController::class,
 
-route::resource('armazenamentos',ArmazenamentoController::class);
+'acaos' => AcaoController::class,
 
-route::resource('fornecedors',FornecedorController::class);
+'armazenamentos' => ArmazenamentoController::class,
 
-route::resource('grupodescartes',GrupoDescarteController::class);
+'fornecedors' => FornecedorController::class,
 
-route::resource('locals',LocalController::class);
+'grupodescartes' => GrupoDescarteController::class,
 
-route::resource('observacaos',ObservacaoController::class);
+'locals' => LocalController::class,
 
-route::resource('referencias',ReferenciaController::class);
+'observacaos' => ObservacaoController::class,
 
-route::resource('fracionamentos',FracionamentoController::class);
+'referencias' => ReferenciaController::class,
 
-route::resource('tipos',TipoController::class);
+'fracionamentos' => FracionamentoController::class,
 
+'tipos' => TipoController::class,
+
+]);

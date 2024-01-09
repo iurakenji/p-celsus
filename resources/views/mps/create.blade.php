@@ -55,9 +55,9 @@ Matéria-Prima - Novo Registro
                 <label for='tipo'>Tipo: </label>
             </div>
             <div class="input-field col s5">
-                <select class="browser-default" id="forma" name="forma">
+                <select class="browser-default" id="tipo_id" name="tipo_id">
                     @foreach ($tipos as $tipo)
-                        <option value="{{ $tipo['nome'] }}">{{ $tipo['nome'] }}</option>
+                        <option value="{{ $tipo['id'] }}">{{ $tipo['nome'] }}</option>
                     @endforeach
                 </select>
             </div>
