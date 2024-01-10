@@ -23,6 +23,35 @@ Matérias-Primas - {{ $mp->nome }}
 
     <h5>{{ $mp->nome }}</h5><br>
 </div>
+<div class="row">
+    <div class="valign-wrapper center">
+        <a class=" white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
+            <i class="small material-icons">view_list</i>
+            <span>
+            Análises
+            </span>
+        </a>
+    <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
+            <i class="small material-icons">apps</i>
+            <span>
+            Setores
+            </span>
+    </a>
+    <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
+            <i class="small material-icons">error_outline</i>
+            <span>
+            Riscos
+            </span>
+    </a>
+    <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
+        <i class="small material-icons">speaker_notes</i>
+        <span>
+        Observações
+        </span>
+</a>
+</div>
+</div>
+
     <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post"  style="margin: 0px 20px" >
         @csrf
         <input type="hidden" name="_method" value="PUT">
@@ -220,8 +249,8 @@ Matérias-Primas - {{ $mp->nome }}
         </div>
 
 <div class="col s12 m2 left">
-    <a href="{{ route('mps.index') }}">
-        <div class="waves-effect waves-light btn lime darken-4
+    <a href="{{ url()->previous() }}">
+        <div class="waves-effect waves-light btn blue-grey darken-4
         hoverable center-align white-text valign-wrapper container">
             <i class="material-icons">arrow_back</i>
             Voltar

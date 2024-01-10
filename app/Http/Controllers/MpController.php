@@ -14,11 +14,13 @@ class MpController extends Controller
      */
     public function index()
     {
-        if(ISSET($_GET['chave'])){
-            $mps = Mp::paginate(10);
-        } else {
-            $mps = Mp::where('nome','like','%'.$_GET["chave"].'%')->paginate(10);
-        }
+        $mps = Mp::paginate(10);
+        return view('mps.mps', compact('mps'));
+    }
+
+    public function pesquisa(Request $request)
+    {
+        $mps = Mp::where('nome','like','%'.$request->chave.'%')->orWhere('nome_fc','like','%'.$request->chave.'%')->orWhere('nome_popular','like','%'.$request->chave.'%')->orWhere('cas','like','%'.$request->chave.'%')->orWhere('codigo','like','%'.$request->chave.'%')->paginate(10);
         return view('mps.mps', compact('mps'));
     }
 

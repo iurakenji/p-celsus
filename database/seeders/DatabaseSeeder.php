@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RiscoSeeder::class);
         $this->call(TipoSeeder::class);
         $this->call(GrupoDescarteSeeder::class);
+        $this->call(ObservacaoSeeder::class);
         //$content = File::get($filename);
 
 

@@ -15,19 +15,30 @@ Observações de Matérias-Primas - Novo Registro
     <form action=" {{ route('observacaos.store')}}" method="post">
         @csrf
         <div class="row">
-            <div class="input-field col s4">
+            <div class="input-field col m5">
                 <input placeholder="Nome"  type="text" id="nome" name="nome" placeholder="Nome">
                 <label for='nome'>Nome: </label>
             </div>
-            <div class="input-field col s8">
+            <div class="input-field col m1">
+                <label for='tipo'>Forma: </label>
+                </div>
+                <div class="input-field col m5">
+                    <select class="browser-default" id="tipo" name="tipo">
+                            <option value="Matéria-Prima">Matéria-Prima</option>
+                            <option value="Método Analítico">Método Analítico</option>
+                            <option value="Análise de Lote">Análise de Lote</option>
+                            <option value="Lote">Lote</option>
+                            <option value="Movimentação">Movimentação</option>
+                </div>
+            <div class="input-field col m8">
             <label for='descricao' title='Descrição'>Descrição: </label>
             <input type="text" id="descricao" name="descricao" placeholder="Descrição">
             </div>
         </div><br><br>
 </div>
 <div class="col s12 m2 left">
-    <a href="{{ route('observacaos.index') }}">
-        <div class="waves-effect waves-light btn lime darken-4
+    <a href="{{ url()->previous() }}">
+        <div class="waves-effect waves-light btn blue-grey darken-4
         hoverable center-align white-text valign-wrapper container">
             <i class="material-icons">arrow_back</i>
             Voltar

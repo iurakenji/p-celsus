@@ -33,7 +33,8 @@ class ObservacaoController extends Controller
         $observacao = new Observacao;
 
        $observacao->nome = $request->nome;
-       $observacao->descricao = $request->descricao;
+       $observacao->tipo = $request->tipo;
+       $observacao->observacao = $request->descricao;
 
        $observacao->save();
 
@@ -64,7 +65,8 @@ class ObservacaoController extends Controller
        $observacao = Observacao::find($id);
 
        $observacao->nome = $request->nome;
-       $observacao->descricao = $request->descricao;
+       $observacao->tipo = $request->tipo;
+       $observacao->observacao = $request->descricao;
 
        $observacao->save();
 

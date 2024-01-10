@@ -20,7 +20,7 @@ Observações de Matérias-Primas
                 @foreach ($observacaos as $observacao)
                 <tr>
                     <td style="width: 35%">{{ $observacao->nome }}</td>
-                    <td style="width: 55%">{{ $observacao->descricao }}</td>
+                    <td style="width: 55%">{{ $observacao->observacao }}</td>
                     <td style="width: 10%"><a href=" {{ route('observacaos.show', ['observacao' => $observacao->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
 
@@ -35,14 +35,14 @@ Observações de Matérias-Primas
 
     </div>
 
-    <a href="{{ route('observacaos.create') }}">
         <div class="row">
+            <a href="{{ route('observacaos.create') }}">
             <div class="col s12 m3 right">
                 <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
                         <i class="material-icons">add</i>
                         Novo Registro
                 </div>
             </div>
+        </a>
         </div>
-    </a>
 @endsection

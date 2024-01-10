@@ -30,35 +30,23 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//Route::resource('usuario', UsuarioController::class);
 
 Route::get('/home', [PagesController::class, 'home'])->name('home');
 
 Route::get('/dados', [DadoController::class, 'dados'])->name('dados');
 
 Route::get('/', [PagesController::class, 'index'])->name('index');
+
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
-route::resource('usuarios',UsuarioController::class);
-/*Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
-Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
-Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
-Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
-Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
-Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
-
-//route::resource('mps',MpController::class);
-Route::get('/mps', [MpController::class, 'index'])->name('mps.index');
-Route::get('/mps/create', [MpController::class, 'create'])->name('mps.create');
-Route::post('/mps', [MpController::class, 'store'])->name('mps.store');
-Route::get('/mps/{mp}', [MpController::class, 'show'])->name('mps.show');
-Route::get('/mps/{mp}/edit', [MpController::class, 'edit'])->name('mps.edit');
-Route::put('/mps/{mp}', [MpController::class, 'update'])->name('mps.update');
-Route::delete('/mps/{mp}', [MpController::class, 'destroy'])->name('mps.destroy');
+Route::post('/mps/pesquisa', [MpController::class, 'pesquisa'])->name('mps.pesquisa');
 
 Route::resources([
+
+'usuarios' => UsuarioController::class,
+
+'mps' => MpController::class,
 
 'tipo_acessos' => TipoAcessoController::class,
 
@@ -85,3 +73,12 @@ Route::resources([
 'tipos' => TipoController::class,
 
 ]);
+
+/*
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/

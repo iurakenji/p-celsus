@@ -10,25 +10,38 @@ Observações de Matérias-Primas - {{ $observacao->nome }}
 
 </div>
 <div class="row center" style="margin: 0px 20px ">
-    <h5>{{ $observacao->nome }}</h5><br>
-
+    <h5>{{ $observacao->codigo.' - '.$observacao->nome }}</h5><br>
+</div>
     <form action=" {{ route('observacaos.update', ['observacao' => $observacao->id]) }} " method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">
-        <div class="row">
-            <div class="input-field col s4">
+            <div class="row">
+            <div class="input-field col s6">
                 <input placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $observacao->nome }}">
                 <label for='nome'>Nome: </label>
             </div>
-            <div class="input-field col s8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
-            <input type="text" id="descricao" name="descricao" value="{{ $observacao->descricao }}">
+            <label for='tipo'>Tipo: </label>
+            <div class="input-field col s6">
+                <select class="browser-default" id="tipo" name="tipo">
+                        <option value="Matéria-Prima" {{$observacao->forma == 'Matéria-Prima' ? 'selected' : '' }}>Matéria-Prima</option>
+                        <option value="Método Analítico" {{$observacao->forma == 'Método Analítico' ? 'selected' : '' }}>Método Analítico</option>
+                        <option value="Análise de Lote" {{$observacao->forma == 'Análise de Lote' ? 'selected' : '' }}>Análise de Lote</option>
+                        <option value="Lote" {{$observacao->forma == 'Lote' ? 'selected' : '' }}>Lote</option>
+                        <option value="Movimentação" {{$observacao->forma == 'Movimentação' ? 'selected' : '' }}>Movimentação</option>
+                </select>
             </div>
-        </div><br><br>
-</div>
+            </div>
+            <div class="row">
+            <div class="input-field col s12">
+            <label for='descricao' title='Descrição'>Texto: </label>
+            <input type="text" id="descricao" name="descricao" value="{{ $observacao->observacao }}">
+            </div>
+            </div>
+
+
 <div class="col s12 m2 left">
-    <a href="{{ route('observacaos.index') }}">
-        <div class="waves-effect waves-light btn lime darken-4
+    <a href="{{ url()->previous() }}">
+        <div class="waves-effect waves-light btn blue-grey darken-4
         hoverable center-align white-text valign-wrapper container">
             <i class="material-icons">arrow_back</i>
             Voltar
@@ -54,3 +67,5 @@ Observações de Matérias-Primas - {{ $observacao->nome }}
     </div>
 </form>
 @endsection
+
+

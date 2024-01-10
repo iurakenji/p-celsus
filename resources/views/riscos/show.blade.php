@@ -27,8 +27,8 @@ Riscos - {{ $risco->nome }}
         </div><br><br>
 </div>
 <div class="col s12 m2 left">
-    <a href="{{ route('riscos.index') }}">
-        <div class="waves-effect waves-light btn lime darken-4
+    <a href="{{ url()->previous() }}">
+        <div class="waves-effect waves-light btn blue-grey darken-4
         hoverable center-align white-text valign-wrapper container">
             <i class="material-icons">arrow_back</i>
             Voltar

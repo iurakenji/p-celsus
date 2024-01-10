@@ -38,7 +38,7 @@
     <input type="text" id="login" name="login" style="margin-left: 10px; max-width: 20%; padding-left: 10px"><br>
     <label for="password" title="Digite a Senha">Senha: </label>
     <input type="password" id="password" name="password" style="margin-left: 10px; max-width: 20%; padding-left: 10px"><br>
-    <input type="submit" value="Entrar" class="waves-effect waves-light btn lime darken-4" name="bt_entrar" style="margin-left: 20px; margin-top: 20px;">
+    <input type="submit" value="Entrar" class="waves-effect waves-light btn blue-grey darken-4" name="bt_entrar" style="margin-left: 20px; margin-top: 20px;">
     </form>
 </div>
 </body>

@@ -7,8 +7,9 @@ Matérias-Primas
 @section('conteudo')
 
 <br><br>
-<div class="row">
-    <form action=" {{ route('mps.index') }} " method="GET">
+    <form action=" {{ route('mps.pesquisa') }} " method="post" >
+        <div class="row">
+        @csrf
         <div class="col m4 offset-m1">
             <a href="{{ route('mps.create') }}">
             <div class="waves-effect waves-light btn blue-grey darken-4 hoverable center-align white-text container">
@@ -24,14 +25,14 @@ Matérias-Primas
                 <label for='codigo'>Pesquisar: </label>
             </div>
         </div>
-            <div class="col m3" type="submit"  name="bt_salvar" value="Salvar">
-                    <div class="waves-effect waves-light btn blue-grey darken-4 hoverable center-align white-text container">
-                        Pesquisar
-                    </div>
-            </div>
+        <div class="col s12 m3 right">
+            <button class="waves-effect blue-grey darken-4
+            white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Pesquisar">
+                <i class="material-icons">search</i>  Pesquisar
+            </button>
+        </div>
+        </div>
         </form>
-
-</div>
 
 
     <div class="row center" style="margin: 0px 20px">
