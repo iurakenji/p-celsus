@@ -7,11 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Mp extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function observacaos(): BelongsToMany
+    {
+        return $this->belongsToMany(Observacao::class);
+    }
 
     public function tipo(): BelongsTo {
         return $this->belongsTo(Tipo::class);

@@ -17,6 +17,12 @@ class ObservacaoController extends Controller
         return view('observacaos.observacaos', compact('observacaos'));
     }
 
+    public function pesquisa(Request $request)
+    {
+        $observacaos = Observacao::where('tipo','=',$request->chave)->paginate(10);
+        return view('mps.mps', compact('mps'));
+    }
+
     /**
      * Show the form for creating a new resource.
      */

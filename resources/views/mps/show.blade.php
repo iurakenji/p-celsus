@@ -43,7 +43,7 @@ Matérias-Primas - {{ $mp->nome }}
             Riscos
             </span>
     </a>
-    <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
+    <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.observacaos', ['mp' => $mp->id]) }}">
         <i class="small material-icons">speaker_notes</i>
         <span>
         Observações

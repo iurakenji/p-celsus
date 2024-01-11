@@ -41,6 +41,18 @@ Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->na
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
 Route::post('/mps/pesquisa', [MpController::class, 'pesquisa'])->name('mps.pesquisa');
+Route::get('/mps/{mp}/observacaos', [MpController::class, 'observacaos'])->name('mps.observacaos');
+Route::get('/mps/{mp}/apaga_obs', [MpController::class, 'observacaos'])->name('mps.apaga_obs');
+Route::post('/observacaos/pesquisa', [ObservacaoController::class, 'pesquisa'])->name('observacaos.pesquisa');
+
+/*
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
+Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
+Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
 
 Route::resources([
 
@@ -74,11 +86,4 @@ Route::resources([
 
 ]);
 
-/*
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
-Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
-Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
-Route::get('/usuarios/{usuario}', [UsuarioController::class, 'show'])->name('usuarios.show');
-Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
-Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
-Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
+
