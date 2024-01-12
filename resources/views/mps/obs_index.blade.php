@@ -7,7 +7,13 @@ Observações
 @section('conteudo')
 
     <div class="row center" style="margin: 0px 20px">
-        <h5>Observações: {{ $mp->nome }}</h5><br>
+        <h5>{{ $mp->nome }}</h5>
+    </div>
+    <x-mps.menu :mp="$mp->id" />
+
+
+        <h5>Observações</h5><br>
+
         <table class="highlight">
             <thead>
                 <tr>
@@ -22,7 +28,7 @@ Observações
                 <tr>
                     <td style="width: 35%">{{ $observacao->nome }}</td>
                     <td style="width: 55%">{{ $observacao->observacao }}</td>
-                    <td style="width: 10%"><a href=" {{ route('mps.apaga_obs', ['mp' => $mp->id, 'id' => $observacao->id]) }} " class="list"> Excluir </a></td>
+                    <td style="width: 10%"><a href=" {{ route('mps.obs_delete', ['mp' => $mp->id, 'id' => $observacao->id]) }} " class="list"> Excluir </a></td>
                 </tr>
                 @endforeach
     </tbody>
@@ -36,7 +42,7 @@ Observações
     </div>
         <div class="row">
             <div class="col s12 m2 left">
-                <a href="{{ url()->previous() }}">
+                <a href="{{ route('mps.show', ['mp' => $mp->id]) }}">
                     <div class="waves-effect waves-light btn blue-grey darken-4
                     hoverable center-align white-text valign-wrapper container">
                         <i class="material-icons">arrow_back</i>
@@ -44,11 +50,11 @@ Observações
                     </div>
                 </a>
             </div>
-            <a href="{{ route('observacaos.create') }}">
+            <a href="{{ route('mps.obs_show',  ['mp' => $mp->id] ) }}">
             <div class="col s12 m3 right">
                 <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
                         <i class="material-icons">add</i>
-                        Adicionar Observação
+                        Adicionar
                 </div>
             </div>
         </a>

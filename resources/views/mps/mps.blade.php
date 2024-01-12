@@ -7,7 +7,7 @@ Matérias-Primas
 @section('conteudo')
 
 <br><br>
-    <form action=" {{ route('mps.pesquisa') }} " method="post" >
+    <form action=" {{ route('mps.query') }} " method="post" >
         <div class="row">
         @csrf
         <div class="col m4 offset-m1">

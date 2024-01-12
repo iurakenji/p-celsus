@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('titulo')
 Matérias-Primas - {{ $mp->nome }}
 @endsection
@@ -16,43 +15,15 @@ Matérias-Primas - {{ $mp->nome }}
 @endphp
 
 @section('conteudo')
-<div class="row">
 
-</div>
-<div class="row center">
+<div class="row center"  style="margin: 10px 0px">
 
-    <h5>{{ $mp->nome }}</h5><br>
-</div>
-<div class="row">
-    <div class="valign-wrapper center">
-        <a class=" white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
-            <i class="small material-icons">view_list</i>
-            <span>
-            Análises
-            </span>
-        </a>
-    <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
-            <i class="small material-icons">apps</i>
-            <span>
-            Setores
-            </span>
-    </a>
-    <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
-            <i class="small material-icons">error_outline</i>
-            <span>
-            Riscos
-            </span>
-    </a>
-    <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.observacaos', ['mp' => $mp->id]) }}">
-        <i class="small material-icons">speaker_notes</i>
-        <span>
-        Observações
-        </span>
-</a>
-</div>
+    <h5>{{ $mp->nome }}</h5>
 </div>
 
-    <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post"  style="margin: 0px 20px" >
+<x-mps.menu :mp="$mp->id" />
+
+    <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post" >
         @csrf
         <input type="hidden" name="_method" value="PUT">
         <div class="row">

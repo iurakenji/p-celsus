@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 
+
 @section('titulo')
 Matéria-Prima - Novo Registro
 @endsection
@@ -16,11 +17,12 @@ Matéria-Prima - Novo Registro
 @endphp
 
 @section('conteudo')
-<div class="row">
 
-</div>
 <div class="row center" style="margin: 0px 20px ">
     <h5>Novo Registro</h5><br>
+</div>
+
+<x-mps.menu :mp="$mp->id" />
 
     <form action=" {{ route('mps.store')}}" method="post">
         @csrf

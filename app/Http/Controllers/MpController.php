@@ -5,11 +5,43 @@ namespace App\Http\Controllers;
 use App\Models\Mp;
 use Hamcrest\Core\IsNull;
 use Illuminate\Http\Request;
-use App\Models\Observacaos;
+use App\Models\Observacao;
 
 
 class MpController extends Controller
 {
+
+    public function obs_index(Mp $mp)
+    {
+
+        $observacaos = $mp->observacaos->all();
+
+        return view('mps.obs_index', compact('observacaos','mp'));
+    }
+
+    public function obs_delete(Mp $mp, string $id)
+    {
+
+        $mp->observacaos()->detach($id);
+        $observacaos = $mp->observacaos->all();
+
+       return redirect()->route('mps.obs_index', compact('observacaos','mp') );
+    }
+
+    public function obs_show(Mp $mp)
+    {
+        $observacaos = Observacao::where('tipo','=','Matéria-Prima')->paginate(15);
+
+       return view('mps.obs_show', compact('observacaos','mp'));
+    }
+    public function obs_create(Mp $mp, string $id)
+    {
+
+        $mp->observacaos()->attach($id);
+        $observacaos = $mp->observacaos->all();
+
+       return redirect()->route('mps.obs_index', compact('observacaos','mp') );
+    }
      /**
      * Display a listing of the resource.
      */
@@ -19,28 +51,10 @@ class MpController extends Controller
         return view('mps.mps', compact('mps'));
     }
 
-    public function pesquisa(Request $request)
+    public function query(Request $request)
     {
         $mps = Mp::where('nome','like','%'.$request->chave.'%')->orWhere('nome_fc','like','%'.$request->chave.'%')->orWhere('nome_popular','like','%'.$request->chave.'%')->orWhere('cas','like','%'.$request->chave.'%')->orWhere('codigo','like','%'.$request->chave.'%')->paginate(10);
         return view('mps.mps', compact('mps'));
-    }
-
-    public function observacaos(Mp $mp)
-    {
-
-        $observacaos = $mp->observacaos->all();
-
-        return view('mps.observacaos', compact('observacaos','mp'));
-    }
-
-    public function apaga_obs(Mp $mp, string $id)
-    {
-        dd($id);
-
-        $mp->observacaos->detach($id);
-        $mp->refresh();
-
-       return redirect()->route('mps.observacaos', compact('observacaos','mp') );
     }
 
         /**

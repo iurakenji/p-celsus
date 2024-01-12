@@ -40,10 +40,13 @@ Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
-Route::post('/mps/pesquisa', [MpController::class, 'pesquisa'])->name('mps.pesquisa');
-Route::get('/mps/{mp}/observacaos', [MpController::class, 'observacaos'])->name('mps.observacaos');
-Route::get('/mps/{mp}/apaga_obs', [MpController::class, 'observacaos'])->name('mps.apaga_obs');
-Route::post('/observacaos/pesquisa', [ObservacaoController::class, 'pesquisa'])->name('observacaos.pesquisa');
+Route::post('/mps/query', [MpController::class, 'query'])->name('mps.query');
+Route::get('/mps/{mp}/obs_index', [MpController::class, 'obs_index'])->name('mps.obs_index');
+Route::get('/mps/{mp}/obs_delete/{id}', [MpController::class, 'obs_delete'])->name('mps.obs_delete');
+Route::get('/mps/{mp}/obs_create/{id}', [MpController::class, 'obs_create'])->name('mps.obs_create');
+Route::get('/mps/{mp}/obs_show', [MpController::class, 'obs_show'])->name('mps.obs_show');
+
+Route::post('/observacaos/obs_query', [ObservacaoController::class, 'obs_query'])->name('observacaos.obs_query');
 
 /*
 Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
