@@ -17,11 +17,11 @@ class SetorSeeder extends Seeder
         DB::table('setors')->insert(['nome' => 'Controlados', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Homeopatia', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Hormônios Externos', 'descricao' => '']);
-        DB::table('setors')->insert(['nome' => 'Homrônios Internos', 'descricao' => '']);
+        DB::table('setors')->insert(['nome' => 'Hormônios Internos (Xarope)', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Injetáveis', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Lactos', 'descricao' => '']);
-        DB::table('setors')->insert(['nome' => 'Líquidos Externos', 'descricao' => '']);
-        DB::table('setors')->insert(['nome' => 'Semissólidos', 'descricao' => '']);
+        DB::table('setors')->insert(['nome' => 'Líquidos Externos (Dermato)', 'descricao' => '']);
+        DB::table('setors')->insert(['nome' => 'Semissólidos (Pastilha)', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Pesagem', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Produção', 'descricao' => '']);
         DB::table('setors')->insert(['nome' => 'Shake', 'descricao' => '']);

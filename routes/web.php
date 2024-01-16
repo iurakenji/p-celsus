@@ -41,10 +41,21 @@ Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->na
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
 Route::post('/mps/query', [MpController::class, 'query'])->name('mps.query');
+
 Route::get('/mps/{mp}/obs_index', [MpController::class, 'obs_index'])->name('mps.obs_index');
 Route::get('/mps/{mp}/obs_delete/{id}', [MpController::class, 'obs_delete'])->name('mps.obs_delete');
 Route::get('/mps/{mp}/obs_create/{id}', [MpController::class, 'obs_create'])->name('mps.obs_create');
 Route::get('/mps/{mp}/obs_show', [MpController::class, 'obs_show'])->name('mps.obs_show');
+
+Route::get('/mps/{mp}/risco_index', [MpController::class, 'risco_index'])->name('mps.risco_index');
+Route::get('/mps/{mp}/risco_delete/{id}', [MpController::class, 'risco_delete'])->name('mps.risco_delete');
+Route::get('/mps/{mp}/risco_create/{id}', [MpController::class, 'risco_create'])->name('mps.risco_create');
+Route::get('/mps/{mp}/risco_show', [MpController::class, 'risco_show'])->name('mps.risco_show');
+
+Route::get('/mps/{mp}/setor_index', [MpController::class, 'setor_index'])->name('mps.setor_index');
+Route::get('/mps/{mp}/setor_delete/{id}', [MpController::class, 'setor_delete'])->name('mps.setor_delete');
+Route::get('/mps/{mp}/setor_create/{id}', [MpController::class, 'setor_create'])->name('mps.setor_create');
+Route::get('/mps/{mp}/setor_show', [MpController::class, 'setor_show'])->name('mps.setor_show');
 
 Route::post('/observacaos/obs_query', [ObservacaoController::class, 'obs_query'])->name('observacaos.obs_query');
 

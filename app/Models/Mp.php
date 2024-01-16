@@ -14,9 +14,19 @@ class Mp extends Model
     use HasFactory;
     use SoftDeletes;
 
+    public function setors(): BelongsToMany
+    {
+        return $this->belongsToMany(Setor::class)->wherePivot('mp_id',$this->id);
+    }
+
+    public function riscos(): BelongsToMany
+    {
+        return $this->belongsToMany(Risco::class)->wherePivot('mp_id',$this->id);
+    }
+
     public function observacaos(): BelongsToMany
     {
-        return $this->belongsToMany(Observacao::class);
+        return $this->belongsToMany(Observacao::class)->wherePivot('mp_id',$this->id);
     }
 
     public function tipo(): BelongsTo {

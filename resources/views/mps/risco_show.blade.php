@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-Observações de Matérias-Primas
+Riscos de Matérias-Primas
 @endsection
 
 @section('conteudo')
@@ -32,10 +32,10 @@ Observações de Matérias-Primas
                 Setores
                 </span>
         </a>
-        <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.risco_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">error_outline</i>
+        <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.obs_index', ['mp' => $mp]) }}">
+            <i class="small material-icons">speaker_notes</i>
             <span>
-            Riscos
+            Observações
             </span>
         </a>
     </div>
@@ -44,17 +44,19 @@ Observações de Matérias-Primas
         <table class="highlight">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($observacaos as $observacao)
+                @foreach ($riscos as $risco)
                 <tr>
-                    <td style="width: 35%">{{ $observacao->nome }}</td>
-                    <td style="width: 55%">{{ $observacao->observacao }}</td>
-                    <td style="width: 10%"><a href=" {{ route('mps.obs_create', ['mp' => $mp->id, 'id' => $observacao->id]) }} " class="list"> Adicionar </a></td>
+                    <td style="width: 20%">Imagem</td>
+                    <td style="width: 20%">{{ $risco->nome }}</td>
+                    <td style="width: 50%">{{ $risco->descricao }}</td>
+                    <td style="width: 10%"><a href=" {{ route('mps.risco_create', ['mp' => $mp->id, 'id' => $risco->id]) }} " class="list"> Adicionar </a></td>
                 </tr>
 
         @endforeach
@@ -64,20 +66,11 @@ Observações de Matérias-Primas
 
     <div class="row center">
 
-{{ $observacaos->links('includes.pagination') }}
+{{ $riscos->links('includes.pagination') }}
 
     </div>
-    <div class="col s12 m2 left">
-        <a href="{{ url()->previous() }}">
-            <div class="waves-effect waves-light btn blue-grey darken-4
-            hoverable center-align white-text valign-wrapper container">
-                <i class="material-icons">arrow_back</i>
-                Voltar
-            </div>
-        </a>
-    </div>
         <div class="row">
-            <a href="{{ route('observacaos.create') }}">
+            <a href="{{ route('riscos.create') }}">
             <div class="col s12 m3 right">
                 <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
                         <i class="material-icons">add</i>

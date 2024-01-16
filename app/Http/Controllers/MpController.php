@@ -6,10 +6,83 @@ use App\Models\Mp;
 use Hamcrest\Core\IsNull;
 use Illuminate\Http\Request;
 use App\Models\Observacao;
+use Illuminate\Support\Facades\DB;
 
 
 class MpController extends Controller
 {
+
+    //Métodos Setor
+
+    public function setor_index(Mp $mp)
+    {
+
+        $setors = $mp->setors->all();
+
+        return view('mps.setor_index', compact('setors','mp'));
+    }
+
+    public function setor_show(Mp $mp)
+    {
+        $setor_add = DB::table('mp_setor')->select('setor_id')->where('mp_id','=',$mp->id);
+        $setors = DB::table('setors')->whereNotIn('id', $setor_add)->paginate(20);
+        return view('mps.setor_show', compact('setors','mp'));
+    }
+
+    public function setor_delete(Mp $mp, string $id)
+    {
+
+        $mp->setors()->detach($id);
+        $setors = $mp->setors->all();
+
+       return redirect()->route('mps.setor_index', compact('setors','mp') );
+    }
+
+    public function setor_create(Mp $mp, string $id)
+    {
+
+        $mp->setors()->attach($id);
+        $setors = $mp->setors->all();
+
+       return redirect()->route('mps.setor_index', compact('setors','mp') );
+    }
+
+    //Métodos Risco
+
+    public function risco_index(Mp $mp)
+    {
+
+        $riscos = $mp->riscos->all();
+
+        return view('mps.risco_index', compact('riscos','mp'));
+    }
+
+    public function risco_show(Mp $mp)
+    {
+        $risco_add = DB::table('mp_risco')->select('risco_id')->where('mp_id','=',$mp->id);
+        $riscos = DB::table('riscos')->whereNotIn('id', $risco_add)->paginate(10);
+        return view('mps.risco_show', compact('riscos','mp'));
+    }
+
+    public function risco_delete(Mp $mp, string $id)
+    {
+
+        $mp->riscos()->detach($id);
+        $riscos = $mp->riscos->all();
+
+       return redirect()->route('mps.risco_index', compact('riscos','mp') );
+    }
+
+    public function risco_create(Mp $mp, string $id)
+    {
+
+        $mp->riscos()->attach($id);
+        $riscos = $mp->riscos->all();
+
+       return redirect()->route('mps.risco_index', compact('riscos','mp') );
+    }
+
+    //Métodos Observações
 
     public function obs_index(Mp $mp)
     {
@@ -17,6 +90,13 @@ class MpController extends Controller
         $observacaos = $mp->observacaos->all();
 
         return view('mps.obs_index', compact('observacaos','mp'));
+    }
+
+    public function obs_show(Mp $mp)
+    {
+        $obs_adicionadas = DB::table('mp_observacao')->select('observacao_id')->where('mp_id','=',$mp->id);
+        $observacaos = DB::table('observacaos')->where('tipo','=','Matéria-Prima')->whereNotIn('id', $obs_adicionadas)->paginate(15);
+        return view('mps.obs_show', compact('observacaos','mp'));
     }
 
     public function obs_delete(Mp $mp, string $id)
@@ -28,12 +108,6 @@ class MpController extends Controller
        return redirect()->route('mps.obs_index', compact('observacaos','mp') );
     }
 
-    public function obs_show(Mp $mp)
-    {
-        $observacaos = Observacao::where('tipo','=','Matéria-Prima')->paginate(15);
-
-       return view('mps.obs_show', compact('observacaos','mp'));
-    }
     public function obs_create(Mp $mp, string $id)
     {
 
@@ -42,9 +116,13 @@ class MpController extends Controller
 
        return redirect()->route('mps.obs_index', compact('observacaos','mp') );
     }
+
+    //Métodos Gerais
+
      /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $mps = Mp::paginate(10);

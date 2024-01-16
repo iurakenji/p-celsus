@@ -9,10 +9,40 @@ Observações
     <div class="row center" style="margin: 0px 20px">
         <h5>{{ $mp->nome }}</h5>
     </div>
-    <x-mps.menu :mp="$mp->id" />
 
 
-        <h5>Observações</h5><br>
+    <div class="row">
+        <div class="valign-wrapper center">
+            <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.show', ['mp' => $mp]) }}">
+                <i class="small material-icons">description</i>
+                <span>
+                Informações Básicas
+                </span>
+        </a>
+
+            <a class=" white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('fracionamentos.index') }}">
+                <i class="small material-icons">view_list</i>
+                <span>
+                Análises
+                </span>
+            </a>
+        <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.setor_index', ['mp' => $mp]) }}">
+                <i class="small material-icons">apps</i>
+                <span>
+                Setores
+                </span>
+        </a>
+        <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.risco_index', ['mp' => $mp]) }}">
+            <i class="small material-icons">error_outline</i>
+            <span>
+            Riscos
+            </span>
+    </a>
+    </div>
+    </div>
+
+
+        <h5 class="center">Observações</h5><br>
 
         <table class="highlight">
             <thead>
