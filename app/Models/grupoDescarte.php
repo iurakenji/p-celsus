@@ -22,4 +22,6 @@ class GrupoDescarte extends Model
         'orientacoes',
 
 ];
+
+protected $primaryKey = 'id';
 }

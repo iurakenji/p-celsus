@@ -39,9 +39,9 @@ $user = Auth::user();
         <a href=" {{ route('home') }} " class="brand-logo" style="margin-left: 1%">ρ-Celsus</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href=" {{ route('mps.index') }} ">Matérias-Primas</a></li>
-                    <li><a href=" # ">Análises</a></li>
+                    <li><a href=" {{ route('analises.index') }} ">Análises</a></li>
                     <li><a href=" # ">Lotes</a></li>
-                    <li><a href=" # ">Fornecedores</a></li>
+                    <li><a href=" {{ route('fornecedors.index') }} ">Fornecedores</a></li>
                     <li><a href=" {{ route('usuarios.index') }} ">Usuários</a></li>
                 </ul>
     </div>

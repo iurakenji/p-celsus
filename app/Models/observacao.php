@@ -16,4 +16,6 @@ class observacao extends Model
     }
 
     protected $fillable = ['nome', 'observacao'];
+
+    protected $primaryKey = 'id';
 }

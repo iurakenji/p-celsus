@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome',150);
             $table->enum('tipo',['Numérica Discreta','Numérica Contínua','Categórica Nominal', 'Categórica Ordinal']);
-            $table->string('unidade',100);
+            $table->string('unidade',100)->nullable();
             $table->text('observacao')->nullable();
             $table->double('margem',100)->default(0);
             $table->integer('valor_ar')->default('0');

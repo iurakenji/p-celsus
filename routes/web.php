@@ -18,6 +18,8 @@ use App\Http\Controllers\ReferenciaController;
 use App\Http\Controllers\FracionamentoController;
 use App\Http\Controllers\DadoController;
 use App\Http\Controllers\TipoController;
+use App\Http\Controllers\AnaliseController;
+use App\Http\Controllers\VarCategoricaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -68,35 +70,45 @@ Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
 
+
+Route::get('/{analise}/varCategoricas/', [varCategoricaController::class, 'index', ])->name('varCategoricas.index');
+Route::get('/varCategoricas/{analise}/create/', [VarCategoricaController::class, 'create'])->name('varCategoricas.create');
+Route::put('/varCategoricas/{varCategorica}', [varCategoricaController::class, 'update'])->name('varCategoricas.update');
+Route::get('/varCategoricas/{varCategorica}', [VarCategoricaController::class, 'show'])->name('varCategoricas.show');
+Route::get('/varCategoricas/{varCategorica}/destroy', [varCategoricaController::class, 'destroy'])->name('varCategoricas.destroy');
+Route::post('/{analise}/varCategoricas/', [varCategoricaController::class, 'store'])->name('varCategoricas.store');
+
 Route::resources([
 
-'usuarios' => UsuarioController::class,
+    'analises' => AnaliseController::class,
 
-'mps' => MpController::class,
+    'usuarios' => UsuarioController::class,
 
-'tipo_acessos' => TipoAcessoController::class,
+    'mps' => MpController::class,
 
-'setors' => SetorController::class,
+    'tipo_acessos' => TipoAcessoController::class,
 
-'riscos' => RiscoController::class,
+    'setors' => SetorController::class,
 
-'acaos' => AcaoController::class,
+    'riscos' => RiscoController::class,
 
-'armazenamentos' => ArmazenamentoController::class,
+    'acaos' => AcaoController::class,
 
-'fornecedors' => FornecedorController::class,
+    'armazenamentos' => ArmazenamentoController::class,
 
-'grupodescartes' => GrupoDescarteController::class,
+    'fornecedors' => FornecedorController::class,
 
-'locals' => LocalController::class,
+    'grupodescartes' => GrupoDescarteController::class,
 
-'observacaos' => ObservacaoController::class,
+    'locals' => LocalController::class,
 
-'referencias' => ReferenciaController::class,
+    'observacaos' => ObservacaoController::class,
 
-'fracionamentos' => FracionamentoController::class,
+    'referencias' => ReferenciaController::class,
 
-'tipos' => TipoController::class,
+    'fracionamentos' => FracionamentoController::class,
+
+    'tipos' => TipoController::class,
 
 ]);
 

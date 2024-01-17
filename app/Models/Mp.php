@@ -83,4 +83,6 @@ protected $primaryKey = 'id';
         'patenteado' => '0',
     ];
 
+
+
 }

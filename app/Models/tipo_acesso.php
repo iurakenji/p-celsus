@@ -17,5 +17,7 @@ class Tipo_acesso extends Model
     }
 
     protected $fillable = ['nome', 'descricao'];
+
+    protected $primaryKey = 'id';
 }
 

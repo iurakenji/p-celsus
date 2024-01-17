@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('nome',150);
             $table->string('nome_fc',150)->nullable();
             $table->enum('forma',['Sólido','Líquido','Semi-Sólido', 'Semi-Acabado', 'Produto Final', 'Outros'])->default('Sólido');
-            $table->foreignId('tipo_id')->constrained()->default('N/A');
+            $table->foreignId('tipo_id')->constrained()->nullable();
             $table->string('cas',100)->nullable();
             $table->string('nome_popular',100)->default('N/A')->nullable();
             $table->string('parte_usada',100)->default('N/A')->nullable();

@@ -10,4 +10,6 @@ class Setor extends Model
     use HasFactory;
 
     protected $fillable = ['nome', 'descricao'];
+
+    protected $primaryKey = 'id';
 }

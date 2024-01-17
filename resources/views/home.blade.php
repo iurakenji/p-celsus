@@ -103,7 +103,7 @@ Página Principal
         <i class="medium material-icons">local_pharmacy</i>  Tratamentos</div>
     </div>
   </a>
-  <a href="{{ route('dados') }}">
+  <a href="{{ route('analises.index') }}">
     <div class="col s12 m2 center-align">
       <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
         <i class="medium material-icons">location_searching</i>  Análises</div>
