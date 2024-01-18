@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('unidade',100)->nullable();
             $table->text('observacao')->nullable();
             $table->double('margem',100)->default(0);
-            $table->integer('valor_ar')->default('0');
+            $table->integer('valor_ar')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -38,8 +38,10 @@ class AnaliseController extends Controller
        $analise->nome = $request->nome;
        $analise->tipo = $request->tipo;
        $analise->unidade = $request->unidade;
-       $request->margem = null ? $analise->margem  = 0 : $analise->margem  = $request->margem;
-       $analise->valor_ar = $request->valor_ar;
+       $margem = $request->margem;
+       $margem == null ? $analise->margem  = 0 : $analise->margem  = $request->margem;
+       $valor_ar = $request->valor_ar;
+       $valor_ar == null ? $analise->valor_ar  = 0 : $analise->valor_ar  = $request->valor_ar;
        $analise->observacao = $request->observacao;
 
        $analise->save();

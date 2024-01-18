@@ -1,3 +1,6 @@
+//adicionar essa tag na view
+<x-mps.menu :mp="$mp->id" />
+
 @props(['mp'])
 
 <div class="row">

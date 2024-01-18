@@ -11,6 +11,46 @@ use Illuminate\Support\Facades\DB;
 
 class MpController extends Controller
 {
+    //Métodos Análise
+
+    public function analise_index(Mp $mp)
+    {
+
+        $analises = $mp->analises->all();
+
+        return view('mps.analise_index', compact('analises','mp'));
+    }
+
+    public function analise_show(Mp $mp)
+    {
+        $analise_add = DB::table('analise_mp')->select('analise_id')->where('mp_id','=',$mp->id);
+        $analises = DB::table('analises')->whereNotIn('id', $analise_add)->paginate(20);
+        return view('mps.analise_show', compact('analises','mp'));
+    }
+
+    public function analise_delete(Mp $mp, string $id)
+    {
+
+        $mp->analises()->detach($id);
+        $analises = $mp->analises->all();
+
+       return redirect()->route('mps.analise_index', compact('analises','mp') );
+    }
+
+    public function analise_create(Request $request, Mp $mp, string $id)
+    {
+        $mp->analises()->attach($id, ['lim_sup' => 10, 'lim_inf' => 0, 'referencia_id' => 1, 'informativo' => 0,'analise_cq' => 1]);
+        $analises = $mp->analises->all();
+
+       return redirect()->route('mps.analise_index', compact('analises','mp') );
+    }
+
+    public function analise_edit(Mp $mp, string $id)
+    {
+
+       return view('mps.analise_edit', compact('mp','id'));
+    }
+
 
     //Métodos Setor
 

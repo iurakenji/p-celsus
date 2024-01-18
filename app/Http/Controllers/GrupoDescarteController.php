@@ -33,7 +33,7 @@ class GrupoDescarteController extends Controller
         $grupodescarte = new GrupoDescarte;
 
        $grupodescarte->nome = $request->nome;
-       $grupodescarte->descricao = $request->descricao;
+       $grupodescarte->orientacoes = $request->descricao;
 
        $grupodescarte->save();
 
@@ -64,7 +64,7 @@ class GrupoDescarteController extends Controller
        $grupodescarte = GrupoDescarte::find($id);
 
        $grupodescarte->nome = $request->nome;
-       $grupodescarte->descricao = $request->descricao;
+       $grupodescarte->orientacoes = $request->descricao;
 
        $grupodescarte->save();
 

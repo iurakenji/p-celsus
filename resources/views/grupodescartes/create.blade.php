@@ -20,7 +20,7 @@ Grupo Descarte - Novo Registro
                 <label for='nome'>Nome: </label>
             </div>
             <div class="input-field col s8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
+            <label for='descricao' title='Descrição'>Orientações: </label>
             <input type="text" id="descricao" name="descricao" placeholder="Descrição">
             </div>
         </div><br><br>

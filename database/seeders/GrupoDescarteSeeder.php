@@ -14,5 +14,9 @@ class GrupoDescarteSeeder extends Seeder
     public function run(): void
     {
         DB::table('grupodescartes')->insert(['nome' => 'Comum', 'orientacoes' => '']);
+        DB::table('grupodescartes')->insert(['nome' => 'Ácidos', 'orientacoes' => '']);
+        DB::table('grupodescartes')->insert(['nome' => 'Bases', 'orientacoes' => '']);
+        DB::table('grupodescartes')->insert(['nome' => 'Nitrogenados', 'orientacoes' => '']);
+        DB::table('grupodescartes')->insert(['nome' => 'Oxidantes', 'orientacoes' => '']);
     }
 }

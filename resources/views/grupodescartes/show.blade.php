@@ -21,8 +21,8 @@ Grupos de Descarte - {{ $grupodescarte->nome }}
                 <label for='nome'>Nome: </label>
             </div>
             <div class="input-field col s8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
-            <input type="text" id="descricao" name="descricao" value="{{ $grupodescarte->descricao }}">
+            <label for='descricao' title='Descrição'>Orientações: </label>
+            <input type="text" id="descricao" name="descricao" value="{{ $grupodescarte->orientacoes }}">
             </div>
         </div><br><br>
 </div>
