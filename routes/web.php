@@ -61,9 +61,9 @@ Route::get('/mps/{mp}/setor_show', [MpController::class, 'setor_show'])->name('m
 
 Route::get('/mps/{mp}/analise_index', [MpController::class, 'analise_index'])->name('mps.analise_index');
 Route::get('/mps/{mp}/analise_delete/{id}', [MpController::class, 'analise_delete'])->name('mps.analise_delete');
-Route::post('/mps/{mp}/analise_create/{id}', [MpController::class, 'analise_create'])->name('mps.analise_create');
+Route::get('/mps/{mp}/analise_save/{id}', [MpController::class, 'analise_save'])->name('mps.analise_save');
 Route::get('/mps/{mp}/analise_show', [MpController::class, 'analise_show'])->name('mps.analise_show');
-Route::get('/mps/{mp}/analise_edit/{id}', [MpController::class, 'analise_edit'])->name('mps.analise_edit');
+Route::get('/mps/{mp}/analise_edit/{id}{novo}', [MpController::class, 'analise_edit'])->name('mps.analise_edit');
 
 Route::post('/observacaos/obs_query', [ObservacaoController::class, 'obs_query'])->name('observacaos.obs_query');
 

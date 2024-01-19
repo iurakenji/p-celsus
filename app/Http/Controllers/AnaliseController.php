@@ -11,9 +11,13 @@ class AnaliseController extends Controller
    /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $tipo_id = 0)
     {
+        if ($tipo_id == 0) {
         $analises = analise::paginate(15);
+        } else {
+        $analises = analise::where('tipo_id','=',$tipo_id)->paginate(15);
+        }
 
         return view('analises.analises', compact('analises'));
     }
@@ -43,6 +47,7 @@ class AnaliseController extends Controller
        $valor_ar = $request->valor_ar;
        $valor_ar == null ? $analise->valor_ar  = 0 : $analise->valor_ar  = $request->valor_ar;
        $analise->observacao = $request->observacao;
+       $analise->tipo_id = $request->tipo_id;
 
        $analise->save();
 

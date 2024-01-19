@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    use App\Models\Tipo;
+
+    $tipos = Tipo::all();
+@endphp
 
 @section('titulo')
 Análises - {{ $analise->nome }}
@@ -61,6 +66,16 @@ Análises - {{ $analise->nome }}
             <input placeholder="Valor AR"  type="text" id="valor_ar" name="valor_ar" value="{{ $analise->valor_ar }}">
             <label for='valor_ar'>Valor_AR: </label>
         </div>
+        <div class="input-field col s1">
+            <label for='tipo'>Tipo: </label>
+        </div>
+        <div class="input-field col s5">
+            <select class="browser-default" id="tipo_id" name="tipo_id">
+                @foreach ($tipos as $tipo)
+                    <option value="{{ $tipo['id'] }}" {{$analise->tipo_mp->nome == $tipo['id'] ? 'selected' : '' }}>{{ $tipo['nome'] }}</option>
+                @endforeach
+            </select>
+        </div>
         </div>
         <div class="row">
             <div class="row">
@@ -70,7 +85,7 @@ Análises - {{ $analise->nome }}
             </div>
         </div>
         </div>
-        <br><br>
+
 </div>
 <div class="col s12 m2 left">
     <a href="{{ route('analises.index') }}">

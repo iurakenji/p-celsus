@@ -13,31 +13,10 @@ Setores Que Utilizam
 
     <div class="row">
         <div class="valign-wrapper center">
-            <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.show', ['mp' => $mp]) }}">
-                <i class="small material-icons">description</i>
-                <span>
-                Informações Básicas
-                </span>
-        </a>
-
-            <a class=" white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.analise_index', ['mp' => $mp]) }}">
-                <i class="small material-icons">view_list</i>
-                <span>
-                Análises
-                </span>
-            </a>
-            <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.risco_index', ['mp' => $mp]) }}">
-                <i class="small material-icons">error_outline</i>
-                <span>
-                Riscos
-                </span>
-            </a>
-        <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.obs_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">speaker_notes</i>
-            <span>
-            Observações
-            </span>
-        </a>
+    <x-mps.infos :mp="$mp->id" />
+    <x-mps.analises :mp="$mp->id" />
+    <x-mps.observacoes :mp="$mp->id" />
+    <x-mps.riscos :mp="$mp->id" />
     </div>
     </div>
 

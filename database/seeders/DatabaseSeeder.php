@@ -34,8 +34,12 @@ class DatabaseSeeder extends Seeder
 
 
         DB::unprepared(file_get_contents('storage\app\public\mp.sql'));
-        $mpAntigos = DB::table('mp')->select('codigo','nome','nome_fc','tipo','cas','nome_popular','parte_usada','mp_vegetal','dcb_dci','m_potes', 'hormonio', 'citostatico', 'controlado', 'pfed', 'pc', 'exercito','micronizado', 'lacto', 'tintura', 'enzima', 'producao', 'li_h2o', 'ls_h2o', 'li_etoh', 'ls_etoh', 'li_ph', 'ls_ph', 'li_densidade', 'ls_densidade', 'li_pf', 'ls_pf', 'ref_car_org', 'ref_sol', 'ref_dens','ref_ph', 'ref_pf', 'car_org')->get();
+        $mp_id = 0;
+        $mpAntigos = DB::table('mp')->select('codigo','nome','nome_fc','tipo','cas','nome_popular','parte_usada','mp_vegetal','dcb_dci','m_potes', 'hormonio', 'citostatico', 'controlado', 'pfed', 'pc', 'exercito','micronizado', 'lacto', 'tintura', 'enzima', 'producao', 'li_h2o', 'ls_h2o', 'li_etoh', 'ls_etoh', 'li_ph', 'ls_ph', 'li_densidade', 'ls_densidade', 'li_pf', 'ls_pf', 'ref_car_org', 'ref_sol', 'ref_dens','ref_ph', 'ref_pf', 'car_org')->orderby('nome', 'asc')->get();
             foreach ($mpAntigos as $mpAntigo) {
+                ++$mp_id;
+                echo "Criando registro ".$mp_id."\n";
+                echo $mpAntigo->nome.' - Inserindo dados: ';
                 DB::table('mps')->insert([
                     'codigo' => $mpAntigo->codigo,
                     'nome' => $mpAntigo->nome,
@@ -63,12 +67,8 @@ class DatabaseSeeder extends Seeder
                     'grupodescarte_id' => 1,
                     'fornecedor_id' => 1,
                 ]);
-                $mp_id = DB::table('mps')->latest()->first()->id;
-                $referencia_car = DB::table('referencias')->where('nome','=', $mpAntigo->ref_car_org)->get();
-                $referencia_sol = DB::table('referencias')->where('nome','=',$mpAntigo->ref_sol)->get();
-                $referencia_dens = DB::table('referencias')->where('nome','=',$mpAntigo->ref_dens)->get();
-                $referencia_ph = DB::table('referencias')->where('nome','=',$mpAntigo->ref_ph)->get();
-                $referencia_pf = DB::table('referencias')->where('nome','=',$mpAntigo->ref_pf)->get();
+                echo "... Sucesso\n";
+
                 switch ($mpAntigo->li_h2o) {
                     case 'Praticamente insolúvel ou Insolúvel':
                         $li_h2o = 1;
@@ -174,16 +174,26 @@ class DatabaseSeeder extends Seeder
                         break;
                 }
 
-
-                if ($referencia_car != null) {
-/*Car_Org*/     DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 1, 'lim_sup' => null, 'lim_inf' => null, 'especificacao' => $mpAntigo->car_org, 'referencia_id' => $referencia_car->id, 'informativo' => 0, 'analise_cq' => 1]);
-/*Sol H2O*/     DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 2, 'lim_sup' => $ls_h2o, 'lim_inf' => $li_h2o, 'especificacao' => null, 'referencia_id' => $referencia_sol->id, 'informativo' => 0, 'analise_cq' => 1]);
-/*Sol_ETOH*/    DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 3, 'lim_sup' => $ls_etoh, 'lim_inf' => $li_etoh, 'especificacao' => null, 'referencia_id' => $referencia_sol->id, 'informativo' => 0, 'analise_cq' => 1]);
-/*pH*/          DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 4, 'lim_sup' => $mpAntigo->ls_ph, 'lim_inf' => $mpAntigo->li_ph, 'especificacao' => null, 'referencia_id' => $referencia_ph->id, 'informativo' => 0, 'analise_cq' => 1]);
-/*Dens*/        DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 5, 'lim_sup' => $mpAntigo->ls_densidade, 'lim_inf' => $mpAntigo->li_densidade, 'especificacao' => null, 'referencia_id' => $referencia_dens->id, 'informativo' => 0, 'analise_cq' => 1]);
-/*PF*/          DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 6, 'lim_sup' => $mpAntigo->ls_pf, 'lim_inf' => $mpAntigo->li_pf, 'especificacao' => null, 'referencia_id' => $referencia_pf->id, 'informativo' => 0, 'analise_cq' => 1]);
-                }
+                $referencia_car = DB::table('referencias')->where('nome','=', $mpAntigo->ref_car_org)->get()->value('id');
+                $referencia_sol = DB::table('referencias')->where('nome','=',$mpAntigo->ref_sol)->get()->value('id');
+                $referencia_dens = DB::table('referencias')->where('nome','=',$mpAntigo->ref_dens)->get()->value('id');
+                $referencia_ph = DB::table('referencias')->where('nome','=',$mpAntigo->ref_ph)->get()->value('id');
+                $referencia_pf = DB::table('referencias')->where('nome','=',$mpAntigo->ref_pf)->get()->value('id');
+                echo $mpAntigo->nome.' - Inserindo análises: ';
+                if (isset($mpAntigo->ref_car_org)) {
+/*Car_Org*/     DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 1, 'lim_sup' => null, 'lim_inf' => null, 'especificacao' => $mpAntigo->car_org, 'referencia_id' => $referencia_car, 'informativo' => 0, 'analise_cq' => 1]);}
+                if (isset($mpAntigo->ref_sol)) {
+/*Sol H2O*/     DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 2, 'lim_sup' => $ls_h2o, 'lim_inf' => $li_h2o, 'especificacao' => null, 'referencia_id' => $referencia_sol, 'informativo' => 0, 'analise_cq' => 1]);
+/*Sol_ETOH*/    DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 3, 'lim_sup' => $ls_etoh, 'lim_inf' => $li_etoh, 'especificacao' => null, 'referencia_id' => $referencia_sol, 'informativo' => 0, 'analise_cq' => 1]);}
+                if (isset($mpAntigo->ref_ph)) {
+/*pH*/          DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 4, 'lim_sup' => $mpAntigo->ls_ph, 'lim_inf' => $mpAntigo->li_ph, 'especificacao' => null, 'referencia_id' => $referencia_ph, 'informativo' => 0, 'analise_cq' => 1]);}
+                if (isset($mpAntigo->ref_dens)) {
+/*Dens*/        DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 5, 'lim_sup' => $mpAntigo->ls_densidade, 'lim_inf' => $mpAntigo->li_densidade, 'especificacao' => null, 'referencia_id' => $referencia_dens, 'informativo' => 0, 'analise_cq' => 1]);}
+                if (isset($mpAntigo->ref_pf)) {
+/*PF*/          DB::table('analise_mp')->insert(['mp_id' => $mp_id, 'analise_id' => 6, 'lim_sup' => $mpAntigo->ls_pf, 'lim_inf' => $mpAntigo->li_pf, 'especificacao' => null, 'referencia_id' => $referencia_pf, 'informativo' => 0, 'analise_cq' => 1]);}
+            echo "... Sucesso\n";
             }
+            echo $mp_id." registros criados.";
         Schema::drop('mp');
         //Usuario::factory(30)->create();
     }

@@ -23,7 +23,7 @@ class MpController extends Controller
 
     public function analise_show(Mp $mp)
     {
-        $analise_add = DB::table('analise_mp')->select('analise_id')->where('mp_id','=',$mp->id);
+        $analise_add = DB::table('analise_mp')->select('analise_id')->where('mp_id','=',$mp->id);   //verifica duplicidade do registro, retorna somente os que não constam na tabela intermediária
         $analises = DB::table('analises')->whereNotIn('id', $analise_add)->paginate(20);
         return view('mps.analise_show', compact('analises','mp'));
     }
@@ -37,18 +37,23 @@ class MpController extends Controller
        return redirect()->route('mps.analise_index', compact('analises','mp') );
     }
 
-    public function analise_create(Request $request, Mp $mp, string $id)
+    public function analise_edit(Mp $mp, string $id, string $novo)
     {
-        $mp->analises()->attach($id, ['lim_sup' => 10, 'lim_inf' => 0, 'referencia_id' => 1, 'informativo' => 0,'analise_cq' => 1]);
-        $analises = $mp->analises->all();
-
-       return redirect()->route('mps.analise_index', compact('analises','mp') );
+        if ($novo == 'novo') {
+            'sim';
+        } else {
+        $analise = $mp->analises->where('id','=',$id)->join('analises','analises.id','=','analise_id');
+        }
+        //dd($analise);
+       return view('mps.analise_edit', compact('mp','analise'));
     }
 
-    public function analise_edit(Mp $mp, string $id)
+    public function analise_save(Mp $mp, string $id)
     {
+        $mp->analises()->attach($id, ['lim_sup' => 10, 'lim_inf' => 0, 'referencia_id' => 1, 'informativo' => 0,'analise_cq' => 1]);
+        $analises = $mp->analises->where('id','=',$id);
 
-       return view('mps.analise_edit', compact('mp','id'));
+       return view('mps.analise_index', compact('mp','analises'));
     }
 
 

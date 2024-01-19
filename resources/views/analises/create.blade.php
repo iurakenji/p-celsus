@@ -1,5 +1,10 @@
 @extends('layouts.app')
 
+@php
+    use App\Models\Tipo;
+
+    $tipos = Tipo::all();
+@endphp
 
 @section('titulo')
 Análises - Novo Registro
@@ -57,6 +62,16 @@ Análises - Novo Registro
         <div class="input-field col s4">
             <input placeholder="0"  type="text" id="valor_ar" name="valor_ar">
             <label for='valor_ar'>Valor AR: </label>
+        </div>
+        <div class="input-field col s1">
+            <label for='tipo'>Tipo: </label>
+        </div>
+        <div class="input-field col s5">
+            <select class="browser-default" id="tipo_id" name="tipo_id">
+                @foreach ($tipos as $tipo)
+                    <option value="{{ $tipo['id'] }}">{{ $tipo['nome'] }}</option>
+                @endforeach
+            </select>
         </div>
         </div>
         <div class="row">

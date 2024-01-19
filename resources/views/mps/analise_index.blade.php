@@ -13,32 +13,11 @@
 
     <div class="row">
         <div class="valign-wrapper center">
-            <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.show', ['mp' => $mp]) }}">
-                <i class="small material-icons">description</i>
-                <span>
-                Informações Básicas
-                </span>
-            </a>
-
-            <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.setor_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">apps</i>
-            <span>
-            Setores
-            </span>
-            </a>
-            <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.risco_index', ['mp' => $mp]) }}">
-                <i class="small material-icons">error_outline</i>
-                <span>
-                Riscos
-                </span>
-            </a>
-            <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.obs_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">speaker_notes</i>
-            <span>
-            Observações
-            </span>
-            </a>
-        </div>
+    <x-mps.infos :mp="$mp->id" />
+    <x-mps.riscos :mp="$mp->id" />
+    <x-mps.setores :mp="$mp->id" />
+    <x-mps.observacoes :mp="$mp->id" />
+    </div>
     </div>
 
         <table class="highlight">
@@ -52,8 +31,9 @@
 
                 @foreach ($analises as $analise)
                 <tr>
-                    <td style="width: 20%">{{ $analise->nome }}</td>
-                    <td style="width: 10%"><a href=" {{ route('mps.analise_delete', ['mp' => $mp->id, 'id' => $analise->id]) }} " class="list"> Excluir </a></td>
+                    <td style="width: 30%">{{ $analise->nome }}</td>
+                    <td style="width: 5%"><a href=" {{ route('mps.analise_delete', ['mp' => $mp->id, 'id' => $analise->id]) }} " class="list"> Excluir </a></td>
+                    <td style="width: 5%"><a href=" {{ route('mps.analise_edit', ['mp' => $mp->id, 'id' => $analise->id, 'novo' => 'não']) }} " class="list"> Editar </a></td>
                 </tr>
                 @endforeach
     </tbody>

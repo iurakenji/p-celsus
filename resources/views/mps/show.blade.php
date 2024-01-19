@@ -20,35 +20,15 @@ Matérias-Primas - {{ $mp->nome }}
 
     <h5>{{ $mp->nome }}</h5>
 </div>
-
 <div class="row">
     <div class="valign-wrapper center">
-        <a class=" white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.analise_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">view_list</i>
-            <span>
-            Análises
-            </span>
-        </a>
-    <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.setor_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">apps</i>
-            <span>
-            Setores
-            </span>
-    </a>
-    <a class="white-text btn col m3 center-align blue-grey darken-4 hoverable" href="{{ route('mps.risco_index', ['mp' => $mp]) }}">
-            <i class="small material-icons">error_outline</i>
-            <span>
-            Riscos
-            </span>
-    </a>
-    <a class="white-text btn col m3 blue-grey darken-4 hoverable" href="{{ route('mps.obs_index', ['mp' => $mp]) }}">
-        <i class="small material-icons">speaker_notes</i>
-        <span>
-        Observações
-        </span>
-    </a>
+<x-mps.analises :mp="$mp->id" />
+<x-mps.observacoes :mp="$mp->id" />
+<x-mps.riscos :mp="$mp->id" />
+<x-mps.setores :mp="$mp->id" />
 </div>
 </div>
+
 
     <form action=" {{ route('mps.update', ['mp' => $mp->id]) }} " method="post" >
         @csrf

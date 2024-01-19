@@ -19,6 +19,7 @@ return new class extends Migration
             $table->text('observacao')->nullable();
             $table->double('margem',100)->default(0);
             $table->integer('valor_ar')->default(0);
+            $table->integer('tipo_id')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });
