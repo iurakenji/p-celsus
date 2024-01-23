@@ -9,7 +9,7 @@
 @endphp
 
 @section('titulo')
-{{ $analise->nome ?? 'Nova Análise'}} - {{ $mp->nome }}
+{{ $mp->nome }}
 @endsection
 
 @section('conteudo')
@@ -18,8 +18,8 @@
 </div>
 <div class="row center" style="margin: 0px 20px ">
     <h5>
-        {{ $mp->nome }} - {{ $analise->nome }}</h5><br>
-    <form action=" {{ route('mps.analise_save', ['mp' => $mp->id, 'id' => $analise->id]) }} " method="post">
+        {{ $mp->nome }} - $analise->value('nome') </h5><br>
+    <form action="# " method="post">
         @csrf
         <div class="row">
         <div class="col s12 m2 left">
@@ -39,21 +39,21 @@
         </div>
         </div>
         <div class="row">
-            @if ($analise->tipo == 'Categórica Nominal')
-            <div class="input-field col s1">
-                <label for='referencia'>Referência: </label>
+            <div class="input-field col s6">
+                <input placeholder="Especificação"  type="text" id="especificacao" name="especificacao" value=" {{ $id === 'novo' ? "" : $analise->value('especificacao') }} ">
+                <label for='especificacao'>Especificação: </label>
             </div>
-            @endif
-            @if ($analise->tipo == 'Categórica Ordinal' || $analise->tipo == 'Numérica Contínua' || $analise->tipo == 'Numérica Discreta')
-            <div class="input-field col s2">
+            <div class="input-field col s3">
                 <input placeholder="Limite inferior"  type="number" id="lim_inf" name="lim_inf" value="">
                 <label for='nome'>Limite Inferior: </label>
             </div>
-            <div class="input-field col s2">
+            <div class="input-field col s3">
                 <input placeholder="Limite superior"  type="number" id="lim_sup" name="lim_sup" value="">
                 <label for='nome'>Limite Superior: </label>
             </div>
-            @endif
+            <div class="input-field col s1">
+                <label for='referencia'>Referência: </label>
+            </div>
             <div class="input-field col s5">
                 <select class="browser-default" id="referencia_id" name="referencia_id">
                     @foreach ($referencias as $referencia)

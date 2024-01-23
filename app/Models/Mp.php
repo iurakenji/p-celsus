@@ -16,7 +16,7 @@ class Mp extends Model
 
     public function analises(): BelongsToMany
     {
-        return $this->belongsToMany(Analise::class)->wherePivot('mp_id',$this->id)->withPivot('lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
+        return $this->belongsToMany(Analise::class)->wherePivot('mp_id',$this->id)->withPivot('especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
     }
 
     public function setors(): BelongsToMany

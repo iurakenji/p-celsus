@@ -33,7 +33,7 @@
                 <tr>
                     <td style="width: 30%">{{ $analise->nome }}</td>
                     <td style="width: 5%"><a href=" {{ route('mps.analise_delete', ['mp' => $mp->id, 'id' => $analise->id]) }} " class="list"> Excluir </a></td>
-                    <td style="width: 5%"><a href=" {{ route('mps.analise_edit', ['mp' => $mp->id, 'id' => $analise->id, 'novo' => 'não']) }} " class="list"> Editar </a></td>
+                    <td style="width: 5%"><a href=" {{ route('mps.analise_edit', ['mp' => $mp->id, 'id' => $analise->id, 'analise' => $analise->id]) }} " class="list"> Editar </a></td>
                 </tr>
                 @endforeach
     </tbody>

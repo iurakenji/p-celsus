@@ -31,7 +31,7 @@ Análises
                 @foreach ($analises as $analise)
                 <tr>
                     <td style="width: 90%">{{ $analise->nome }}</td>
-                    <td style="width: 10%"><a href=" {{ route('mps.analise_edit', ['mp' => $mp->id, 'id' => $analise->id, 'novo' => 'sim']) }} " class="list"> Adicionar </a></td>
+                    <td style="width: 10%"><a href=" {{ route('mps.analise_edit', ['mp' => $mp->id, 'id' => 'novo', 'analise' => $analise->id]) }} " class="list"> Adicionar </a></td>
                 </tr>
                 @endforeach
     </tbody>

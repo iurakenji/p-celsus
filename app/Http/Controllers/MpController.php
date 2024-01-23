@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mp;
+use App\Models\Analise;
 use Hamcrest\Core\IsNull;
 use Illuminate\Http\Request;
 use App\Models\Observacao;
@@ -37,15 +38,15 @@ class MpController extends Controller
        return redirect()->route('mps.analise_index', compact('analises','mp') );
     }
 
-    public function analise_edit(Mp $mp, string $id, string $novo)
+    public function analise_edit(Mp $mp, string $id, Analise $analise)
     {
-        if ($novo == 'novo') {
-            'sim';
+        if ($id === 'novo') {
+        $analise = DB::table('analises')->where('id','=',$analise->id)->get();
         } else {
-        $analise = $mp->analises->where('id','=',$id)->join('analises','analises.id','=','analise_id');
+        $analise = $mp->analises->where('id','=', $analise->id);
         }
         //dd($analise);
-       return view('mps.analise_edit', compact('mp','analise'));
+       return view('mps.analise_edit', compact('mp','id','analise'));
     }
 
     public function analise_save(Mp $mp, string $id)
