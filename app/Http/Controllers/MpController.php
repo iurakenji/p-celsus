@@ -17,8 +17,8 @@ class MpController extends Controller
     public function analise_index(Mp $mp)
     {
 
-        $analises = $mp->analises->all();
-
+        $analises = $mp->analises->sortBy('id');
+        //dd($analises);
         return view('mps.analise_index', compact('analises','mp'));
     }
 
@@ -41,20 +41,27 @@ class MpController extends Controller
     public function analise_edit(Mp $mp, string $id, Analise $analise)
     {
         if ($id === 'novo') {
-        $analise = DB::table('analises')->where('id','=',$analise->id)->get();
+        $analise = DB::table('analises')->where('analises.id','=',$analise->id)->get();
         } else {
-        $analise = $mp->analises->where('id','=', $analise->id);
+        //$analise = DB::table('analise_mp')->join('analises','analise_id','=','analises.id')->where('analise_id','=',$analise->id)->where('mp_id','=',$mp->id)->get();
+        $analise = $mp->analises()->where('analise_id','=', $analise->id);
         }
         //dd($analise);
        return view('mps.analise_edit', compact('mp','id','analise'));
     }
 
-    public function analise_save(Mp $mp, string $id)
+    public function analise_save(Request $request, Mp $mp, string $id, Analise $analise)
     {
-        $mp->analises()->attach($id, ['lim_sup' => 10, 'lim_inf' => 0, 'referencia_id' => 1, 'informativo' => 0,'analise_cq' => 1]);
+        $mp = Mp::find($mp->id);
+        if ($id === 'novo'){
+        $mp->analises()->attach($analise->value('id'), ['especificacao'=>$request->especificacao, 'lim_sup' => $request->lim_sup, 'lim_inf' => $request->lim_inf, 'referencia_id' => $request->referencia_id, 'informativo' => ($request->informativo ?? 0),'analise_cq' => ($request->analise_cq ?? 1)]);
+        } else {
+        $mp->analises()->updateExistingPivot($analise->value('id'), ['especificacao'=>$request->especificacao, 'lim_sup' => $request->lim_sup, 'lim_inf' => $request->lim_inf, 'referencia_id' => $request->referencia_id, 'informativo' => ($request->informativo ?? 0),'analise_cq' => ($request->analise_cq ?? 1)]);
+        }
         $analises = $mp->analises->where('id','=',$id);
+        dd($request->informativo);
 
-       return view('mps.analise_index', compact('mp','analises'));
+        return redirect()->route('mps.analise_index', compact('analises','mp') );
     }
 
 

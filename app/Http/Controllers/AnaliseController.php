@@ -11,7 +11,7 @@ class AnaliseController extends Controller
    /**
      * Display a listing of the resource.
      */
-    public function index(string $tipo_id = 0)
+    public function index(string $tipo_id = '0')
     {
         if ($tipo_id == 0) {
         $analises = analise::paginate(15);

@@ -71,7 +71,7 @@ class VarCategoricaController extends Controller
 
        $varCategorica->save();
 
-       return view('varCategoricas.index', compact('analise'));
+       return redirect()->route('varCategoricas.index', compact('analise'));
     }
 
     /**

@@ -16,22 +16,22 @@ class Mp extends Model
 
     public function analises(): BelongsToMany
     {
-        return $this->belongsToMany(Analise::class)->wherePivot('mp_id',$this->id)->withPivot('especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
+        return $this->belongsToMany(Analise::class, 'analise_mp', 'mp_id', 'analise_id')->wherePivot('mp_id',$this->id)->withPivot('analise_mp.id','especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
     }
 
     public function setors(): BelongsToMany
     {
-        return $this->belongsToMany(Setor::class)->wherePivot('mp_id',$this->id);
+        return $this->belongsToMany(Setor::class)->as('setor')->wherePivot('mp_id',$this->id);
     }
 
     public function riscos(): BelongsToMany
     {
-        return $this->belongsToMany(Risco::class)->wherePivot('mp_id',$this->id);
+        return $this->belongsToMany(Risco::class)->as('risco')->wherePivot('mp_id',$this->id);
     }
 
     public function observacaos(): BelongsToMany
     {
-        return $this->belongsToMany(Observacao::class)->wherePivot('mp_id',$this->id);
+        return $this->belongsToMany(Observacao::class)->as('observacao')->wherePivot('mp_id',$this->id);
     }
 
     public function tipo(): BelongsTo {
