@@ -61,7 +61,7 @@ Route::get('/mps/{mp}/setor_show', [MpController::class, 'setor_show'])->name('m
 
 Route::get('/mps/{mp}/analise_index', [MpController::class, 'analise_index'])->name('mps.analise_index');
 Route::get('/mps/{mp}/analise_delete/{id}', [MpController::class, 'analise_delete'])->name('mps.analise_delete');
-Route::get('/mps/{mp}/analise_save/{id}', [MpController::class, 'analise_save'])->name('mps.analise_save');
+Route::get('/mps/{mp}/analise_save/{id}/{analise}', [MpController::class, 'analise_save'])->name('mps.analise_save');
 Route::get('/mps/{mp}/analise_show', [MpController::class, 'analise_show'])->name('mps.analise_show');
 Route::get('/mps/{mp}/analise_edit/{id}/{analise}', [MpController::class, 'analise_edit'])->name('mps.analise_edit');
 

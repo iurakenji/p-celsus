@@ -7,7 +7,7 @@
 
     $observacaos = Observacao::all();
     $referencias = Referencia::all();
-    $varCategoricas = varCategorica::where('analise_id','=',$analise->value('analise_id'))->get();
+    $varCategoricas = varCategorica::where('analise_id','=', $id == 'novo' ? $analise->value('id') : $analise->value('analise_id') )->get();
 @endphp
 
 @section('titulo')
@@ -21,8 +21,7 @@
 <div class="row center" style="margin: 0px 20px ">
     <h5>
         {{ $mp->nome }} - {{ $analise->value('nome') }} </h5><br>
-
-    <form action=" {{ route('mps.analise_save', ['mp' => $mp->id, 'analise' => $analise->value('analise_mp.id'), 'id' => $analise->value('analise_mp.id') ]) }} " method="get">
+    <form action=" {{ route('mps.analise_save', ['mp' => $mp->id, 'id' => $id, 'analise' => $id == 'novo' ? $analise->value('id') : $analise->value('analise_id') ]) }} " method="get">
         @csrf
         <div class="row">
         <div class="col s12 m2 left">
@@ -43,20 +42,21 @@
         </div>
         <div class="row">
             @if ($analise->value('tipo') == 'Categórica Nominal')
-            <div class="input-field col s6">
+            <div class="input-field col s4">
                 <input placeholder="Especificação"  type="text" id="especificacao" name="especificacao" value=" {{ $id === 'novo' ? "" : $analise->value('especificacao') }} ">
                 <label for='especificacao'>Especificação: </label>
             </div>
             @endif
 
-            @if ($analise->value('tipo') == 'Categórica Ordinal')
+            @if ($id == 'novo')
+
             <div class="input-field col s1">
                 <label for='referencia'>Limite Inferior </label>
             </div>
             <div class="input-field col s5">
                 <select class="browser-default" id="lim_inf" name="lim_inf">
                     @foreach ($varCategoricas as $varCategorica)
-                        <option value="{{ $varCategorica['ordem'] }}" >{{ $varCategorica['nome'] }} {{$analise->value('lim_inf') == $varCategorica['lim_inf'] ? 'selected' : '' }}</option>
+                        <option value="{{ $varCategorica['ordem'] }}">{{ $varCategorica['nome'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -66,7 +66,30 @@
             <div class="input-field col s5">
                 <select class="browser-default" id="lim_sup" name="lim_sup">
                     @foreach ($varCategoricas as $varCategorica)
-                        <option value="{{ $varCategorica['ordem'] }}" >{{ $varCategorica['nome'] }} {{$analise->value('lim_sup') == $varCategorica['lim_sup'] ? 'selected' : '' }}</option>
+                        <option value="{{ $varCategorica['ordem'] }}" >{{ $varCategorica['nome'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @endif
+
+            @if (($id != 'novo') && ($analise->value('tipo') == 'Categórica Ordinal'))
+            <div class="input-field col s1">
+                <label for='referencia'>Limite Inferior </label>
+            </div>
+            <div class="input-field col s5">
+                <select class="browser-default" id="lim_inf" name="lim_inf">
+                    @foreach ($varCategoricas as $varCategorica)
+                        <option value="{{ $varCategorica['ordem'] }}" {{ $analise->value('lim_inf') == $varCategorica['ordem'] ? 'selected' : '' }}>{{ $varCategorica['nome'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="input-field col s1">
+                <label for='referencia'>Limite Superior: </label>
+            </div>
+            <div class="input-field col s5">
+                <select class="browser-default" id="lim_sup" name="lim_sup">
+                    @foreach ($varCategoricas as $varCategorica)
+                        <option value="{{ $varCategorica['ordem'] }}" {{$analise->value('lim_sup') == $varCategorica['ordem'] ? 'selected' : '' }} >{{ $varCategorica['nome'] }}</option>
                     @endforeach
                 </select>
             </div>
@@ -95,6 +118,7 @@
             </div>
         </div>
         <div class="input-field col s2">
+
             <label>
             <input type="checkbox" id="informativo" name="informativo" value="1" @checked(old('informativo', $analise->value('informativo')))/>
             <span>Informativo</span>

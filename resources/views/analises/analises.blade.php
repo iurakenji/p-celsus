@@ -12,8 +12,8 @@ Análises
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Observação</th>
+                    <th>Tipo de Variável</th>
+                    <th>Aplicável a</th>
                     <th></th>
                 </tr>
             </thead>
@@ -22,7 +22,7 @@ Análises
                 <tr>
                     <td style="width: 35%">{{ $analise->nome }}</td>
                     <td style="width: 15%">{{ $analise->tipo }}</td>
-                    <td style="width: 40%">{{ $analise->observacao }}</td>
+                    <td style="width: 40%">{{ $analise->tipo_mp->nome }}</td>
                     <td style="width: 10%"><a href=" {{ route('analises.show', ['analise' => $analise->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
 

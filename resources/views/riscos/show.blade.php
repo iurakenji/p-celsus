@@ -12,8 +12,19 @@ Riscos - {{ $risco->nome }}
 <div class="row center" style="margin: 0px 20px ">
     <h5>{{ $risco->nome }}</h5><br>
 
+    <img src=" {{ asset('storage\app\public\img\riscos\inflamavel.png') }} " alt="Inflamável">
+
     <form action=" {{ route('riscos.update', ['risco' => $risco->id]) }} " method="post">
         @csrf
+        <div class="file-field input-field">
+            <div class="btn">
+              <span>Imagem</span>
+              <input name="imagem" type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
         <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="input-field col s4">

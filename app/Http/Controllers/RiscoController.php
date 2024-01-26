@@ -66,7 +66,11 @@ class RiscoController extends Controller
 
        $risco->nome = $request->nome;
        $risco->descricao = $request->descricao;
-       $risco->imagem = $request->imagem;
+       if($request->imagem) {
+        dd($request->imagem);
+       $risco->imagem = $request->imagem->store('img\riscos');
+       //$risco->imagem = $request->imagem;
+       }
 
        $risco->save();
 

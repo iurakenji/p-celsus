@@ -80,7 +80,7 @@ Análises - {{ $analise->nome }}
         <div class="row">
             <div class="row">
             <div class="input-field col s12">
-                <textarea class="materialize-textarea" placeholder="Observações" id="observacao" name="orbservacao" value="{{ $analise->observacao }}"></textarea>
+                <textarea class="materialize-textarea" placeholder="Observações" id="observacao" name="observacao" value="{{ $analise->observacao }}"></textarea>
                 <label for='observacao'>Observação: </label>
             </div>
         </div>

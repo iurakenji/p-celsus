@@ -19,8 +19,8 @@ class AnaliseSeeder extends Seeder
         DB::table('analises')->insert(['nome' => 'pH', 'tipo' => 'Numérica Contínua','unidade' => null, 'observacao' => null, 'margem' => 0.1, 'valor_ar' => 5, 'tipo_id' => 1]);
         DB::table('analises')->insert(['nome' => 'Densidade (com compactação)', 'tipo' => 'Numérica Contínua','unidade' => 'g/cm³', 'observacao' => null, 'margem' => 0.1, 'valor_ar' => 1, 'tipo_id' => 1]);
         DB::table('analises')->insert(['nome' => 'Ponto de Fusão', 'tipo' => 'Numérica Contínua','unidade' => '° C', 'observacao' => null, 'margem' => 0.1, 'valor_ar' => 5, 'tipo_id' => 1]);
-        DB::table('analises')->insert(['nome' => 'Solubilidade em Água Quente', 'tipo' => 'Categórica Ordinal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 1]);
-        DB::table('analises')->insert(['nome' => 'Solubilidade em Isopropanol', 'tipo' => 'Categórica Ordinal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 1]);
+        DB::table('analises')->insert(['nome' => 'Solubilidade em água Quente', 'tipo' => 'Categórica Ordinal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 1]);
+        DB::table('analises')->insert(['nome' => 'Solubilidade em isopropanol', 'tipo' => 'Categórica Ordinal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 1]);
         DB::table('analises')->insert(['nome' => 'Características físicas', 'tipo' => 'Categórica Nominal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 3]);
     }
 }

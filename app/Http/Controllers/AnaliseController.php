@@ -73,9 +73,9 @@ class AnaliseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $analise)
     {
-       $analise = Analise::find($id);
+       $analise = Analise::find($analise);
 
        $analise->nome = $request->nome;
        $analise->tipo = $request->tipo;
@@ -83,6 +83,7 @@ class AnaliseController extends Controller
        $analise->margem = $request->margem;
        $analise->valor_ar = $request->valor_ar;
        $analise->observacao = $request->observacao;
+       //dd($analise);
 
        $analise->save();
 
