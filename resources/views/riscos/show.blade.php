@@ -12,7 +12,7 @@ Riscos - {{ $risco->nome }}
 <div class="row center" style="margin: 0px 20px ">
     <h5>{{ $risco->nome }}</h5><br>
 
-    <img src=" {{ asset('storage\app\public\img\riscos\inflamavel.png') }} " alt="Inflamável">
+    <img src=" {{ asset('storage/img/riscos/Inflamavel.png') }} " alt="Inflamável" style="width: 10%">
 
     <form action=" {{ route('riscos.update', ['risco' => $risco->id]) }} " method="post">
         @csrf
