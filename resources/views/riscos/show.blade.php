@@ -12,10 +12,15 @@ Riscos - {{ $risco->nome }}
 <div class="row center" style="margin: 0px 20px ">
     <h5>{{ $risco->nome }}</h5><br>
 
-    <img src=" {{ asset('storage/img/riscos/Inflamavel.png') }} " alt="Inflamável" style="width: 10%">
+    @if ($risco->imagem)
+    <img src=" {{ asset($risco->imagem) }} " alt=" {{ $risco->nome }} " style="width: 10% ">
+    @else
 
-    <form action=" {{ route('riscos.update', ['risco' => $risco->id]) }} " method="post">
+    @endif
+
+    <form action=" {{ route('riscos.update', ['risco' => $risco->id]) }} " method="post" enctype="multipart/form-data">
         @csrf
+        <input type="hidden" name="_method" value="PUT">
         <div class="file-field input-field">
             <div class="btn">
               <span>Imagem</span>
@@ -25,7 +30,6 @@ Riscos - {{ $risco->nome }}
               <input class="file-path validate" type="text">
             </div>
           </div>
-        <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="input-field col s4">
                 <input placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $risco->nome }}">

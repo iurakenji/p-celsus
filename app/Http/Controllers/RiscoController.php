@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\risco;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class RiscoController extends Controller
 {
@@ -35,7 +36,13 @@ class RiscoController extends Controller
 
        $risco->nome = $request->nome;
        $risco->descricao = $request->descricao;
-       $risco->imagem = $request->imagem;
+
+       if($request->imagem) {
+        //dd($request->imagem);
+       $risco->imagem = $request->imagem->store('storage/img/riscos', 'public');
+       //$risco->imagem = 'storage/img/riscos/'.Str::slug($request->nome);
+       }
+
        $risco->save();
 
        return redirect('/riscos');
@@ -68,8 +75,8 @@ class RiscoController extends Controller
        $risco->descricao = $request->descricao;
        if($request->imagem) {
         //dd($request->imagem);
-       $risco->imagem = $request->imagem->store('img\riscos');
-       //$risco->imagem = $request->imagem;
+       $risco->imagem = $request->imagem->store('storage/img/riscos', 'public');
+       //$risco->imagem = 'storage/img/riscos/'.Str::slug($request->nome);
        }
 
        $risco->save();

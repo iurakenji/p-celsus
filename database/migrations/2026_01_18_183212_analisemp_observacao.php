@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('analisemp_observacao', function (Blueprint $table) {
             $table->id();
-            $table->integer('analisemp_id');
-            $table->integer('observacao_id');
+            $table->foreignId('mp_id')->constrained();
+            $table->foreignId('analise_id')->constrained();
+            $table->foreignId('observacao_id')->constrained();
             });
         }
 

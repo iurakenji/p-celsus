@@ -2,10 +2,8 @@
 
 @php
     use App\Models\Referencia;
-    use App\Models\Observacao;
     use App\Models\varCategorica;
 
-    $observacaos = Observacao::all();
     $referencias = Referencia::all();
     $varCategoricas = varCategorica::where('analise_id','=', $id == 'novo' ? $analise->value('id') : $analise->value('analise_id') )->get();
 @endphp
@@ -48,7 +46,7 @@
             </div>
             @endif
 
-            @if ($id == 'novo')
+            @if (($id == 'novo') && ($analise->value('tipo') == 'Categórica Ordinal'))
 
             <div class="input-field col s1">
                 <label for='referencia'>Limite Inferior </label>
@@ -139,6 +137,17 @@
 
         </div>
         <div class="row">
+            <a href="{{ route('mps.analiseobs_index',  ['mp' => $mp->id, 'analise' => $id == 'novo' ? $analise->value('id') : $analise->value('analise_id') ] ) }}">
+            <div class="col s12 m2 right">
+                <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
+                    <i class="material-icons">add</i>
+                    Adicionar
+            </div>
+
+            </div>
+            </a>
+        </div>
+        <div class="row">
             <table class="highlight">
                 <thead>
                     <tr>
@@ -153,7 +162,7 @@
                     <tr>
                         <td style="width: 35%">{{ $observacao->nome }}</td>
                         <td style="width: 55%">{{ $observacao->observacao }}</td>
-                        <td style="width: 10%"><a href=" # " class="list"> Adicionar </a></td>
+                        <td style="width: 10%"><a href=" {{ route('mps.analiseobs_destroy',  ['mp' => $mp->id, 'analise' => $id == 'novo' ? $analise->value('id') : $analise->value('analise_id'), 'observacao' => $observacao->id ] ) }} " class="list"> Excluir </a></td>
                     </tr>
                     @endforeach
         </tbody>

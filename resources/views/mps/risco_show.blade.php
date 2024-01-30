@@ -32,7 +32,7 @@ Riscos de Matérias-Primas
             <tbody>
                 @foreach ($riscos as $risco)
                 <tr>
-                    <td style="width: 20%">Imagem</td>
+                    <td style="width: 10%"> <img src=" {{ asset($risco->imagem) }} " alt=" {{ $risco->nome }} " style="width: 50% "> </td>
                     <td style="width: 20%">{{ $risco->nome }}</td>
                     <td style="width: 50%">{{ $risco->descricao }}</td>
                     <td style="width: 10%"><a href=" {{ route('mps.risco_create', ['mp' => $mp->id, 'id' => $risco->id]) }} " class="list"> Adicionar </a></td>

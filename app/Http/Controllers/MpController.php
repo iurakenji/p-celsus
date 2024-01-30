@@ -12,6 +12,38 @@ use Illuminate\Support\Facades\DB;
 
 class MpController extends Controller
 {
+    //Métodos Observações de Análises de MP
+
+    public function analiseobs_index(Mp $mp, string $analise)
+    {
+        $observ = DB::table('analisemp_observacao')->select('observacao_id')->where('mp_id','=',$mp->id)->where('analise_id','=',$analise);
+
+        $observacaos = Observacao::whereNotIn('id',$observ)->where('tipo','Método Analítico')->paginate(15);
+        return view('mps.analiseobs_index', compact('analise','mp', 'observacaos'));
+    }
+
+    public function analiseobs_add(Mp $mp, string $analise, string $observacao)
+    {
+        //$observacaos = DB::table('analisemp_observacao')->join('observacaos','observacaos.id','=','observacao_id')->where('mp_id','=',$mp->id)->where('analise_id','=',$analise)->get();
+
+        //$observacaos = Observacao::paginate(15);
+        $id = $analise;
+        DB::table('analisemp_observacao')->insert([
+            'mp_id' => $mp->id,
+            'analise_id' => $analise,
+            'observacao_id' => $observacao,
+        ]);
+        return redirect()->route('mps.analise_edit', compact('analise','mp', 'id') );
+    }
+
+    public function analiseobs_destroy(Mp $mp, string $analise, string $observacao)
+    {
+        //dd($analise, $observacao, $mp->id);
+        $id = $analise;
+        DB::table('analisemp_observacao')->where('mp_id','=', $mp->id)->where('observacao_id','=', $observacao)->where('analise_id','=', $analise)->delete();
+        return redirect()->route('mps.analise_edit', compact('analise','mp', 'id') );
+    }
+
     //Métodos Análise
 
     public function analise_index(Mp $mp)
@@ -40,15 +72,14 @@ class MpController extends Controller
 
     public function analise_edit(Mp $mp, string $id, Analise $analise)
     {
-        //dd($analise);
+        $observacaos = DB::table('analisemp_observacao')->join('observacaos','observacaos.id','=','observacao_id')->where('mp_id','=',$mp->id)->where('analise_id','=',$analise->id)->get();
         if ($id === 'novo') {
         $analise = DB::table('analises')->where('analises.id','=',$analise->id)->get();
         } else {
-        //$analise = DB::table('analise_mp')->join('analises','analise_id','=','analises.id')->where('analise_id','=',$analise->id)->where('mp_id','=',$mp->id)->get();
         $analise = $mp->analises()->where('analise_id','=', $analise->id);
         }
-        //dd($analise);
-       return view('mps.analise_edit', compact('mp','id','analise'));
+
+       return view('mps.analise_edit', compact('mp','id','analise','observacaos'));
     }
 
     public function analise_save(Request $request, Mp $mp, string $analise, string $id)

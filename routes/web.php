@@ -44,6 +44,10 @@ Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.log
 
 Route::post('/mps/query', [MpController::class, 'query'])->name('mps.query');
 
+Route::get('/mps/{mp}/{analise}/analiseobs_index', [MpController::class, 'analiseobs_index'])->name('mps.analiseobs_index');
+Route::get('/mps/{mp}/{analise}/analiseobs_destroy/{observacao}', [MpController::class, 'analiseobs_destroy'])->name('mps.analiseobs_destroy');
+Route::get('/mps/{mp}/{analise}/analiseobs_add/{observacao}', [MpController::class, 'analiseobs_add'])->name('mps.analiseobs_add');
+
 Route::get('/mps/{mp}/obs_index', [MpController::class, 'obs_index'])->name('mps.obs_index');
 Route::get('/mps/{mp}/obs_delete/{id}', [MpController::class, 'obs_delete'])->name('mps.obs_delete');
 Route::get('/mps/{mp}/obs_create/{id}', [MpController::class, 'obs_create'])->name('mps.obs_create');
@@ -84,9 +88,11 @@ Route::get('/varCategoricas/{varCategorica}', [VarCategoricaController::class, '
 Route::get('/varCategoricas/{varCategorica}/destroy', [varCategoricaController::class, 'destroy'])->name('varCategoricas.destroy');
 Route::post('/{analise}/varCategoricas/', [varCategoricaController::class, 'store'])->name('varCategoricas.store');
 
-Route::resources([
+Route::resource('analises', AnaliseController::class)->except(['update']);
 
-    'analises' => AnaliseController::class,
+Route::post('/analises/{analise}', [AnaliseController::class, 'update'])->name('analises.update');
+
+Route::resources([
 
     'usuarios' => UsuarioController::class,
 

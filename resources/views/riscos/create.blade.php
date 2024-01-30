@@ -12,8 +12,17 @@ Riscos - Novo Registro
 <div class="row center" style="margin: 0px 20px ">
     <h5>Novo Registro</h5><br>
 
-    <form action=" {{ route('riscos.store')}}" method="post">
+    <form action=" {{ route('riscos.store')}}" method="post"  enctype="multipart/form-data">
         @csrf
+        <div class="file-field input-field">
+            <div class="btn">
+              <span>Imagem</span>
+              <input name="imagem" type="file">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
+          </div>
         <div class="row">
             <div class="input-field col s4">
                 <input placeholder="Nome"  type="text" id="nome" name="nome" placeholder="Nome">

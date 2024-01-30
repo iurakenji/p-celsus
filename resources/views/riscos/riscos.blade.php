@@ -11,6 +11,7 @@ Riscos
         <table class="highlight">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Nome</th>
                     <th>Descrição</th>
                     <th></th>
@@ -19,8 +20,9 @@ Riscos
             <tbody>
                 @foreach ($riscos as $risco)
                 <tr>
+                    <td style="width: 10%"> <img src=" {{ asset($risco->imagem) }} " alt=" {{ $risco->nome }} " style="width: 50% "> </td>
                     <td style="width: 35%">{{ $risco->nome }}</td>
-                    <td style="width: 55%">{{ $risco->descricao }}</td>
+                    <td style="width: 45%">{{ $risco->descricao }}</td>
                     <td style="width: 10%"><a href=" {{ route('riscos.show', ['risco' => $risco->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
 
