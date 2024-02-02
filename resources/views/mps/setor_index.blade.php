@@ -21,7 +21,7 @@ Setores Que Utilizam
     </div>
 
 
-        <h5 class="center">Setores Que Utilizam</h5><br>
+        <h5 class="center">Setores em Uso</h5><br>
 
         <table class="highlight">
             <thead>

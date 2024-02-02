@@ -1,5 +1,23 @@
 @extends('layouts.app')
 
+@php
+    switch ($lote->situacao) {
+        case 'Liberado':
+            $cor = 'DarkGreen';
+            break;
+
+        case 'Aguardando Conferência':
+            $cor = 'DarkGoldenRod';
+            break;
+
+        case 'Em Espera':
+            $cor = 'DarkRed';
+            break;
+        default:
+            $cor = 'Black';
+            break;
+    }
+@endphp
 
 @section('titulo')
 Informações de Lote - {{ $lote->mp->nome }}
@@ -9,20 +27,23 @@ Informações de Lote - {{ $lote->mp->nome }}
 <div class="row">
 
 </div>
+<div class="row">
+    <div class="col m6 center">
+        <h5>{{ $lote->mp->nome }}</h5><br>
+    </div>
+    <div class="col m6 center">
+        <h5>Situação: <span style="color: {{ $cor }}"> {{ $lote->situacao }} </span> </h5><br>
+    </div>
+</div>
 <div class="row center" style="margin: 0px 20px ">
-    <h5>{{ $referencia->nome }}</h5><br>
 
-    <form action=" {{ route('referencias.update', ['referencia' => $referencia->id]) }} " method="post">
+    <form action=" {{ route('lotes.update', ['lote' => $lote->id]) }} " method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">
         <div class="row">
             <div class="input-field col s4">
-                <input placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $referencia->nome }}">
+                <input placeholder="Nome"  type="text" id="nome" name="nome" value=" $lote->nome ">
                 <label for='nome'>Nome: </label>
-            </div>
-            <div class="input-field col s8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
-            <input type="text" id="descricao" name="descricao" value="{{ $referencia->descricao }}">
             </div>
         </div><br><br>
 </div>
@@ -42,7 +63,7 @@ Informações de Lote - {{ $lote->mp->nome }}
     </button>
 </div>
 </form>
-<form action=" {{ route('referencias.destroy', ['referencia' => $referencia->id]) }}" method="POST">
+<form action=" {{ route('lotes.destroy', ['lote' => $lote->id]) }}" method="POST">
     @csrf
     <input type="hidden" name="_method" value="DELETE">
     <div class="col s12 m2 right">

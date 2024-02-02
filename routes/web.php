@@ -94,8 +94,10 @@ Route::post('/analises/{analise}', [AnaliseController::class, 'update'])->name('
 
 
 Route::match(['get','post'],'/lotes/mp_index/{query?}', [LoteController::class, 'mp_index'])->name('lotes.mp_index');
-Route::resource('lotes', LoteController::class)->except(['index']);
+Route::resource('lotes', LoteController::class)->except(['index', 'show', 'create']);
 Route::get('/{mp}/lotes', [LoteController::class, 'index'])->name('lotes.index');
+Route::get('/{mp}/lotes/{lote}', [LoteController::class, 'show'])->name('lotes.show');
+Route::get('/{mp}/lotes/create', [LoteController::class, 'create'])->name('lotes.create');
 
 
 Route::resources([

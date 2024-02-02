@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('titulo')
 Lotes
 @endsection
@@ -21,13 +22,31 @@ Lotes
             </thead>
             <tbody>
                 @foreach ($lotes as $lote)
+                @php
+                switch ($lote->situacao) {
+                    case 'Liberado':
+                        $cor = 'DarkGreen';
+                        break;
+
+                    case 'Aguardando Conferência':
+                        $cor = 'DarkGoldenRod';
+                        break;
+
+                    case 'Em Espera':
+                        $cor = 'DarkRed';
+                        break;
+                    default:
+                        $cor = 'Black';
+                        break;
+                }
+                @endphp
                 <tr>
-                    <td style="width: 20%">{{ $lote->situacao }}</td>
+                    <td style="width: 20%"><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
                     <td style="width: 30%">{{ $lote->fornecedor->nome }}</td>
                     <td style="width: 15%">{{ $lote->entrada }}</td>
                     <td style="width: 25%">{{ $lote->lote }}</td>
                     <td style="width: 15%">{{ $lote->nf }}</td>
-                    <td style="width: 15%"><a href=" {{ route('lotes.show', ['lote' => $lote->id]) }} " class="list"> Detalhes </a></td>
+                    <td style="width: 15%"><a href=" {{ route('lotes.show', ['mp' => $mp->id ,'lote' => $lote->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
 
         @endforeach
@@ -42,7 +61,7 @@ Lotes
     </div>
     <br><br>
     <div class="row">
-    <a href="{{ route('lotes.create') }}">
+    <a href="{{ route('lotes.create', ['mp' => $mp->id]) }}">
             <div class="col s12 m3 right">
                 <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
                         <i class="material-icons">add</i>

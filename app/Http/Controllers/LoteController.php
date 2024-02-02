@@ -11,7 +11,7 @@ class LoteController extends Controller
 
     public function mp_index(Request $request)
     {
-        if ($request == null) {
+        if (is_null($request)) {
         $mps = Mp::paginate(15);
         } else {
         $mps = Mp::where('nome','like','%'.$request->chave.'%')->orWhere('nome_fc','like','%'.$request->chave.'%')->orWhere('nome_popular','like','%'.$request->chave.'%')->orWhere('cas','like','%'.$request->chave.'%')->orWhere('codigo','like','%'.$request->chave.'%')->paginate(10);
@@ -55,7 +55,7 @@ class LoteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Lote $lote)
+    public function show(Mp $mp, Lote $lote)
     {
         return view('lotes.show', compact('lote'));
     }
