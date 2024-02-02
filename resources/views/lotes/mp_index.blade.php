@@ -6,7 +6,7 @@ Matérias-Primas
 
 @section('conteudo')
 
-<br><br>
+<br>
     <form action=" {{ route('lotes.mp_index') }} " method="post" >
         <div class="row">
         @csrf
