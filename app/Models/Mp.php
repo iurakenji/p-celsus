@@ -9,10 +9,16 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
+
 class Mp extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function lotes(): HasMany
+    {
+        return $this->hasMany(Lote::class);
+    }
 
     public function analises(): BelongsToMany
     {

@@ -16,5 +16,7 @@ class TipoAcessoSeeder extends Seeder
        DB::table('tipo_acessos')->insert(['nome' => 'CQ - Técnico', 'descricao' => '']);
        DB::table('tipo_acessos')->insert(['nome' => 'CQ - Farmacêutico', 'descricao' => '']);
        DB::table('tipo_acessos')->insert(['nome' => 'GQ', 'descricao' => '']);
+       DB::table('tipo_acessos')->insert(['nome' => 'Suprimentos', 'descricao' => '']);
+       DB::table('tipo_acessos')->insert(['nome' => 'Sem Acesso Ativo', 'descricao' => '']);
     }
 }

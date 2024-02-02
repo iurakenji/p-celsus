@@ -20,6 +20,7 @@ use App\Http\Controllers\DadoController;
 use App\Http\Controllers\TipoController;
 use App\Http\Controllers\AnaliseController;
 use App\Http\Controllers\VarCategoricaController;
+use App\Http\Controllers\LoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,8 +90,13 @@ Route::get('/varCategoricas/{varCategorica}/destroy', [varCategoricaController::
 Route::post('/{analise}/varCategoricas/', [varCategoricaController::class, 'store'])->name('varCategoricas.store');
 
 Route::resource('analises', AnaliseController::class)->except(['update']);
-
 Route::post('/analises/{analise}', [AnaliseController::class, 'update'])->name('analises.update');
+
+
+Route::match(['get','post'],'/lotes/mp_index/{query?}', [LoteController::class, 'mp_index'])->name('lotes.mp_index');
+Route::resource('lotes', LoteController::class)->except(['index']);
+Route::get('/{mp}/lotes', [LoteController::class, 'index'])->name('lotes.index');
+
 
 Route::resources([
 

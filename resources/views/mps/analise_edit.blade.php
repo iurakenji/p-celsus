@@ -165,6 +165,7 @@
                         <td style="width: 10%"><a href=" {{ route('mps.analiseobs_destroy',  ['mp' => $mp->id, 'analise' => $id == 'novo' ? $analise->value('id') : $analise->value('analise_id'), 'observacao' => $observacao->id ] ) }} " class="list"> Excluir </a></td>
                     </tr>
                     @endforeach
+
         </tbody>
             </table>
         </div>

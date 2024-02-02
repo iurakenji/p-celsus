@@ -115,6 +115,18 @@ Página Principal
         <i class="medium material-icons">speaker_notes</i>  Observações de MP's</div>
     </div>
   </a>
+  <a href="{{ route('lotes.mp_index') }}">
+    <div class="col s12 m2 center-align">
+      <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
+        <i class="medium material-icons">control_point</i>  Entrada de Lotes (Suprimentos)</div>
+    </div>
+  </a>
+  <a href=" # ">
+    <div class="col s12 m2 center-align">
+      <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
+        <i class="medium material-icons">assignment_turned_in</i>  Conferência de Lotes (GQ)</div>
+    </div>
+  </a>
 
 </div>
 

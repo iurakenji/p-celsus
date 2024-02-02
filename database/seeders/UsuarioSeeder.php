@@ -35,13 +35,49 @@ class UsuarioSeeder extends Seeder
         'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
         'genero' => 'F', 'titulo' => 'Técnica', 'email' => null,
         'password' => Hash::make('123456'),
-        'slug' => 'tatianemitrus', 'ativo' => true
+        'slug' => 'tatianemitrus', 'ativo' => false
             ]);
         DB::table('usuarios')->insert(['login' => 'taynara.machado','nome' => 'Taynara Janete Machado',
         'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
         'genero' => 'F', 'titulo' => 'Técnica', 'email' => null,
         'password' => Hash::make('123456'),
         'slug' => 'taynaramachado', 'ativo' => true
+            ]);
+            DB::table('usuarios')->insert(['login' => 'andreia.medeiros','nome' => 'Andreia Medeiros',
+        'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
+        'genero' => 'F', 'titulo' => 'Técnica', 'email' => null,
+        'password' => Hash::make('123456'),
+        'slug' => 'andreiamedeiros', 'ativo' => false
+            ]);
+            DB::table('usuarios')->insert(['login' => 'clebson.lira','nome' => 'Clebson Pires Lira',
+        'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
+        'genero' => 'M', 'titulo' => 'Técnico', 'email' => null,
+        'password' => Hash::make('123456'),
+        'slug' => 'taynaramachado', 'ativo' => false
+            ]);
+            DB::table('usuarios')->insert(['login' => 'talita.alvez','nome' => 'Talita Juraci Alvez',
+        'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
+        'genero' => 'F', 'titulo' => 'Técnica', 'email' => null,
+        'password' => Hash::make('123456'),
+        'slug' => 'talitaalvez', 'ativo' => true
+            ]);
+            DB::table('usuarios')->insert(['login' => 'nenhum','nome' => 'N/I',
+        'tipo_acesso_id' => '5', 'conselho' => null, 'registro' => null,
+        'genero' => 'O', 'titulo' => '', 'email' => null,
+        'password' => Hash::make('123456'),
+        'slug' => 'naoinformado', 'ativo' => false
+            ]);
+            DB::table('usuarios')->insert(['login' => 'maria.oliver','nome' => 'Maria Luisa Oliver',
+        'tipo_acesso_id' => '3', 'conselho' => null, 'registro' => null,
+        'genero' => 'F', 'titulo' => 'Aussistente de Gestão da Qualidade', 'email' => 'maria.luisa@essentia.com.br',
+        'password' => Hash::make('123456'),
+        'slug' => 'talitaalvez', 'ativo' => true
+            ]);
+            DB::table('usuarios')->insert(['login' => 'enderson.braga','nome' => 'Enderson Braga',
+        'tipo_acesso_id' => '4', 'conselho' => null, 'registro' => null,
+        'genero' => 'M', 'titulo' => 'Assistente de Suprimentos', 'email' => 'compras1@essentia.com.br',
+        'password' => Hash::make('123456'),
+        'slug' => 'endersonbraga', 'ativo' => true
             ]);
     }
 }

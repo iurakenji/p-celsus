@@ -82,10 +82,10 @@ class MpController extends Controller
        return view('mps.analise_edit', compact('mp','id','analise','observacaos'));
     }
 
-    public function analise_save(Request $request, Mp $mp, string $analise, string $id)
+    public function analise_save(Request $request, Mp $mp, string $id, string $analise)
     {
         $mp = Mp::find($mp->id);
-        if ($id === 'novo'){
+        if ($id == 'novo'){
         $mp->analises()->attach($analise, ['especificacao'=>$request->especificacao, 'lim_sup' => $request->lim_sup, 'lim_inf' => $request->lim_inf, 'referencia_id' => $request->referencia_id, 'informativo' => ($request->informativo == null ? 0 : 1),'analise_cq' => ($request->analise_cq == null ? 0 : 1)]);
         } else {
         $mp->analises()->updateExistingPivot($analise, ['especificacao'=>$request->especificacao, 'lim_sup' => $request->lim_sup, 'lim_inf' => $request->lim_inf, 'referencia_id' => $request->referencia_id, 'informativo' => ($request->informativo == null ? 0 : 1),'analise_cq' => ($request->analise_cq == null ? 0 : 1)]);

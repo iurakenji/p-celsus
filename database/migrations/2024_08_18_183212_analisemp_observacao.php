@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('analisemp_observacao', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mp_id')->constrained();
-            $table->foreignId('analise_id')->constrained();
-            $table->foreignId('observacao_id')->constrained();
+            $table->foreignId('mp_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('analise_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('observacao_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             });
         }
 
