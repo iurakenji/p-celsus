@@ -42,6 +42,7 @@ class Lote extends Model
         'fabricacao',
         'lote',
         'nf',
+        'fc',
         'umidade',
         'teor',
         'armazenamento_id',
@@ -56,4 +57,19 @@ class Lote extends Model
 
 protected $primaryKey = 'id';
 
+
+protected $casts = [
+    'quantidade' => 'double',
+    'urgente' => 'boolean',
+    'entrada' => 'datetime:Y/m/d',
+    'fc' => 'double',
+    'umidade' => 'double',
+    'teor' => 'double',
+    'validade' => 'datetime:Y/m/d',
+    'fabricacao' => 'datetime:Y/m/d',
+    'liberacao_gq' => 'datetime:Y/m/d',
+    'deleted_at' => 'datetime:Y/m/d',
+    'created_at' => 'datetime:Y/m/d',
+    'updated_at' => 'datetime:Y/m/d',
+];
 }

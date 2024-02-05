@@ -25,7 +25,7 @@ Lotes
                 @php
                 switch ($lote->situacao) {
                     case 'Liberado':
-                        $cor = 'DarkGreen';
+                        $cor = 'LimeGreen';
                         break;
 
                     case 'Aguardando Conferência':
@@ -33,7 +33,7 @@ Lotes
                         break;
 
                     case 'Em Espera':
-                        $cor = 'DarkRed';
+                        $cor = 'Maroon';
                         break;
                     default:
                         $cor = 'Black';
