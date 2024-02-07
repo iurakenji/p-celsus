@@ -70,7 +70,7 @@ Lotes
             </div>
     </a>
     <div class="col s12 offset-m1 m3 left">
-        <a href="{{ url()->previous() }}">
+        <a href="{{ route('lotes.mp_index') }}">
             <div class="waves-effect waves-light btn blue-grey darken-4
             hoverable center-align white-text valign-wrapper container">
                 <i class="material-icons">arrow_back</i>

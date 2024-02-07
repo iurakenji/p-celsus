@@ -118,10 +118,10 @@ Página Principal
   <a href="{{ route('lotes.mp_index') }}">
     <div class="col s12 m2 center-align">
       <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
-        <i class="medium material-icons">control_point</i>  Entrada de Lotes (Suprimentos)</div>
+        <i class="medium material-icons">control_point</i>  Lotes (Suprimentos)</div>
     </div>
   </a>
-  <a href=" # ">
+  <a href="{{ route('lotes.conferencia_index') }}">
     <div class="col s12 m2 center-align">
       <div class="card-panel blue-grey darken-4 hoverable white-text valign-wrapper">
         <i class="medium material-icons">assignment_turned_in</i>  Conferência de Lotes (GQ)</div>

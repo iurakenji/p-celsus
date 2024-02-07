@@ -94,6 +94,19 @@ protected $primaryKey = 'id';
         'patenteado' => '0',
     ];
 
+    protected $casts = [
+        'bancada' => 'boolean',
+        'tratado' => 'boolean',
+        'hormonio' => 'boolean',
+        'citostatico' => 'boolean',
+        'enzima' => 'boolean',
+        'lacto' => 'boolean',
+        'tintura' => 'boolean',
+        'producao' => 'boolean',
+        'patenteado' => 'boolean',
+
+];
+
 
 
 }

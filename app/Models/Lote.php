@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 
 class Lote extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
 
     public function mp(): BelongsTo {
         return $this->belongsTo(Mp::class);
@@ -33,20 +36,36 @@ class Lote extends Model
 
    // public $incrementing = false;
 
+   public function getFc() {
+
+
+    $teor = $this->teor;
+    $umidade = $this->umidade;
+
+    if ($teor == 100) {
+        $fc = 100/(100-$umidade);
+    } else {
+        $fc = (100/(100-$umidade)*100/$teor);
+    }
+    return $fc;
+    }
+   protected $appends = ['fc'];
     protected $fillable = [
         'mp_id',
         'fornecedor_id',
         'situacao',
         'quantidade',
         'validade',
+        'certificado',
         'fabricacao',
+        'amostra_cq',
         'lote',
         'nf',
-        'fc',
         'umidade',
         'teor',
         'armazenamento_id',
         'resp_supri_id',
+        'origem',
         'resp_gq_id',
         'entrada',
         'liberacao_gq',
@@ -59,12 +78,12 @@ protected $primaryKey = 'id';
 
 
 protected $casts = [
-    'quantidade' => 'double',
+    'quantidade' => 'decimal:4',
     'urgente' => 'boolean',
     'entrada' => 'datetime:Y/m/d',
-    'fc' => 'double',
-    'umidade' => 'double',
-    'teor' => 'double',
+    'fc' => 'decimal:2',
+    'umidade' => 'decimal:2',
+    'teor' => 'decimal:2',
     'validade' => 'datetime:Y/m/d',
     'fabricacao' => 'datetime:Y/m/d',
     'liberacao_gq' => 'datetime:Y/m/d',

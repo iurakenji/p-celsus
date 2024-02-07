@@ -1,6 +1,7 @@
 @php
 
 $paises = [
+'',
 'Afeganistão',
 'África do Sul',
 'Akrotiri',
@@ -259,7 +260,12 @@ $paises = [
 'Zimbabue',
 ];
         @endphp
-
+@if (isset($lote))
 @foreach ($paises as $pais)
     <option value="{{ $pais }}" {{$lote->origem == $pais ? 'selected' : '' }}>{{ $pais }}</option>
 @endforeach
+@else
+@foreach ($paises as $pais)
+    <option value="{{ $pais }}">{{ $pais }}</option>
+@endforeach
+@endif

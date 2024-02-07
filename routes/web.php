@@ -94,10 +94,18 @@ Route::post('/analises/{analise}', [AnaliseController::class, 'update'])->name('
 
 
 Route::match(['get','post'],'/lotes/mp_index/{query?}', [LoteController::class, 'mp_index'])->name('lotes.mp_index');
-Route::resource('lotes', LoteController::class)->except(['index', 'show', 'create']);
+Route::get('/lotes/conferencia_index', [LoteController::class, 'conferencia_index'])->name('lotes.conferencia_index');
+Route::get('/lotes/conferencia/show_1/{lote}', [LoteController::class, 'conferencia_show_1'])->name('lotes.conferencia_show_1');
+Route::match(['put','get'],'/lotes/conferencia/show_2/{mp}/{lote}', [LoteController::class, 'conferencia_show_2'])->name('lotes.conferencia_show_2');
+Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}', [LoteController::class, 'conferencia_show_3'])->name('lotes.conferencia_show_3');
+Route::match(['put','get'], '/lotes/conferencia/show_4/{mp}/{lote}', [LoteController::class, 'conferencia_show_4'])->name('lotes.conferencia_show_4');
+Route::match(['put','get'], '/lotes/conferencia/show_5/{mp}/{lote}', [LoteController::class, 'conferencia_show_5'])->name('lotes.conferencia_show_5');
+Route::resource('lotes', LoteController::class)->except(['index', 'show', 'create', 'store']);
 Route::get('/{mp}/lotes', [LoteController::class, 'index'])->name('lotes.index');
 Route::get('/{mp}/lotes/{lote}', [LoteController::class, 'show'])->name('lotes.show');
-Route::get('/{mp}/lotes/create', [LoteController::class, 'create'])->name('lotes.create');
+Route::get('/lotes/{mp}/create', [LoteController::class, 'create'])->name('lotes.create');
+Route::post('/lotes/{mp}/store', [LoteController::class, 'store'])->name('lotes.store');
+
 
 
 Route::resources([
