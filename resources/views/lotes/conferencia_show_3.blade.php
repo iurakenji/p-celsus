@@ -61,11 +61,10 @@ Informações de Lote - {{ $lote->mp->nome }}
                 @foreach ($analises as $analise)
                 <tr>
                     <td>{{$analise->nome}}</td>
-                    <td>{{$analise->mps->especificacao}}</td>
-                    <td>{{$analise->unidade}}</td>
                 </tr>
                 @endforeach
             </tbody>
+
         </table>
 
 
@@ -100,4 +99,6 @@ Informações de Lote - {{ $lote->mp->nome }}
     </div>
 </form>
 @endif
+
 @endsection
+

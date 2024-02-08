@@ -7,6 +7,7 @@ use App\Models\Lote;
 use App\Models\Mp;
 use App\Models\Analise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 //use Illuminate\Support\Facades\URL;
 
@@ -39,7 +40,8 @@ class LoteController extends Controller
         if ($request->isMethod('put')){
             $lote = Lote::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
             }
-        $analises = DB::table
+        $analises = DB::table('analise_mp')->join('analises','analise_id','=','analises.id')->where('mp_id',$mp->id)->get();
+        //dd($analises);
         return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
     }
 
