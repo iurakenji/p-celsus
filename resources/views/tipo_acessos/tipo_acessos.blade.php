@@ -5,10 +5,12 @@ Usuários
 @endsection
 
 @section('conteudo')
-
-    <div class="row center" style="margin: 0px 20px">
-        <h5>Tipos de Acesso</h5><br>
-        <table class="highlight">
+<div class="text-center row align-items-center h-25">
+        <h4>Tipos de Acesso</h4>
+</div>
+<div class="row justify-content-center align-items-center g-2">
+    <div class="col">
+        <table class="table table-striped table-hover">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -16,33 +18,31 @@ Usuários
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 @foreach ($tipo_acessos as $tipo_acesso)
                 <tr>
                     <td style="width: 35%">{{ $tipo_acesso->nome }}</td>
                     <td style="width: 55%">{{ $tipo_acesso->descricao }}</td>
                     <td style="width: 10%"><a href=" {{ route('tipo_acessos.show', ['tipo_acesso' => $tipo_acesso->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
-
-        @endforeach
-    </tbody>
+                @endforeach
+            </tbody>
         </table>
     </div>
+</div>
 
     <div class="row center">
 
 {{ $tipo_acessos->links('includes.pagination') }}
 
     </div>
-
-    <a href="{{ route('tipo_acessos.create') }}">
-        <div class="row">
-            <div class="col s12 m3 right">
-                <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
-                        <i class="material-icons">add</i>
+<div class="row justify-content-end">
+    <a class="col-2 btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" href="{{ route('tipo_acessos.create') }}" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+            <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
+            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+          </svg>
                         Novo Registro
-                </div>
-            </div>
-        </div>
     </a>
+</div>
 @endsection
