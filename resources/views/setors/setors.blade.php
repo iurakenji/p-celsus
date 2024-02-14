@@ -6,43 +6,42 @@ Setores
 
 @section('conteudo')
 
-    <div class="row center" style="margin: 0px 20px">
-        <h5>Setores</h5><br>
-        <table class="highlight">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($setors as $setor)
-                <tr>
-                    <td style="width: 35%">{{ $setor->nome }}</td>
-                    <td style="width: 55%">{{ $setor->descricao }}</td>
-                    <td style="width: 10%"><a href=" {{ route('setors.show', ['setor' => $setor->id]) }} " class="list"> Detalhes </a></td>
-                </tr>
-
-        @endforeach
-    </tbody>
-        </table>
+    <div class="text-center align-items-center">
+        <br><h4>Setores</h4><hr>
     </div>
-
-    <div class="row center">
+        <div class="justify-content-center align-items-center">
+            <div class="col">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    @foreach ($setors as $setor)
+                    <tr>
+                        <td style="width: 35%">{{ $setor->nome }}</td>
+                        <td style="width: 55%">{{ $setor->descricao }}</td>
+                        <td style="width: 10%"><a href=" {{ route('setors.show', ['setor' => $setor->id]) }} " class="list"> Detalhes </a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+    </div>
+    </div>
 
 {{ $setors->links('includes.pagination') }}
-
-    </div>
-
-    <a href="{{ route('setors.create') }}">
-        <div class="row">
-            <div class="col s12 m3 right">
-                <div class="waves-effect waves-light btn indigo darken-3 hoverable center-align white-text container">
-                        <i class="material-icons">add</i>
+<br>
+<div class="d-grid gap-1 d-md-flex justify-content-md-center">
+    <a class="btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" href="{{ route('setors.create') }}" role="button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+            <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5z"/>
+            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1"/>
+          </svg>
                         Novo Registro
-                </div>
-            </div>
-        </div>
     </a>
+</div>
+<br>
 @endsection

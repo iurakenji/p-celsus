@@ -12,7 +12,7 @@ class SetorController extends Controller
      */
     public function index()
     {
-        $setors = Setor::paginate(15);
+        $setors = Setor::paginate(10);
 
         return view('setors.setors', compact('setors'));
     }

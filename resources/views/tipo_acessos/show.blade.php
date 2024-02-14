@@ -6,51 +6,40 @@ Tipo de Acesso - {{ $tipo_acesso->nome }}
 @endsection
 
 @section('conteudo')
-<div class="row">
 
+<div class="text-center align-items-center">
+   <br> <h4>{{ $tipo_acesso->nome }}</h4><br>
 </div>
-<div class="row center" style="margin: 0px 20px ">
-    <h5>{{ $tipo_acesso->nome }}</h5><br>
-
     <form action=" {{ route('tipo_acessos.update', ['tipo_acesso' => $tipo_acesso->id]) }} " method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">
-        <div class="row">
-            <div class="input-field col s4">
-                <input placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $tipo_acesso->nome }}">
-                <label for='nome'>Nome: </label>
+            <div class="mb-">
+                <label class="form-label" for='nome'>Nome: </label>
+                <input class="form-control" placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $tipo_acesso->nome }}">
             </div>
-            <div class="input-field col s8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
-            <input type="text" id="descricao" name="descricao" value="{{ $tipo_acesso->descricao }}">
+            <div class="mb-">
+            <label class="form-label" for='descricao' title='Descrição'>Descrição: </label>
+            <input class="form-control" type="text" id="descricao" name="descricao" value="{{ $tipo_acesso->descricao }}">
             </div>
-        </div><br><br>
-</div>
-<div class="col s12 m2 left">
-    <a href="{{ url()->previous() }}">
-        <div class="waves-effect waves-light btn blue-grey darken-4
-        hoverable center-align white-text valign-wrapper container">
-            <i class="material-icons">arrow_back</i>
-            Voltar
-        </div>
-    </a>
-</div>
-<div class="col s12 m2 right">
-    <button class="waves-effect teal darken-4
-    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
-        <i class="material-icons">save</i>  Salvar
-    </button>
-</div>
-</form>
-<form action=" {{ route('tipo_acessos.destroy', ['tipo_acesso' => $tipo_acesso->id]) }}" method="POST">
-    @csrf
-    <input type="hidden" name="_method" value="DELETE">
-    <div class="col s12 m2 right">
-        <button class="waves-effect red lighten-1
-        white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Apagar">
+<br><br>
+
+    <div class="d-grid gap-5 d-md-flex justify-content-md-center">
+        <a href="{{ url()->previous() }}">
+            <div class="btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+                <i class="material-icons">arrow_back</i>
+                Voltar
+            </div>
+        </a>
+        <button class="btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
+            <i class="material-icons">save</i>  Salvar
+        </button>
+        </form>
+        <form action=" {{ route('tipo_acessos.destroy', ['tipo_acesso' => $tipo_acesso->id]) }}" method="POST">
+        @csrf
+        <input type="hidden" name="_method" value="DELETE">
+        <button class="btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Apagar">
             <i class="material-icons">delete</i>  Apagar
         </button>
-
-    </div>
-</form>
+        </form>
+        </div>
 @endsection

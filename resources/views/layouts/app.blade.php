@@ -25,7 +25,7 @@ $user = Auth::user();
 
      <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="{{asset('/styles.css')}}" rel="stylesheet">
+    <link href="{{asset('css/styles.css')}}" rel="stylesheet">
     <!--Import materialize.css-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -36,7 +36,7 @@ $user = Auth::user();
 <body>
     @section('header')
 
-    <nav class="navbar navbar-expand-lg" style = "height:50px; color:azure; margin-bottom: 0px; padding: 10px 0px 15px 20px; background-color: #8a7741;">
+    <nav class="navbar navbar-expand-lg sticky-top" style = "color:azure; margin-bottom: 0px; padding: 10px 0px 15px 20px; background-color: #8a7741;">
 
         <a href=" {{ route('home') }} " class="navbar-brand text-white">ρ-Celsus</a>
 
@@ -72,10 +72,13 @@ $user = Auth::user();
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle text-body-emphasis" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">CQ</a>
                       <ul class="dropdown-menu navbar-scroll ">
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Action</a></li>
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Another action</a></li>
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Something else here</a></li>
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Separated link</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Recebimento de Insumos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Análises</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Consultar Insumos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Envase</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Revisão de Laudos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Liberação de Laudos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Solicitações de Insumos</a></li>
                       </ul>
                     </li>
           </ul>
@@ -96,15 +99,14 @@ $user = Auth::user();
 
               </ul>
             </li>
-  </ul>
+        </ul>
 
     </nav>
     @show
-    <div class="row" >
-    <div class="col s12">
+    <div class="col">
         @yield('conteudo')
     </div>
-    </div>
+    </div><br>
     <small>
         <footer class="text-center fixed-bottom">ρ-celsus - Controle de Qualidade Essentia Pharma - Logado como <b>{{ $user['login'] ?? 'Anônimo'}}.</b> <a href='{{ route('login.logout') }}'>(sair)</a> </center></footer>
     </small>
