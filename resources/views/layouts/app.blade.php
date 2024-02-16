@@ -42,7 +42,7 @@ $user = Auth::user();
 
         <ul class="nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-body-emphasis" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Suprimentos</a>
+              <a class="nav-link dropdown-toggle  text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Suprimentos</a>
               <ul class="dropdown-menu navbar-scroll ">
                     <li><a class="dropdown-item icon-link icon-link-hover" href="{{ route('lotes.mp_index') }}"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
@@ -58,7 +58,7 @@ $user = Auth::user();
             </li>
             <ul class="nav">
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-body-emphasis" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">GQ</a>
+                  <a class="nav-link dropdown-toggle  text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">GQ</a>
                   <ul class="dropdown-menu navbar-scroll ">
                         <li><a class="dropdown-item icon-link icon-link-hover" href="{{ route('lotes.conferencia_index') }}"><i class="assignment_turned_in"></i>  Conferência de Lotes (GQ)</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="{{ route('observacaos.index') }}"><i class="speaker_notes"></i>  Observações de MP's</a></li>
@@ -70,7 +70,7 @@ $user = Auth::user();
                 </li>
                 <ul class="nav">
                     <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle text-body-emphasis" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">CQ</a>
+                      <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">CQ</a>
                       <ul class="dropdown-menu navbar-scroll ">
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Recebimento de Insumos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Análises</a></li>
@@ -84,7 +84,7 @@ $user = Auth::user();
           </ul>
           <ul class="nav">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-body-emphasis" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gerencial</a>
+              <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Gerencial</a>
               <ul class="dropdown-menu navbar-scroll ">
                 <li><a class="dropdown-item" href="{{ route('tipo_acessos.index') }}"><i class="perm_identity"></i>  Tipos de Acessos</a></li>
                 <li><a class="dropdown-item" href="{{ route('setors.index') }}"><i class="apps"></i>  Setores</a></li>

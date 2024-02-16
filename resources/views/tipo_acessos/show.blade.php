@@ -8,16 +8,16 @@ Tipo de Acesso - {{ $tipo_acesso->nome }}
 @section('conteudo')
 
 <div class="text-center align-items-center">
-   <br> <h4>{{ $tipo_acesso->nome }}</h4><br>
+   <br> <h4>{{ $tipo_acesso->nome }}</h4><hr>
 </div>
     <form action=" {{ route('tipo_acessos.update', ['tipo_acesso' => $tipo_acesso->id]) }} " method="post">
         @csrf
         <input type="hidden" name="_method" value="PUT">
-            <div class="mb-">
+            <div class="m-3">
                 <label class="form-label" for='nome'>Nome: </label>
                 <input class="form-control" placeholder="Nome"  type="text" id="nome" name="nome" value="{{ $tipo_acesso->nome }}">
             </div>
-            <div class="mb-">
+            <div class="m-3">
             <label class="form-label" for='descricao' title='Descrição'>Descrição: </label>
             <input class="form-control" type="text" id="descricao" name="descricao" value="{{ $tipo_acesso->descricao }}">
             </div>

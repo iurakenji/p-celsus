@@ -69,7 +69,7 @@ class UsuarioSeeder extends Seeder
             ]);
             DB::table('usuarios')->insert(['login' => 'maria.oliver','nome' => 'Maria Luisa Oliver',
         'tipo_acesso_id' => '3', 'conselho' => null, 'registro' => null,
-        'genero' => 'F', 'titulo' => 'Aussistente de Gestão da Qualidade', 'email' => 'maria.luisa@essentia.com.br',
+        'genero' => 'F', 'titulo' => 'Assistente de Gestão da Qualidade', 'email' => 'maria.luisa@essentia.com.br',
         'password' => Hash::make('123456'),
         'slug' => 'talitaalvez', 'ativo' => true
             ]);

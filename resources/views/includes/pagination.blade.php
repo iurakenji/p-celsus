@@ -1,18 +1,18 @@
 @if ($paginator->hasPages())
-    <div class="d-grid gap-1 d-md-flex justify-content-md-center">
-    <ul class="pagination">
+    <nav aria-label="Navegação">
+    <ul class="pagination  justify-content-center">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
-            <li class="disabled"><i class="material-icons">chevron_left</i></li>
+            <li class="disabled page-item"><i class="page-link">&laquo;</i></li>
         @else
-            <li class="page-item"><a href="{{ $paginator->previousPageUrl() }}"><i class="material-icons">chevron_left</i></a></li>
+            <li class="page-item"><a class="page-link" href="{{ $paginator->previousPageUrl() }}" aria-label="Anterior"><span aria-hidden="true">&laquo;</span></a></li>
         @endif
 
         {{-- Pagination Elements --}}
         @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
             @if (is_string($element))
-                <li class="disabled">{{ $element }}</li>
+                <li class="disabled page-item"><a class="page-link" href="">{{ $element }}</a></li>
             @endif
 
             {{-- Array Of Links --}}
@@ -20,10 +20,10 @@
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
                         <li class="active">
-                            <a>{{ $page }}</a>
+                            <a class="page-link bg-light-subtle text-dark"> {{ $page}} </a>
                         </li>
                     @else
-                        <li class="page-item"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                        <li ><a class="page-link bg-light-subtle" href="{{ $url }}"> {{$page}} </a></li>
                     @endif
                 @endforeach
             @endif
@@ -31,10 +31,10 @@
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
-            <li class="page-item"><a href="{{ $paginator->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a></li>
+            <li class="page-item"><a class="page-link" href="{{ $paginator->nextPageUrl() }}">&raquo;</a></li>
         @else
-            <li class=" disabled"><a href="{{ $paginator->nextPageUrl() }}"><i class="material-icons">chevron_right</i></a></li>
+            <li class=" disabled"><a class="page-link href="{{ $paginator->nextPageUrl() }}">&raquo;</a></li>
         @endif
     </ul>
-</div>
+</nav>
 @endif

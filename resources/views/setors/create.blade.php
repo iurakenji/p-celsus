@@ -9,7 +9,7 @@ Setores - Novo Registro
 <br>
 <div class="text-center align-items-center">
     <h4>Novo Registro</h4>
-</div>
+</div><hr>
     <form action=" {{ route('setors.store')}}" method="post">
         @csrf
             <div class="m-3">
@@ -24,12 +24,12 @@ Setores - Novo Registro
 
 <div class="d-grid gap-5 d-md-flex justify-content-md-center">
     <a href="{{ url()->previous() }}">
-        <div class="btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+        <div class="btn shadow btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
             <i class="material-icons">arrow_back</i>
             Voltar
         </div>
     </a>
-    <button class="btn btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
+    <button class="btn shadow btn-primary icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
         <i class="material-icons">save</i>  Salvar
     </button>
 </div>

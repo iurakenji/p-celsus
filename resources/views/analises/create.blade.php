@@ -5,98 +5,85 @@
 
     $tipos = Tipo::all();
 @endphp
-
 @section('titulo')
 Análises - Novo Registro
 @endsection
 
 @section('conteudo')
-<div class="row">
+<br>
+<div class="text-center">
+    <h4>Novo Registro</h4><hr></div>
 
-</div>
-<div class="row center" style="margin: 0px 20px ">
-    <h5>Novo Registro</h5><br>
 
-    <form action=" {{ route('analises.store')}}" method="post">
-        @csrf
-        <div class="row">
-            <div class="input-field col s4">
-                <input placeholder="Nome"  type="text" id="nome" name="nome">
-                <label for='nome'>Nome: </label>
-            </div>
-            <div class="input-field col s1">
-                <label for='tipo'>Forma: </label>
+        <div class="text-center">
+            <a href="{{ route('varCategoricas.index', ['analise' => $ultimo]) }}">
+                <div class="waves-effect waves-light btn blue-grey darken-4
+                hoverable center-align white-text valign-wrapper">
+                    <i class="material-icons">apps</i>
+                    Categorias
                 </div>
-            <div class="input-field col s5">
-                <select class="browser-default" id="tipo" name="tipo">
-                        <option value="Numérica Discreta">Numérica Discreta</option>
-                        <option value="Numérica Contínua">Numérica Contínua</option>
-                        <option value="Categórica Nominal">Categórica Nominal</option>
-                        <option value="Categórica Ordinal">Categórica Ordinal</option>
-                </select>
+            </a>
+        </div>
 
+    <form action=" {{ route('analises.store') }} " method="post">
+        @csrf
+
+        <div class="row mx-2 w-auto">
+            <div class="col-8">
+                <label class="form-label" for='nome'>Nome: </label>
+                <input class="form-control" placeholder="Nome"  type="text" id="nome" name="nome"">
             </div>
-
-
-            <div class="col s2 m2">
-                <a href="{{ route('varCategoricas.index', ['analise' => $ultimo]) }}">
-                    <div class="waves-effect waves-light btn blue-grey darken-4
-                    hoverable center-align white-text valign-wrapper">
-                        <i class="material-icons">apps</i>
-                        Categorias
-                    </div>
-                </a>
+            <div class="col-4">
+            <label class="form-label" for='tipo'>Forma: </label>
+            <select class="form-select" id="tipo" name="tipo">
+                    <option value="Numérica Discreta">Numérica Discreta</option>
+                    <option value="Numérica Contínua">Numérica Contínua</option>
+                    <option value="Categórica Nominal">Categórica Nominal</option>
+                    <option value="Categórica Ordinal">Categórica Ordinal</option>
+            </select>
             </div>
-
-
         </div>
-        <div class="row">
-        <div class="input-field col s4">
-            <input placeholder=""  type="text" id="unidade" name="unidade">
-            <label for='unidade'>Unidade: </label>
-        </div>
-        <div class="input-field col s4">
-            <input placeholder="0"  type="text" id="margem" name="margem">
-            <label for='margem'>Margem Permitida: </label>
-        </div>
-        <div class="input-field col s4">
-            <input placeholder="0"  type="text" id="valor_ar" name="valor_ar">
-            <label for='valor_ar'>Valor AR: </label>
-        </div>
-        <div class="input-field col s1">
-            <label for='tipo'>Tipo: </label>
-        </div>
-        <div class="input-field col s5">
-            <select class="browser-default" id="tipo_id" name="tipo_id">
+        <div class="row mx-2 w-auto">
+            <div class="col-2">
+            <label class="form-label" for='unidade'>Unidade: </label>
+            <input class="form-control" placeholder="Unidade"  type="text" id="unidade" name="unidade">
+            </div>
+            <div class="col-2">
+            <label class="form-label" for='margem'>Margem Permitida: </label>
+            <input class="form-control" placeholder="Margem Permitida"  type="text" id="margem" name="margem">
+            </div>
+            <div class="col-2">
+            <label class="form-label" for='valor_ar'>Valor_AR: </label>
+            <input class="form-control" placeholder="Valor AR"  type="number" id="valor_ar" name="valor_ar">
+            </div>
+            <div class="col-6">
+            <label class="form-label" for='tipo'>Tipo: </label>
+            <select class="form-select" id="tipo_id" name="tipo_id">
                 @foreach ($tipos as $tipo)
                     <option value="{{ $tipo['id'] }}">{{ $tipo['nome'] }}</option>
                 @endforeach
             </select>
-        </div>
-        </div>
-        <div class="row">
-            <div class="row">
-            <div class="input-field col s12">
-                <textarea class="materialize-textarea" placeholder="Observações" id="observacao" name="orbservacao"></textarea>
-                <label for='observacao'>Observação: </label>
             </div>
         </div>
+        <div class="row m-2 w-auto">
+            <div class="col-12">
+            <label class="form-label" for='observacao'>Observação: </label>
+            <textarea class="form-control" placeholder="Observações" id="observacao" name="observacao"></textarea>
+            </div>
         </div>
-</div>
-<div class="col s12 m2 left">
-    <a href="{{ route('analises.index') }}">
-        <div class="waves-effect waves-light btn blue-grey darken-4
-        hoverable center-align white-text valign-wrapper container">
+
+        <div class="d-grid gap-4 d-md-flex justify-content-md-center">
+            <a href="{{ url()->previous() }}">
+                <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
             <i class="material-icons">arrow_back</i>
             Voltar
-        </div>
-    </a>
-</div>
-<div class="col s12 m2 right">
-    <button class="waves-effect teal darken-4
-    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
-        <i class="material-icons">save</i>  Salvar
-    </button>
-</div>
-</form>
+                </div>  
+        </a>
+        <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
+            <i class="material-icons">save</i>  Salvar
+        </button>
+        </form>
+    </div>
+<br>
 @endsection
+

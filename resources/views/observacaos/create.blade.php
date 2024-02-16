@@ -6,50 +6,51 @@ Observações de Matérias-Primas - Novo Registro
 @endsection
 
 @section('conteudo')
-<div class="row">
+<br>
+<div class="text-center">
+    <h4>Novo Registro</h4><hr></div>
 
-</div>
-<div class="row center" style="margin: 0px 20px ">
-    <h5>Novo Registro</h5><br>
-
-    <form action=" {{ route('observacaos.store')}}" method="post">
+    <form action=" {{ route('observacaos.store') }} " method="post">
         @csrf
-        <div class="row">
-            <div class="input-field col m5">
-                <input placeholder="Nome"  type="text" id="nome" name="nome" placeholder="Nome">
-                <label for='nome'>Nome: </label>
+
+            <div class="row m-2 w-auto">
+            <div class="col-9 m3">
+                <label class="form-label" for='nome'>Nome: </label>
+                <input class="form-control" placeholder="Nome"  type="text" id="nome" name="nome">
             </div>
-            <div class="input-field col m1">
-                <label for='tipo'>Forma: </label>
-                </div>
-                <div class="input-field col m5">
-                    <select class="browser-default" id="tipo" name="tipo">
-                            <option value="Matéria-Prima">Matéria-Prima</option>
-                            <option value="Método Analítico">Método Analítico</option>
-                            <option value="Análise de Lote">Análise de Lote</option>
-                            <option value="Lote">Lote</option>
-                            <option value="Movimentação">Movimentação</option>
-                </div>
-            <div class="input-field col m8">
-            <label for='descricao' title='Descrição'>Descrição: </label>
-            <input type="text" id="descricao" name="descricao" placeholder="Descrição">
+            <div class="col-3">
+            <label class="form-label" for='tipo'>Tipo: </label>
+                <select class="form-select" id="tipo" name="tipo">
+                        <option value="Matéria-Prima">Matéria-Prima</option>
+                        <option value="Método Analítico">Método Analítico</option>
+                        <option value="Análise de Lote">Análise de Lote</option>
+                        <option value="Lote">Lote</option>
+                        <option value="Movimentação">Movimentação</option>
+                </select>
             </div>
-        </div><br><br>
-</div>
-<div class="col s12 m2 left">
-    <a href="{{ url()->previous() }}">
-        <div class="waves-effect waves-light btn blue-grey darken-4
-        hoverable center-align white-text valign-wrapper container">
-            <i class="material-icons">arrow_back</i>
-            Voltar
+            </div>
+            <div class="row m-2 w-auto">
+            <div class="col-12">
+            <label class="form-label" for='descricao' title='Descrição'>Texto: </label>
+            <textarea class="form-control" id="descricao" rows="5" name="descricao" ></textarea>
+            </div>
+            </div>
+
+
+
+            <div class="d-grid gap-4 d-md-flex justify-content-md-center">
+                <a href="{{ url()->previous() }}">
+                    <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+                <i class="material-icons">arrow_back</i>
+                Voltar
+                    </div>  
+            </a>
+        
+            <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
+                <i class="material-icons">save</i>  Salvar
+            </button>
+            </form>
         </div>
-    </a>
-</div>
-<div class="col s12 m2 right">
-    <button class="waves-effect teal darken-4
-    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
-        <i class="material-icons">save</i>  Salvar
-    </button>
-</div>
-</form>
+
 @endsection
+

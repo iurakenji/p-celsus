@@ -61,31 +61,22 @@ label {
     font-size: medium;
 }
 
-input[type="text"] {
-    background: transparent;
-    border: none;
-    margin: 0;
-    padding: 0;
-    outline: none;
+textarea {
+    background: #fff;
+    border: 1px solid #ab9b6a !important;
+    border-color: #ab9b6a;
+    padding: 5px 20px;
+    margin: 10px 10px 10px 6px !important;
+    font-family: inherit;
 }
 
-input[type="text"] {
+select {
     background: #fff;
-    border: 1px solid #ab9b6a;
+    border: 1px solid #ab9b6a !important;
+    border-color: #ab9b6a;
     padding: 5px 20px;
-    margin: 10px 10px 10px 10px;
+    margin: 10px 10px 10px 6px !important;
     font-family: inherit;
-    transition: all .5s ease;
-}
-
-input[type="text"]:focus {
-    background: #fff;
-    border: 1px solid #7e6f43;
-    padding: 5px 20px;
-    margin: 10px 10px 10px 10px;
-    font-family: inherit;
-    border-radius: 15px 50px;
-    transition: all .5s ease;
 }
 
 input[type="password"] {
@@ -94,17 +85,22 @@ input[type="password"] {
     padding: 5px 20px;
     margin: 10px 10px 10px 10px;
     font-family: inherit;
-    transition: all .5s ease;
 }
 
-input[type="password"]:focus {
+input[type="text"] {
     background: #fff;
-    border: 1px solid #7e6f43;
+    border: 1px solid #ab9b6a;
     padding: 5px 20px;
     margin: 10px 10px 10px 10px;
     font-family: inherit;
-    border-radius: 15px 50px;
-    transition: all .5s ease;
+}
+
+input[type="email"] {
+    background: #fff;
+    border: 1px solid #ab9b6a;
+    padding: 5px 20px;
+    margin: 10px 10px 10px 10px;
+    font-family: inherit;
 }
 
 input[type="number"] {
@@ -113,17 +109,5 @@ input[type="number"] {
     padding: 5px 5px 5px 20px;
     margin: 10px 10px 10px 10px;
     font-family: inherit;
-    transition: all .5s ease;
-    text-align: center;
-}
-
-input[type="number"]:focus {
-    background: #fff;
-    border: 1px solid #7e6f43;
-    padding: 5px 5px 5px 20px;
-    margin: 10px 10px 10px 10px;
-    font-family: inherit;
-    border-radius: 15px 50px;
-    transition: all .5s ease;
     text-align: center;
 }

@@ -8,7 +8,7 @@ Tipo de Acesso - Novo Registro
 @section('conteudo')
 
 <div class="text-center align-items-center" style="margin: 0px 20px ">
-    <br><h4>Novo Registro</h4><br>
+    <br><h4>Novo Registro</h4><hr>
 </div>
     <form action=" {{ route('tipo_acessos.store')}}" method="post">
         @csrf

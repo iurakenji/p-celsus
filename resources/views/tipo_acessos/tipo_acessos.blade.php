@@ -5,10 +5,10 @@ Usuários
 @endsection
 
 @section('conteudo')
-<div class="text-center align-items-center">
+<div class="text-center">
        <br> <h4>Tipos de Acesso</h4>
 </div><hr>
-<div class="justify-content-center align-items-center">
+
     <div class="col">
         <table class="table table-striped table-hover">
             <thead>
@@ -21,15 +21,15 @@ Usuários
             <tbody class="table-group-divider">
                 @foreach ($tipo_acessos as $tipo_acesso)
                 <tr>
-                    <td style="width: 35%">{{ $tipo_acesso->nome }}</td>
-                    <td style="width: 55%">{{ $tipo_acesso->descricao }}</td>
-                    <td style="width: 10%"><a href=" {{ route('tipo_acessos.show', ['tipo_acesso' => $tipo_acesso->id]) }} " class="list"> Detalhes </a></td>
+                    <td class="align-middle text-left" style="width: 35%">{{ $tipo_acesso->nome }}</td>
+                    <td class="align-middle text-left" style="width: 55%">{{ $tipo_acesso->descricao }}</td>
+                    <td class="align-middle text-center" style="width: 10%"><a href=" {{ route('tipo_acessos.show', ['tipo_acesso' => $tipo_acesso->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-</div>
+
 
 <div>
 {{ $tipo_acessos->links('includes.pagination') }}

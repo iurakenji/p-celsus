@@ -6,49 +6,53 @@ Fornecedores - Novo Registro
 @endsection
 
 @section('conteudo')
-<div class="row">
+<br>
+<div class="text-center" style="margin: 0px 20px ">
+    <h4>Novo Registro</h4><hr></div>
 
-</div>
-<div class="row center" style="margin: 0px 20px ">
-    <h5>Novo Registro</h5><br>
-
-    <form action=" {{ route('fornecedors.store')}}" method="post">
+    <form action=" {{ route('fornecedors.store') }} " method="post">
         @csrf
-        <div class="row">
+
+        <div class="m-3">
             <div class="input-field col s12">
-                <input placeholder="Nome"  type="text" id="nome" name="nome"">
-                <label for='nome'>Nome: </label>
+                <label class="form-label" for='nome'>Nome: </label>
+                <input class="form-control" placeholder="Nome"  type="text" id="nome" name="nome">
+            </div>
+            <div class="input-field col s4">
+                <label class="form-label" for='telefone'>Telefone: </label>
+                <input class="form-control" placeholder="Telefone"  type="text" id="telefone" name="telefone">
+            </div>
+            <div class="input-field col s4">
+                <label class="form-label" for='cep'>CEP: </label>
+                <input class="form-control" placeholder="CEP"  type="text" id="cep" name="cep">
+            </div>
+            <div class="input-field col s4">
+                <label class="form-label" for='nome'>CNPJ: </label>
+                <input class="form-control" placeholder="CNPJ"  type="text" id="cnpj" name="cnpj">
             </div>
         </div>
-        <div class="row">
-            <div class="input-field col s4">
-                <input placeholder="Telefone"  type="text" id="telefone" name="telefone">
-                <label for='telefone'>Telefone: </label>
-            </div>
-            <div class="input-field col s4">
-                <input placeholder="CEP"  type="text" id="cep" name="cep">
-                <label for='cep'>CEP: </label>
-            </div>
-            <div class="input-field col s4">
-                <input placeholder="CNPJ"  type="text" id="cnpj" name="cnpj">
-                <label for='nome'>CNPJ: </label>
-            </div>
-        </div><br><br>
+        </div><br>
 </div>
-<div class="col s12 m2 left">
+
+<div class="d-grid gap-4 d-md-flex justify-content-md-center">
     <a href="{{ url()->previous() }}">
-        <div class="waves-effect waves-light btn blue-grey darken-4
-        hoverable center-align white-text valign-wrapper container">
+        <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
             <i class="material-icons">arrow_back</i>
             Voltar
         </div>
     </a>
-</div>
-<div class="col s12 m2 right">
-    <button class="waves-effect teal darken-4
-    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
+
+    <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
         <i class="material-icons">save</i>  Salvar
     </button>
-</div>
-</form>
+    </form>
+
+    </div>
+
+
+
 @endsection
+
+
+
+
