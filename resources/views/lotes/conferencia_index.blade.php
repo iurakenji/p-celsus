@@ -8,20 +8,21 @@ Lotes
 
 <br>
 
-<div class="row center" style="margin: 0px 20px">
-    <h5>Lotes Pendentes</h5><br>
-    <table class="highlight">
+<div class="text-center">
+    <h4>Lotes Pendentes</h4><hr>
+</div>
+    <table class="table table-striped table-hover m-2 align-middle">
         <thead>
             <tr>
-                <th>Situação</th>
-                <th>Insumo</th>
-                <th>Fornecedor</th>
-                <th>Entrada</th>
-                <th>Tipo</th>
-                <th></th>
+                <th style="width: 10%">Situação</th>
+                <th style="width: 30%">Insumo</th>
+                <th style="width: 15%">Fornecedor</th>
+                <th style="width: 15%">Entrada</th>
+                <th style="width: 15%">Tipo</th>
+                <th style="width: 10%"></th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="table-group-divider">
             @foreach ($lotes as $lote)
             @php
             switch ($lote->situacao) {
@@ -43,11 +44,11 @@ Lotes
             @endphp
             <tr>
                 <td style="width: 10%"><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
-                <td style="width: 30%">{{ $lote->mp->codigo.' - '.$lote->mp->nome }}</td>
+                <td style="width: 30%">{!! ($lote->urgente == 1 ? "<b class='text-danger'>URGENTE! - </b>" : '').$lote->mp->codigo.' - '.$lote->mp->nome !!}</td>
                 <td style="width: 15%">{{ $lote->fornecedor->nome }}</td>
                 <td style="width: 15%">{{ $lote->entrada }}</td>
                 <td style="width: 15%">{{ $lote->mp->tipo->nome }}</td>
-                <td style="width: 10%"><a href=" {{ route('lotes.conferencia_show_1', ['lote' => $lote->id]) }} " class="list"> Conferir </a></td>
+                <td class="text-center" style="width: 10%"><a href="{{ route('lotes.conferencia_show_1', ['lote' => $lote->id]) }}" class="list"> Conferir </a></td>
             </tr>
 
     @endforeach

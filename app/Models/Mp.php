@@ -20,11 +20,6 @@ class Mp extends Model
         return $this->hasMany(Lote::class);
     }
 
-    public function analises(): BelongsToMany
-    {
-        return $this->belongsToMany(Analise::class, 'analise_mp', 'mp_id', 'analise_id')->wherePivot('mp_id',$this->id)->withPivot('analise_mp.id','analise_id', 'mp_id', 'especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
-    }
-
     public function setors(): BelongsToMany
     {
         return $this->belongsToMany(Setor::class)->as('setor')->wherePivot('mp_id',$this->id);

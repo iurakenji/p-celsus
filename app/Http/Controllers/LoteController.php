@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class LoteController extends Controller
 {
-
     public function conferencia_index()
     {
         $lotes = Lote::where('situacao','Aguardando Conferência')->orWhere('situacao','Em Espera')->paginate(10);
@@ -40,8 +39,31 @@ class LoteController extends Controller
         if ($request->isMethod('put')){
             $lote = Lote::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
             }
-        $analises = DB::table('analise_mp')->join('analises','analise_id','=','analises.id')->where('mp_id',$mp->id)->get();
-        //dd($analises);
+        $analises = DB::table('analise_lote')->join('analises','analise_id','=','analises.id')->where('lote_id',$lote->id)->get();
+        //dd($lote->id);
+        return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
+    }
+
+    public function conferencia_show_3_addset( Mp $mp, Lote $lote, string $set)
+    {
+        if ($set == 'solido'){
+            DB::table('analise_lote')->insert([
+                'lote_id' => $lote->id,
+                'analise_id' => 1,
+                'especificacao' => '',
+                'referencia_id' => '10',
+                'informativo' => 0,
+                'analise_cq' => 1
+            ]);
+            
+        }
+        if ($set == 'liquido'){
+
+        }
+        if ($set == 'embalagem'){
+
+        }
+        $analises = DB::table('analise_lote')->join('analises','analise_id','=','analises.id')->where('lote_id',$lote->id)->get();
         return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
     }
 

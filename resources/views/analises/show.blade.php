@@ -15,14 +15,17 @@ Análises - {{ $analise->nome }}
     <h4>{{ $analise->nome }}</h4><hr></div>
 
     @if ($analise->tipo == 'Categórica Ordinal')
-        <div class="text-center">
-            <a href="{{ route('varCategoricas.index', ['analise' => $analise->id]) }}">
-                <div class="waves-effect waves-light btn blue-grey darken-4
-                hoverable center-align white-text valign-wrapper">
-                    <i class="material-icons">apps</i>
-                    Categorias
-                </div>
+        <div class="text-center row">
+            <div class="d-grid gap-4 d-md-flex justify-content-md-center">
+                <a href="{{ route('varCategoricas.index', ['analise' => $analise->id]) }}">
+                    <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-ruled" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v4h10V2a1 1 0 0 0-1-1zm9 6H6v2h7zm0 3H6v2h7zm0 3H6v2h6a1 1 0 0 0 1-1zm-8 2v-2H3v1a1 1 0 0 0 1 1zm-2-3h2v-2H3zm0-3h2V7H3z"/>
+                          </svg>
+                Categorias
+            </div>  
             </a>
+        </div>
         </div>
     @endif
 
@@ -74,11 +77,11 @@ Análises - {{ $analise->nome }}
         </div>
 
         <div class="d-grid gap-4 d-md-flex justify-content-md-center">
-            <a href="{{ url()->previous() }}">
+            <a href="{{ route('analises.index', ['$tipo_id' => '0']) }}">
                 <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
             <i class="material-icons">arrow_back</i>
             Voltar
-                </div>  
+        </div>  
         </a>
         <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
             <i class="material-icons">save</i>  Salvar

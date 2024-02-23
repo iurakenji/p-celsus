@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('analise_mp', function (Blueprint $table) {
+        Schema::create('analise_lote', function (Blueprint $table) {
             $table->id();
-            $table->integer('mp_id');
+            $table->foreignId('lote_id')->constrained();
             $table->integer('analise_id');
             $table->string('especificacao', 200)->nullable();
             $table->double('lim_sup')->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('analise_mp');
+        Schema::dropIfExists('analise_lote');
     }
 };

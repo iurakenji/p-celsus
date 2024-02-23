@@ -10,7 +10,7 @@ Usuários
 </div><hr>
 
     <div class="col">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover align-middle">
             <thead>
                 <tr>
                     <th>Nome</th>

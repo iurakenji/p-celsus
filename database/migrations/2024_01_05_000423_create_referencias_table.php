@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('referencias', function (Blueprint $table) {
             $table->id();
             $table->string('nome',150);
+            $table->integer('peso');
+            $table->boolean('protegido');
             $table->text('descricao')->nullable();
             $table->timestamps();
         });

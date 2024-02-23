@@ -9,7 +9,7 @@ Locais de Armazenamento
     <div class="text-center">
         <h4>Locais de Armazenamento</h4><hr>
     </div>
-        <table class="table table-striped table-hover m-2">
+        <table class="table table-striped table-hover m-2 align-middle">
             <thead>
                 <tr>
                     <th>Nome</th>

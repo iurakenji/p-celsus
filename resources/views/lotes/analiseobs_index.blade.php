@@ -11,14 +11,12 @@ Observações
     </div>
 
 
-    <div class="row">
-        <div class="valign-wrapper center">
-    <x-mps.infos :mp="$mp->id" />
-    <x-mps.analises :mp="$mp->id" />
-    <x-mps.riscos :mp="$mp->id" />
-    <x-mps.setores :mp="$mp->id" />
-    </div>
-    </div>
+    <div class="row justify-content-center">
+        <x-mps.analises :mp="$mp->id" />
+        <x-mps.observacoes :mp="$mp->id" />
+        <x-mps.riscos :mp="$mp->id" />
+        <x-mps.setores :mp="$mp->id" />
+        </div>
 
 
         <h5 class="center">Observações</h5><br>

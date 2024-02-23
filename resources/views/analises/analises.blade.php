@@ -9,7 +9,7 @@ Análises
     <div class="text-center">
         <h4>Análises</h4><hr>
     </div>
-        <table class="table table-striped table-hover m-2">
+        <table class="table table-striped table-hover m-2 align-middle">
             <thead>
                 <tr>
                     <th>Nome</th>
@@ -18,7 +18,7 @@ Análises
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="table-group-divider">
                 @foreach ($analises as $analise)
                 <tr>
                     <td class="align-middle text-left" style="width: 35%">{{ $analise->nome }}</td>

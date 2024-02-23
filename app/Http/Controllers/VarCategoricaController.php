@@ -33,21 +33,21 @@ class VarCategoricaController extends Controller
     {
         $varCategorica = new VarCategorica;
 
-        $varCategorica->analise_id = $request->analise_id;
+        $varCategorica->analise_id = $analise->id;
        $varCategorica->nome = $request->nome;
        $varCategorica->ordem = $request->ordem;
 
        $varCategorica->save();
 
-       return redirect('/varCategoricas');
+       return redirect()->route('varCategoricas.index', compact('analise'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(VarCategorica $varCategorica, Analise $analise)
+    public function show(VarCategorica $varCategorica)
     {
-        return view('varCategoricas.show', compact('varCategorica','analise'));
+        return view('varCategoricas.show', compact('varCategorica'));
     }
 
     /**
@@ -61,9 +61,9 @@ class VarCategoricaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Analise $analise, string $id)
+    public function update(Request $request, varCategorica $varCategorica)
     {
-       $varCategorica = VarCategorica::find($id);
+       $varCategorica = VarCategorica::find($varCategorica->id);
 
        $varCategorica->analise_id = $request->analise_id;
        $varCategorica->nome = $request->nome;
@@ -71,15 +71,17 @@ class VarCategoricaController extends Controller
 
        $varCategorica->save();
 
-       return redirect()->route('varCategoricas.index', compact('analise'));
+       return redirect()->route('varCategoricas.index', ['analise' => $varCategorica->analise_id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy( Analise $analise, string $id)
+    public function destroy(varCategorica $varCategorica)
     {
-        DB::table('var_categoricas')->where('id','=',$id)->delete();
-        return view('varCategoricas.index', compact('analise'));
+        //dd($varCategorica);
+        DB::table('var_categoricas')->where('id','=',$varCategorica->id)->delete();
+
+        return redirect()->route('varCategoricas.index', ['analise' => $varCategorica->analise_id]);
     }
 }

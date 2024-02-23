@@ -9,7 +9,7 @@ Grupos de Descarte
     <div class="text-center">
         <h4>Grupos de Descarte</h4><hr>
     </div>
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover align-middle">
             <thead>
                 <tr>
                     <th>Nome</th>

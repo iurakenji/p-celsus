@@ -22,14 +22,12 @@ Matéria-Prima - Novo Registro
     <h5>Novo Registro</h5><br>
 </div>
 
-<div class="row">
-    <div class="valign-wrapper center">
-<x-mps.analises :mp="$mp->id" />
-<x-mps.riscos :mp="$mp->id" />
-<x-mps.setores :mp="$mp->id" />
-<x-mps.observacoes :mp="$mp->id" />
-</div>
-</div>
+<div class="row justify-content-center">
+    <x-mps.lotes :mp="$mp->id" />
+    <x-mps.observacoes :mp="$mp->id" />
+    <x-mps.riscos :mp="$mp->id" />
+    <x-mps.setores :mp="$mp->id" />
+    </div>
 
     <form action=" {{ route('mps.store')}}" method="post">
         @csrf

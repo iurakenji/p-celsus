@@ -79,6 +79,24 @@ select {
     font-family: inherit;
 }
 
+input[type="date"] {
+    background: #fff;
+    border: 1px solid #ab9b6a !important;
+    border-color: #ab9b6a;
+    padding: 5px 20px;
+    margin: 10px 10px 10px 6px !important;
+    font-family: inherit;
+}
+
+input[type="datetime-local"] {
+    background: #fff;
+    border: 1px solid #ab9b6a !important;
+    border-color: #ab9b6a;
+    padding: 5px 20px;
+    margin: 10px 10px 10px 6px !important;
+    font-family: inherit;
+}
+
 input[type="password"] {
     background: #fff;
     border: 1px solid #ab9b6a;

@@ -13,6 +13,7 @@ class AnaliseController extends Controller
      */
     public function index(string $tipo_id = '0')
     {
+        //O parâmetro tipo_id possibilita filtrar ou não as análises pelo tipo
         if ($tipo_id == 0) {
         $analises = analise::paginate(15);
         } else {

@@ -15,129 +15,110 @@ Novo Lote
 @endsection
 
 @section('conteudo')
-
-<div class="row">
-    <div class="col s12 center">
-        <h5>Novo Lote: {{$mp->codigo.' - '.$mp->nome }}</h5>
-    </div>
-</div>
-<div class="row center" style="margin: 0px 20px ">
+<br>
+    <div class="text-center mb-3">
+        <h4>Novo Lote: {{$mp->codigo.' - '.$mp->nome }}</h4>
+    </div><hr>
 
     <form action=" {{ route('lotes.store', ['mp'=> $mp->id]) }} " method="post">
         @csrf
         <input type="hidden" name="mp_id" value="{{$mp->id}}">
-        <div class="row">
-            <div class="input-field col s1">
-                <label for='fornecedor'>Fornecedor: </label>
-            </div>
-            <div class="input-field col s4">
-                <select class="browser-default" id="fornecedor_id" name="fornecedor_id">
+
+        <div class="row mx-1 w-auto">
+            <div class="col-4">
+                <label class="form-label" for='fornecedor'>Fornecedor: </label>
+                <select class="form-select" id="fornecedor_id" name="fornecedor_id">
                     @foreach ($fornecedors as $fornecedor)
                         <option value="{{ $fornecedor['id'] }}">{{ $fornecedor['nome'] }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="input-field col s3">
-                <input placeholder="Lote"  type="text" id="lote" name="lote">
-                <label for='lote'>Lote: </label>
+            <div class="col-4">
+                <label class="form-label" for='lote'>Lote: </label>
+                <input class="form-control" placeholder="Lote"  type="text" id="lote" name="lote">
             </div>
-            <div class="input-field col s2">
-                <input placeholder="NF"  type="text" id="nf" name="nf">
-                <label for='nf'>Nota Fiscal: </label>
+            <div class="col-2">
+                <label class="form-label" for='nf'>Nota Fiscal: </label>
+                <input class="form-control" placeholder="NF"  type="text" id="nf" name="nf">
             </div>
-            <div class="input-field col s2">
-                <input type="number" id="quantidade" name="quantidade" step="0.001">
-                <label for='quantidade'>Quantidade: </label>
+            <div class="col-2">
+                <label class="form-label" for='quantidade'>Quantidade: </label>
+                <input class="form-control" placeholder="Quantidade" type="number" id="quantidade" name="quantidade" step="0.001">
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s2">
-                <input type="date" id="fabricacao" name="fabricacao">
-                <label for='fabricacao'>Data de Fabricação: </label>
+            <div class="col-3">
+                <label class="form-label" for='fabricacao'>Data de Fabricação: </label>
+                <input class="form-control" type="date" id="fabricacao" name="fabricacao">
             </div>
-            <div class="input-field col s2">
-                <input type="date" id="validade" name="validade">
-                <label for='validade'>Data de Validade: </label>
+            <div class="col-3">
+                <label class="form-label" for='validade'>Data de Validade: </label>
+                <input class="form-control" type="date" id="validade" name="validade">
             </div>
-            <div class="input-field col s2">
-                <input type="text" id="certificado" name="certificado">
-                <label for='certificado'>Certificado: </label>
+            <div class="col-3">
+                <label class="form-label" for='certificado'>Certificado: </label>
+                <input class="form-control" type="text" id="certificado" name="certificado">
             </div>
-            <div class="input-field col s1">
-                <label for='origem'>Origem: </label>
-            </div>
-            <div class="input-field col s3">
-                <select class="browser-default" id="origem" name="origem">
+            <div class="col-3">
+                <label class="form-label" for='origem'>Origem: </label>
+                <select class="form-select" id="origem" name="origem">
                     @include('paises')
                 </select>
             </div>
-            <label for='entrada'>Data de Entrada: </label>
-            <div class="input-field col s2">
-                <input type="datetime" id="entrada" name="entrada" value="{{ now()->format('Y-m-d H:i:s') }}">
+            <div class="col-3">
+                <label class="form-label" for='entrada'>Data de Entrada: </label>
+                <input class="form-control" type="datetime" id="entrada" name="entrada" value="{{ now()->format('Y-m-d H:i:s') }}">
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s2">
-                <label for='armazenamento_id'>Armazenamento: </label>
-            </div>
-            <div class="input-field col s3">
-                <select class="browser-default" id="armazenamento_id" name="armazenamento_id">
+            <div class="col-3">
+                <label class="form-label" for='armazenamento_id'>Armazenamento: </label>
+                <select class="form-select" id="armazenamento_id" name="armazenamento_id">
                     @foreach ($armazenamentos as $armazenamento)
                         <option value="{{ $armazenamento['id'] }}">{{ $armazenamento['nome'] }}</option>
                     @endforeach
                 </select>
             </div>
-            <div class="input-field col s1">
-                <input type="number" id="umidade" name="umidade" step="0.01">
-                <label for='umidade'>Umidade: </label>
+            <div class="col-2">
+                <label class="form-label" for='umidade'>Umidade: </label>
+                <input class="form-control" type="number" id="umidade" name="umidade" step="0.01">
             </div>
-            <div class="input-field col s1">
-                <input type="number" id="teor" name="teor" step="0.01">
-                <label for='teor'>Teor: </label>
+            <div class="col-2">
+                <label class="form-label" for='teor'>Teor: </label>
+                <input class="form-control" type="number" id="teor" name="teor" step="0.01">
             </div>
-            <div class="input-field col s2">
-                <input type="number" id="fc" name="fc" step="0.01">
-                <label for='fc'>Fator de Correção: </label>
+            <div class="col-2">
+                <label class="form-label" for='fc'>Fator de Correção: </label>
+                <input class="form-control" type="number" id="fc" name="fc" step="0.01">
             </div>
-            <div class="input-field col s1">
-            </div>
-            <div class="input-field col s2">
-                <input type="number" id="amostra_cq" name="amostra_cq" step="0.01">
-                <label for='amostra_cq'>Amostra CQ: </label>
+            <div class="col-2">
+                <label class="form-label" for='amostra_cq'>Amostra CQ: </label>
+                <input class="form-control" type="number" id="amostra_cq" name="amostra_cq" step="0.01">
             </div>
         </div>
-        <div class="row">
-
+        <div class="row mx-1 w-auto">
+            <div class="col-1 offset-md-9">
+                <legend class="col-form-label">‎ </legend>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="urgente" name="urgente" value="1"/>
+                    <B><label class="form-check-label text-danger" for="ex">URGENTE</label></B>
+                </div>
+            </div>
         </div>
 <br>
-</div>
-<div class="col s12 m2 left">
-    <a href="{{ route('lotes.index', ['mp' => $mp->id]) }}">
-        <div class="waves-effect waves-light btn blue-grey darken-4
-        hoverable center-align white-text valign-wrapper container">
-            <i class="material-icons">arrow_back</i>
-            Voltar
-        </div>
-    </a>
-</div>
-<div class="col s12 m2 right">
-    <button class="waves-effect teal darken-4
-    white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Salvar">
-        <i class="material-icons">save</i>  Salvar
-    </button>
-</div>
-</form>
-@if (2<1)
-<form action=" {{ route('lotes.destroy', ['lote' => $lote->id]) }}" method="POST">
-    @csrf
-    <input type="hidden" name="_method" value="DELETE">
-    <div class="col s12 m2 right">
-        <button class="waves-effect red lighten-1
-        white-text btn waves-light hoverable btn container" type="submit" name="bt_entrar" value="Apagar">
-            <i class="material-icons">delete</i>  Apagar
-        </button>
 
-    </div>
-</form>
-@endif
+
+        <div class="d-grid gap-4 d-md-flex justify-content-md-center">
+            <a href="{{ route('lotes.index', ['mp' => $mp->id]) }}">
+                <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+                <i class="material-icons">arrow_back</i>
+                Voltar
+                </div>  
+            </a>
+            <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Salvar">
+            <i class="material-icons">save</i>  Salvar
+            </button>
+    </form>
+        </div>
+<br>
 @endsection

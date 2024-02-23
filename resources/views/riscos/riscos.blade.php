@@ -6,11 +6,11 @@ Riscos
 
 @section('conteudo')
 
-    <div class="text-center" style="margin: 0px 20px">
+    <div class="text-center">
         <br><h4>Riscos</h4><hr>
     </div>
 
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover align-middle">
             <thead>
                 <tr>
                     <th></th>

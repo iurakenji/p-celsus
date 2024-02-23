@@ -34,9 +34,10 @@ $user = Auth::user();
 
 </head>
 <body>
+  <body>
     @section('header')
 
-    <nav class="navbar navbar-expand-lg sticky-top" style = "color:azure; margin-bottom: 0px; padding: 10px 0px 15px 20px; background-color: #8a7741;">
+    <nav class="navbar navbar-expand-lg sticky-top w-100" style = "color:azure; margin-bottom: 0px; padding: 10px 0px 15px 20px; background-color: #8a7741;">
 
         <a href=" {{ route('home') }} " class="navbar-brand text-white">ρ-Celsus</a>
 
@@ -103,7 +104,7 @@ $user = Auth::user();
 
     </nav>
     @show
-    <div class="col">
+    <div class="col w-auto">
         @yield('conteudo')
     </div>
     </div><br>
