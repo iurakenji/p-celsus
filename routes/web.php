@@ -99,6 +99,8 @@ Route::get('/lotes/conferencia/show_1/{lote}', [LoteController::class, 'conferen
 Route::match(['put','get'],'/lotes/conferencia/show_2/{mp}/{lote}', [LoteController::class, 'conferencia_show_2'])->name('lotes.conferencia_show_2');
 Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}', [LoteController::class, 'conferencia_show_3'])->name('lotes.conferencia_show_3');
 Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}/addset/{set}', [LoteController::class, 'conferencia_show_3_addset'])->name('lotes.conferencia_show_3_addset');
+Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}/save', [LoteController::class, 'conferencia_show_3_save'])->name('lotes.conferencia_show_3_save');
+Route::get('/lotes/conferencia/show_3/{mp}/{lote}/save/{id}', [LoteController::class, 'conferencia_show_3_delete'])->name('lotes.conferencia_show_3_delete');
 Route::match(['put','get'], '/lotes/conferencia/show_4/{mp}/{lote}', [LoteController::class, 'conferencia_show_4'])->name('lotes.conferencia_show_4');
 Route::match(['put','get'], '/lotes/conferencia/show_5/{mp}/{lote}', [LoteController::class, 'conferencia_show_5'])->name('lotes.conferencia_show_5');
 Route::resource('lotes', LoteController::class)->except(['index', 'show', 'create', 'store']);

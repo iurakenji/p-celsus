@@ -22,5 +22,12 @@ class AnaliseSeeder extends Seeder
         DB::table('analises')->insert(['nome' => 'Solubilidade em água Quente', 'tipo' => 'Categórica Ordinal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 1]);
         DB::table('analises')->insert(['nome' => 'Solubilidade em isopropanol', 'tipo' => 'Categórica Ordinal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 1]);
         DB::table('analises')->insert(['nome' => 'Características físicas', 'tipo' => 'Categórica Nominal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 3]);
+        DB::table('analises')->insert(['nome' => 'Largura', 'tipo' => 'Numérica contínua','unidade' => 'mm', 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 3]);
+        DB::table('analises')->insert(['nome' => 'Comprimento', 'tipo' => 'Numérica contínua','unidade' => 'mm', 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 3]);
+        DB::table('analises')->insert(['nome' => 'Condições gerais', 'tipo' => 'Categórica Nominal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 3]);
+        DB::table('analises')->insert(['nome' => 'Características organolépticas Gerais', 'tipo' => 'Categórica Nominal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 4]);
+        DB::table('analises')->insert(['nome' => 'Características organolépticas: Coloração', 'tipo' => 'Categórica Nominal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 4]);
+        DB::table('analises')->insert(['nome' => 'Peso médio', 'tipo' => 'Categórica Nominal','unidade' => null, 'observacao' => null, 'margem' => 0, 'valor_ar' => 1, 'tipo_id' => 4]);
+        
     }
 }

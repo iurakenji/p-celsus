@@ -15,9 +15,9 @@ class Mp extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function lotes(): HasMany
+    public function lotes(): BelongsToMany
     {
-        return $this->hasMany(Lote::class);
+        return $this->belongsToMany(Lote::class)->using(Analise_lote::class);
     }
 
     public function setors(): BelongsToMany

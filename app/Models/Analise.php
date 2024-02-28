@@ -13,9 +13,10 @@ class Analise extends Model
 {
     use HasFactory;
 
-    public function mps(): BelongsToMany
+    public function lotes(): BelongsToMany
     {
-        return $this->belongsToMany(Mp::class)->as('analise_mp')->withPivot('especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq')->wherePivot('analise_id',$this->id);
+        return $this->belongsToMany(Lote::class)->using(Analise_lote::class);
+        //->as('analise_mp')->withPivot('especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq')->wherePivot('analise_id',$this->id)
     }
 
     public function tipo_mp(): BelongsTo {

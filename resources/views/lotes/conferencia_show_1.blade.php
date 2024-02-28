@@ -92,7 +92,7 @@ Informações de Lote - {{ $lote->mp->nome }}
         </div>  
     </a>
     <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_salvar" value="Salvar">
-        Próximo  <i class="material-icons">navigate_next</i>
+        Próximo  <i class="material-icons">arrow_forward</i>
     </button>
 </form>
 

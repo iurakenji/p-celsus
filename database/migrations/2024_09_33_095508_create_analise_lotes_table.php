@@ -21,7 +21,8 @@ return new class extends Migration
             $table->foreignId('referencia_id')->constrained();
             $table->boolean('informativo');
             $table->boolean('analise_cq');
-            });
+            $table->timestamps();
+        });
     }
 
     /**
