@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nome',150);
             $table->enum('tipo',['Matéria-Prima','Método Analítico','Análise de Lote', 'Lote', 'Movimentação'])->default('Método Analítico');
             $table->text('observacao')->nullable();
+            $table->boolean('protegido');
             $table->timestamps();
         });
     }

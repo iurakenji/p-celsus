@@ -30,7 +30,8 @@ class LoteController extends Controller
     public function conferencia_show_2( Mp $mp, Lote $lote, Request $request)
     {
         if ($request->isMethod('put')){
-        $mp = Mp::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
+            $updated = Mp::find($mp->id);
+            $updated->where('id',$mp->id)->update($request->except('_token', '_method', 'bt_salvar'));
         }
         return view('lotes.conferencia_show_2', compact('mp','lote'));
     }
@@ -38,12 +39,19 @@ class LoteController extends Controller
     public function conferencia_show_3(Mp $mp, Lote $lote, Request $request)
     {
         if ($request->isMethod('put')){
-            $lote = Lote::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
+            $updated = Lote::find($lote->id);
+            $updated->where('id',$lote->id)->update($request->except('_token', '_method', 'bt_salvar'));
+            //$lote = Lote::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
             }
-        $analises = Analise_lote::where('lote_id',$lote->id)->get();
+        $analises = $lote->analises;
         //dd($analises);
-        //$analises = DB::table('analise_lotes')->join('analises','analise_id','=','analises.id')->where('lote_id',$lote->id)->get();
-        return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
+        $lotes = DB::table('lotes')->where('mp_id',$mp->id)->get();
+        if ($lotes->count() > 1){
+            $historico = true;
+        } else {
+            $historico = false; 
+        }
+        return view('lotes.conferencia_show_3', compact('mp','lote', 'analises', 'historico'));
     }
 
     public function conferencia_show_3_save( Mp $mp, Lote $lote, Request $request)
@@ -54,22 +62,37 @@ class LoteController extends Controller
         if (!$request->analise_cq) {
             $request->merge(['analise_cq' => "0"]);
         }
-        //dd($request->except('_token', '_method', 'bt_salvar'));
-            $analise_lote = analise_lote::find($request->id);
-            $analise_lote->where('id',$lote->id)->update($request->except('_token', '_method', 'bt_salvar'));      
-        $analises = Analise_lote::where('lote_id', $lote->id)->get();
-        //return redirect()->route('lotes.conferencia_show_4', )
-        return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
-
+            dd($request->id);
+            if ($lote->analises()->where('id', $request->analise_id)){
+                $lote->analises()->updateExistingPivot($request->id, $request->except('_token', '_method', 'bt_salvar'));
+                //dd($lote->analises);
+            } else {
+                $lote->analises()->attach($request->analise_id, $request->except('_token', '_method', 'bt_salvar','id'));
+            }
+            //$analise_lote = analise_lote::find($request->id);
+            //$analise_lote->where('id',$request->id)->update($request->except('_token', '_method', 'bt_salvar'));      
+        return redirect()->route('lotes.conferencia_show_3', compact('mp','lote'));
     }
 
     public function conferencia_show_3_delete( Mp $mp, Lote $lote, string $id)
     {
         DB::table('analise_lote')->where('id', $id)->delete();
         $analises = Analise_lote::where('lote_id', $lote->id)->get();
-        //return redirect()->route('lotes.conferencia_show_4', )
-        return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
+        return redirect()->route('lotes.conferencia_show_3', compact('mp','lote'));
 
+    }
+
+    public function conferencia_show_3_addultimo( Mp $mp, Lote $lote)
+    {
+        $ultimo_lote = DB::table('lotes')->select('id')->where('mp_id',$mp->id)->orderBy('entrada', 'desc')->skip(1)->take(1)->value('id');
+        $analises = DB::table('analise_lote')->select('lote_id', 'analise_id', 'especificacao', 'lim_sup', 'lim_inf', 'referencia_id', 'informativo', 'analise_cq')->where('lote_id', $ultimo_lote)->get();
+        foreach ($analises as $analise) {
+            $analise->lote_id = $lote->id;
+            DB::table('analise_lote')->insert((array)$analise);
+            dd((array)$analise);
+        }
+       $analises = Analise_lote::where('lote_id', $lote->id)->get();
+       return redirect()->route('lotes.conferencia_show_3', compact('mp','lote'));
     }
 
     public function conferencia_show_3_addset( Mp $mp, Lote $lote, string $set)
@@ -79,7 +102,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 1,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -87,7 +110,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 2,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -95,7 +118,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 3,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -103,7 +126,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 4,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -111,7 +134,15 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 5,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
+                'informativo' => 1,
+                'analise_cq' => 1
+            ]);
+            DB::table('analise_lote')->insert([
+                'lote_id' => $lote->id,
+                'analise_id' => 6,
+                'especificacao' => '',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -122,7 +153,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 1,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -130,15 +161,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 2,
                 'especificacao' => '',
-                'referencia_id' => '10',
-                'informativo' => 1,
-                'analise_cq' => 1
-            ]);
-            DB::table('analise_lote')->insert([
-                'lote_id' => $lote->id,
-                'analise_id' => 3,
-                'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -146,7 +169,7 @@ class LoteController extends Controller
                 'lote_id' => $lote->id,
                 'analise_id' => 4,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
@@ -154,22 +177,34 @@ class LoteController extends Controller
         if ($set == 'embalagem'){
             DB::table('analise_lote')->insert([
                 'lote_id' => $lote->id,
-                'analise_id' => 4,
+                'analise_id' => 9,
                 'especificacao' => '',
-                'referencia_id' => '10',
+                'referencia_id' => '1',
+                'informativo' => 1,
+                'analise_cq' => 1
+            ]);
+        }
+        if ($set == 'capsula'){
+            DB::table('analise_lote')->insert([
+                'lote_id' => $lote->id,
+                'analise_id' => 9,
+                'especificacao' => '',
+                'referencia_id' => '1',
                 'informativo' => 1,
                 'analise_cq' => 1
             ]);
         }
         $analises = Analise_lote::where('lote_id',$lote->id)->get();
         //return redirect()->route('lotes.conferencia_show_4', )
-        return view('lotes.conferencia_show_3', compact('mp','lote', 'analises'));
+        return redirect()->route('lotes.conferencia_show_3', compact('mp','lote'));
     }
 
     public function conferencia_show_4( Mp $mp, Lote $lote, Request $request)
     {
         if ($request->isMethod('put')){
-            $lote = Lote::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
+            $analise_lote = analise_lote::find($request->id);
+            $analise_lote->where('id',$lote->id)->update($request->except('_token', '_method', 'bt_salvar'));      
+            $analises = Analise_lote::where('lote_id', $lote->id)->get();
             }
         $analises = $mp->analises;
         return view('lotes.conferencia_show_4', compact('mp','lote', 'analises'));

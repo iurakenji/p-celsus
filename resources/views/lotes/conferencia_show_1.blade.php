@@ -35,7 +35,7 @@ Informações de Lote - {{ $lote->mp->nome }}
 
 @section('conteudo')
 <br>
-<div class="text-center">
+<div class="text-center mb-4">
         <h4> {{$mp->codigo.' - '.$mp->nome }}   <a href="{{ route('lotes.conferencia_index', ['mp' => $lote->mp->id]) }}"> <small>Alterar</small></a>  </h4>
 </div>
 <hr>

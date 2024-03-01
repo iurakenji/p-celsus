@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome',25);
             $table->text('descricao')->nullable();
+            $table->boolean('protegido');
             $table->softDeletes();
             $table->timestamps();
         });

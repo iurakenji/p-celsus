@@ -39,34 +39,34 @@ Informações de Lote - {{ $lote->mp->nome }}
 
 @section('conteudo')
 <br>
-<div class="text-center">
-    <h4><b><span class="grey-text text-darken-4">Insumo:</span></b> {{$mp->codigo.' - '.$mp->nome }}    </h4>
+<div class="text-center mb-4">
+    <h4> {{$mp->codigo.' - '.$mp->nome }}    </h4>
 </div><hr>
-<div class="text-start ms-4">
-        <h5> 3. Informações das Análises </h5>
+<div class="text-start ms-4 my-4">
+        <h5> 3. Informações das Análises - {{$lote->id}}</h5>
 </div>
 
 <div class="row" style="margin: 0px 20px ">
         @if ($analises->count() != 0)
         <div class="accordion accordion-flush mb-5" id="accordionFlush">
                 @foreach ($analises as $analise)
-                <form action="{{ route('lotes.conferencia_show_3_save', ['mp' => $mp->id, 'lote' => $lote->id]) }}" method="post">
+                <form action="{{ route('lotes.conferencia_show_3_save', ['mp' => $mp->id, 'lote' => $lote->id, 'id' =>$lote->analise->id]) }}" method="post">
                   @csrf
                   <input type="hidden" name="_method" value="PUT">
-                  <input type="hidden" name="id" value="{{$analise->id}}">
+                  <input type="hidden" name="id" value="{{$lote->analise->id}}">
                   <input type="hidden" name="lote_id" value="{{$lote->id}}">
                   <input type="hidden" name="analise_id" value="{{$analise->id}}">
                   <div class="accordion-item">
                     <h2 class="accordion-header">
                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-{{$analise->id}}" aria-expanded="false" aria-controls="flush-collapseOne">
                           <div class="col-12">
-                              {{$analise->analise->nome}}
+                              {{$analise->nome}}
                           </div>
                       </button>
                     </h2>
                     <div id="flush-{{$analise->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                       <div class="accordion-body">
-                          @if ($analise->analise->tipo == 'Categórica Nominal')
+                          @if ($analise->tipo == 'Categórica Nominal')
                           <div class="row mx-1 w-auto">
                             <div class="col-12">
                                 <label class="form-label" for='cas'>Especificação: </label>
@@ -74,7 +74,7 @@ Informações de Lote - {{ $lote->mp->nome }}
                             </div>
                           </div>
                           @endif
-                          @if ($analise->analise->tipo == 'Categórica Ordinal')
+                          @if ($analise->tipo == 'Categórica Ordinal')
                           <div class="row mx-1 w-auto">
                             <div class="col-6">
                                 @php
@@ -97,7 +97,7 @@ Informações de Lote - {{ $lote->mp->nome }}
                             </div>
                           </div>
                           @endif
-                          @if ($analise->analise->tipo == 'Numérica Contínua' || $analise->tipo == 'Numérica Discreta')
+                          @if ($analise->tipo == 'Numérica Contínua' || $analise->tipo == 'Numérica Discreta')
                           <div class="row mx-1 w-auto">
                             <div class="col-6">
                                 <label class="form-label" for='lim_inf'>Limite Inferior: </label>
@@ -148,16 +148,24 @@ Informações de Lote - {{ $lote->mp->nome }}
                       </form> 
                 @endforeach
                 @endif
-                <br>
+                <div class="mx-4 gap-4 text-center my-5">
                 @if ($analises->count() == 0)
-                <p>Ainda não há análises definidas para este lote.</p>
-                <button type="button" class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" data-bs-toggle="modal" data-bs-target="#setAnalises">
-                    Adicionar um conjunto padrão de análises
-                </button>  
+                  <p class="my-4">Ainda não há análises definidas para este lote.</p>
+                  <button type="button" class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" data-bs-toggle="modal" data-bs-target="#setAnalises">
+                      Adicionar um conjunto padrão de análises
+                  </button>  
+                @if ($historico == true)
+                  <a href="{{ route('lotes.conferencia_show_3_addultimo', ['mp' => $mp->id, 'lote' => $lote->id, 'set' => 'solido']) }}">
+                    <button type="button" class="ms-3 btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+                      Manter análises do último lote
+                    </button> 
+                  </a>
+                @endif
                 @endif
                 <button type="button" class="ms-3 btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" data-bs-toggle="modal" data-bs-target="#analiseIndividual">
                     Adicionar nova análise individual
                 </button>
+                </div>
                   <!-- Modal conjuntos de análises -->
                   <div class="modal fade" id="setAnalises" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
                     <div class="modal-dialog">

@@ -15,8 +15,7 @@ class Analise extends Model
 
     public function lotes(): BelongsToMany
     {
-        return $this->belongsToMany(Lote::class)->using(Analise_lote::class);
-        //->as('analise_mp')->withPivot('especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq')->wherePivot('analise_id',$this->id)
+        return $this->belongsToMany(Lote::class)->using(Analise_lote::class)->wherePivot('lote_id',$this->id)->withPivot('analise_lote.id','analise_id', 'lote_id', 'especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');;
     }
 
     public function tipo_mp(): BelongsTo {

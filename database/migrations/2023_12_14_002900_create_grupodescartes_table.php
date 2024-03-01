@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nome',100);
             $table->text('orientacoes')->nullable();
+            $table->boolean('protegido');
             $table->timestamps();
         });
     }

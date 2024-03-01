@@ -13,10 +13,10 @@ class TipoAcessoSeeder extends Seeder
      */
     public function run(): void
     {
-       DB::table('tipo_acessos')->insert(['nome' => 'CQ - Técnico', 'descricao' => '']);
-       DB::table('tipo_acessos')->insert(['nome' => 'CQ - Farmacêutico', 'descricao' => '']);
-       DB::table('tipo_acessos')->insert(['nome' => 'GQ', 'descricao' => '']);
-       DB::table('tipo_acessos')->insert(['nome' => 'Suprimentos', 'descricao' => '']);
-       DB::table('tipo_acessos')->insert(['nome' => 'Sem Acesso Ativo', 'descricao' => '']);
+       DB::table('tipo_acessos')->insert(['nome' => 'CQ - Técnico', 'descricao' => '', 'protegido' => 0]);
+       DB::table('tipo_acessos')->insert(['nome' => 'CQ - Farmacêutico', 'descricao' => '', 'protegido' => 0]);
+       DB::table('tipo_acessos')->insert(['nome' => 'GQ', 'descricao' => '', 'protegido' => 0]);
+       DB::table('tipo_acessos')->insert(['nome' => 'Suprimentos', 'descricao' => '', 'protegido' => 0]);
+       DB::table('tipo_acessos')->insert(['nome' => 'Sem Acesso Ativo', 'descricao' => '', 'protegido' => 0]);
     }
 }

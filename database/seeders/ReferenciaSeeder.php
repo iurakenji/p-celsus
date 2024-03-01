@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 class ReferenciaSeeder extends Seeder
 {
@@ -13,26 +14,17 @@ class ReferenciaSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('referencias')->insert(['nome' => 'Análises Internas', 'peso' => 1, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'BP 2020', 'peso' => 4, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'CAMEO Chemicals', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'ChemSrc', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'Declarado pelo fornecedor e referenciado pelo mesmo como FB 6', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'Drug Bank', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'EP10', 'peso' => 5, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'EPA DSSTox', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'Farmacopeia Homeopatica Brasileira 3ª Edição', 'pesoo' => 6, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'FB 6', 'peso' => 6, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'FCC 9', 'peso' => 4, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'Handbook of pharmaceutical excipients, 2003', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'HMDB', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'HSDB', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'JP XVII', 'peso' => 5, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'Laudo do Fornecedor', 'peso' => 3, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'PB 20', 'peso' => 5, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'PubChem', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'Sci-finder', 'peso' => 2, 'protegido' => 0, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'USP 43', 'peso' => 5, 'protegido' => 1, 'descricao' => '']);
-        DB::table('referencias')->insert(['nome' => 'USP 44 NF 39', 'peso' => 5, 'protegido' => 1, 'descricao' => '']);
+        echo "Criando tabela Referencias..."."\n";
+        DB::unprepared(file_get_contents('storage\app\public\referencias.sql'));
+        $referenciaAntigos = DB::table('referenciass')->select('nome')->orderby('nome', 'asc')->get();
+        foreach ($referenciaAntigos as $referenciaAntigo) {
+            echo "Criando registro ".$referenciaAntigo->nome."\n";
+            if (in_array($referenciaAntigo->nome,['Análises Internas', 'Laudo do Fornecedor'])) {
+                DB::table('referencias')->insert(['nome' => $referenciaAntigo->nome, 'descricao' => '', 'protegido' => 1]);
+            } else {
+                DB::table('referencias')->insert(['nome' => $referenciaAntigo->nome, 'descricao' => '', 'protegido' => 0]);
+            }
+        }
+        Schema::drop('referenciass');
     }
 }

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nome',150);
             $table->text('descricao')->nullable();
             $table->string('imagem',200)->nullable();
+            $table->boolean('protegido');
             $table->timestamps();
         });
     }

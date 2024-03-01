@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nome',150);
             $table->integer('peso');
-            $table->boolean('protegido');
             $table->text('descricao')->nullable();
+            $table->boolean('protegido');
             $table->timestamps();
         });
     }

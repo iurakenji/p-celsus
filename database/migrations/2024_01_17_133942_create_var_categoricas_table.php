@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('analise_id')->constrained()->nullable();
             $table->integer('ordem');
             $table->string('nome',150);
+            $table->boolean('protegido');
             $table->timestamps();
         });
     }

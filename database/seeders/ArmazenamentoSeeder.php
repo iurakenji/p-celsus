@@ -13,10 +13,10 @@ class ArmazenamentoSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('armazenamentos')->insert(['nome' => 'Temperatura Ambiente', 'descricao' => '']);
-        DB::table('armazenamentos')->insert(['nome' => 'Refrigerador', 'descricao' => '']);
-        DB::table('armazenamentos')->insert(['nome' => 'Freezer', 'descricao' => '']);
-        DB::table('armazenamentos')->insert(['nome' => 'Adicionar Sílica', 'descricao' => '']);
+        DB::table('armazenamentos')->insert(['nome' => 'Temperatura Ambiente', 'descricao' => '', 'protegido' => 1]);
+        DB::table('armazenamentos')->insert(['nome' => 'Refrigerador', 'descricao' => '', 'protegido' => 1]);
+        DB::table('armazenamentos')->insert(['nome' => 'Freezer', 'descricao' => '', 'protegido' => 1]);
+        DB::table('armazenamentos')->insert(['nome' => 'Adicionar Sílica', 'descricao' => '', 'protegido' => 0]);
         
     }
 }
