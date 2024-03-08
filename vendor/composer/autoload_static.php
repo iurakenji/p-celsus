@@ -176,6 +176,7 @@ class ComposerStaticInitaa322c53454393ed775cfe4807d54a50
         'B' => 
         array (
             'Brick\\Math\\' => 11,
+            'Barryvdh\\DomPDF\\' => 16,
         ),
         'A' => 
         array (
@@ -541,6 +542,10 @@ class ComposerStaticInitaa322c53454393ed775cfe4807d54a50
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
         ),
+        'Barryvdh\\DomPDF\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -553,6 +558,7 @@ class ComposerStaticInitaa322c53454393ed775cfe4807d54a50
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\AcaoController' => __DIR__ . '/../..' . '/app/Http/Controllers/AcaoController.php',
         'App\\Http\\Controllers\\AnaliseController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnaliseController.php',
+        'App\\Http\\Controllers\\AnaliseLoteController' => __DIR__ . '/../..' . '/app/Http/Controllers/AnaliseLoteController.php',
         'App\\Http\\Controllers\\ArmazenamentoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ArmazenamentoController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DadoController' => __DIR__ . '/../..' . '/app/Http/Controllers/DadoController.php',
@@ -592,17 +598,20 @@ class ComposerStaticInitaa322c53454393ed775cfe4807d54a50
         'App\\Models\\Tipo_acesso' => __DIR__ . '/../..' . '/app/Models/Tipo_acesso.php',
         'App\\Models\\Usuario' => __DIR__ . '/../..' . '/app/Models/Usuario.php',
         'App\\Models\\VarCategorica' => __DIR__ . '/../..' . '/app/Models/VarCategorica.php',
+        'App\\Models\\analise_lote' => __DIR__ . '/../..' . '/app/Models/analise_lote.php',
         'App\\Models\\loteFisico' => __DIR__ . '/../..' . '/app/Models/loteFisico.php',
         'App\\Models\\solicitacao' => __DIR__ . '/../..' . '/app/Models/solicitacao.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
-        'App\\Providers\\HelperServiceProvider' => __DIR__ . '/../..' . '/app/Providers/HelperServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\View\\Components\\menu_mps' => __DIR__ . '/../..' . '/app/View/Components/menu_mps.php',
         'App\\View\\Components\\mps\\menu' => __DIR__ . '/../..' . '/app/View/Components/mps/menu.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'Barryvdh\\DomPDF\\Facade\\Pdf' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/Facade/Pdf.php',
+        'Barryvdh\\DomPDF\\PDF' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/PDF.php',
+        'Barryvdh\\DomPDF\\ServiceProvider' => __DIR__ . '/..' . '/barryvdh/laravel-dompdf/src/ServiceProvider.php',
         'Brick\\Math\\BigDecimal' => __DIR__ . '/..' . '/brick/math/src/BigDecimal.php',
         'Brick\\Math\\BigInteger' => __DIR__ . '/..' . '/brick/math/src/BigInteger.php',
         'Brick\\Math\\BigNumber' => __DIR__ . '/..' . '/brick/math/src/BigNumber.php',
@@ -714,6 +723,7 @@ class ComposerStaticInitaa322c53454393ed775cfe4807d54a50
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
         'Database\\Factories\\AcaoFactory' => __DIR__ . '/../..' . '/database/factories/AcaoFactory.php',
         'Database\\Factories\\AnaliseFactory' => __DIR__ . '/../..' . '/database/factories/AnaliseFactory.php',
+        'Database\\Factories\\AnaliseLoteFactory' => __DIR__ . '/../..' . '/database/factories/AnaliseLoteFactory.php',
         'Database\\Factories\\ArmazenamentoFactory' => __DIR__ . '/../..' . '/database/factories/ArmazenamentoFactory.php',
         'Database\\Factories\\ControladoFactory' => __DIR__ . '/../..' . '/database/factories/ControladoFactory.php',
         'Database\\Factories\\FornecedorFactory' => __DIR__ . '/../..' . '/database/factories/FornecedorFactory.php',
@@ -733,6 +743,7 @@ class ComposerStaticInitaa322c53454393ed775cfe4807d54a50
         'Database\\Factories\\UsuarioFactory' => __DIR__ . '/../..' . '/database/factories/UsuarioFactory.php',
         'Database\\Factories\\VarCategoricaFactory' => __DIR__ . '/../..' . '/database/factories/VarCategoricaFactory.php',
         'Database\\Seeders\\AcaoSeeder' => __DIR__ . '/../..' . '/database/seeders/AcaoSeeder.php',
+        'Database\\Seeders\\AnaliseLoteSeeder' => __DIR__ . '/../..' . '/database/seeders/AnaliseLoteSeeder.php',
         'Database\\Seeders\\AnaliseSeeder' => __DIR__ . '/../..' . '/database/seeders/AnaliseSeeder.php',
         'Database\\Seeders\\ArmazenamentoSeeder' => __DIR__ . '/../..' . '/database/seeders/ArmazenamentoSeeder.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',

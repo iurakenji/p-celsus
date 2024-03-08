@@ -10,7 +10,7 @@ class VarCategorica extends Model
 {
     use HasFactory;
 
-    public function post(): BelongsTo
+    public function analises(): BelongsTo
     {
         return $this->belongsTo(Analise::class);
     }

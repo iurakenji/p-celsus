@@ -12,7 +12,7 @@ class Tipo_acesso extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public function usuario(): HasMany {
+    public function usuarios(): HasMany {
         return $this->hasMany(Usuario::class,'tipo_acesso');
     }
 

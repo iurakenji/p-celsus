@@ -13,12 +13,12 @@ Lotes
         <table class="table table-striped table-hover m-2 w-auto align-middle">
             <thead>
                 <tr>
-                    <th>Situação</th>
-                    <th>Fornecedor</th>
-                    <th>Data de Entrada</th>
-                    <th>Lote</th>
-                    <th>NF</th>
-                    <th></th>
+                    <th style="width: 20%">Situação</th>
+                    <th style="width: 30%">Fornecedor</th>
+                    <th style="width: 15%">Data de Entrada</th>
+                    <th style="width: 25%">Lote</th>
+                    <th style="width: 15%">NF</th>
+                    <th style="width: 15%"></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -42,12 +42,12 @@ Lotes
                 }
                 @endphp
                 <tr>
-                    <td style="width: 20%"><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
-                    <td style="width: 30%">{{ $lote->fornecedor->nome }}</td>
-                    <td style="width: 15%">{{ $lote->entrada }}</td>
-                    <td style="width: 25%">{{ $lote->lote }}</td>
-                    <td style="width: 15%">{{ $lote->nf }}</td>
-                    <td style="width: 15%"><a href=" {{ route('lotes.show', ['mp' => $mp->id ,'lote' => $lote->id]) }} " class="list"> Detalhes </a></td>
+                    <td><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
+                    <td">{{ $lote->fornecedor->nome }}</td>
+                    <td>{{ $lote->entrada }}</td>
+                    <td>{{ $lote->lote }}</td>
+                    <td>{{ $lote->nf }}</td>
+                    <td><a href=" {{ route('lotes.show', ['mp' => $mp->id ,'lote' => $lote->id]) }} " class="list"> Detalhes </a></td>
                 </tr>
 
         @endforeach

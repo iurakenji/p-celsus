@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Number;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Lote extends Model
@@ -18,7 +17,7 @@ class Lote extends Model
 
     public function analises(): BelongsToMany
     {
-        return $this->belongsToMany(Analise::class)->using(Analise_lote::class)->wherePivot('analise_id',$this->id)->withPivot('analise_lote.id','analise_id', 'lote_id', 'especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
+        return $this->belongsToMany(Analise::class)->using(Analise_lote::class)->withPivot('analise_id', 'lote_id', 'especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
     }
 
     public function mp(): BelongsTo {
@@ -28,7 +27,12 @@ class Lote extends Model
         return $this->belongsTo(Armazenamento::class);
     }
 
-    public function usuario(): BelongsTo
+    public function resp_supri(): BelongsTo
+    {
+        return $this->belongsTo(Usuario::class);
+    }
+
+    public function resp_gq(): BelongsTo
     {
         return $this->belongsTo(Usuario::class);
     }
@@ -37,8 +41,10 @@ class Lote extends Model
     {
         return $this->belongsTo(Fornecedor::class);
     }
-
-   // public $incrementing = false;
+    public function observacaos(): BelongsToMany
+    {
+        return $this->belongsToMany(Observacao::class);
+    }
 
    public function getFc() {
 

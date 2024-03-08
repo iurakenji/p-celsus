@@ -10,7 +10,7 @@ class Tipo extends Model
 {
     use HasFactory;
 
-    public function analise(): HasMany
+    public function analises(): HasMany
     {
         return $this->hasMany(Analise::class);
     }

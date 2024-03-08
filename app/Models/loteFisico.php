@@ -14,7 +14,7 @@ class loteFisico extends Model
         return $this->hasOne(Lote::class);
     }
 
-    public function usuario(): BelongsTo
+    public function usuarios(): BelongsTo
     {
         return $this->belongsTo(Usuario::class);
     }

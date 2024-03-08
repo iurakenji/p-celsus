@@ -40,6 +40,7 @@ class ObservacaoController extends Controller
 
        $observacao->nome = $request->nome;
        $observacao->tipo = $request->tipo;
+       $observacao->protegido = 0;
        $observacao->observacao = $request->descricao;
 
        $observacao->save();
@@ -72,6 +73,7 @@ class ObservacaoController extends Controller
 
        $observacao->nome = $request->nome;
        $observacao->tipo = $request->tipo;
+       $observacao->protegido = 0;
        $observacao->observacao = $request->descricao;
 
        $observacao->save();

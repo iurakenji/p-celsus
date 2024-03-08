@@ -63,7 +63,6 @@ class MpController extends Controller
 
     public function analise_delete(Mp $mp, string $id)
     {
-
         $mp->analises()->detach($id);
         $analises = $mp->analises->all();
 

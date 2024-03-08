@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nome',150);
             $table->string('telefone',150)->nullable();
             $table->string('cep',150)->nullable();
-            $table->text('cnpj')->nullable();
+            $table->string('cnpj')->nullable();
             $table->boolean('protegido');
             $table->timestamps();
         });

@@ -12,16 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('analise_lote', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('lote_id')->constrained();
-            $table->integer('analise_id');
+            $table->foreignId('lote_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('analise_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('especificacao', 200)->nullable();
             $table->double('lim_sup')->nullable();
             $table->double('lim_inf')->nullable();
-            $table->foreignId('referencia_id')->constrained();
+            $table->foreignId('referencia_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->boolean('informativo');
             $table->boolean('analise_cq');
             $table->timestamps();
+            $table->primary(['lote_id', 'analise_id']);
         });
     }
 

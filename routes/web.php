@@ -100,9 +100,14 @@ Route::match(['put','get'],'/lotes/conferencia/show_2/{mp}/{lote}', [LoteControl
 Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}', [LoteController::class, 'conferencia_show_3'])->name('lotes.conferencia_show_3');
 Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}/addset/{set}', [LoteController::class, 'conferencia_show_3_addset'])->name('lotes.conferencia_show_3_addset');
 Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}/addultimo', [LoteController::class, 'conferencia_show_3_addultimo'])->name('lotes.conferencia_show_3_addultimo');
+Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}/addum/{analise}', [LoteController::class, 'conferencia_show_3_addum'])->name('lotes.conferencia_show_3_addum');
 Route::match(['put','get'], '/lotes/conferencia/show_3/{mp}/{lote}/save', [LoteController::class, 'conferencia_show_3_save'])->name('lotes.conferencia_show_3_save');
 Route::get('/lotes/conferencia/show_3/{mp}/{lote}/save/{id}', [LoteController::class, 'conferencia_show_3_delete'])->name('lotes.conferencia_show_3_delete');
 Route::match(['put','get'], '/lotes/conferencia/show_4/{mp}/{lote}', [LoteController::class, 'conferencia_show_4'])->name('lotes.conferencia_show_4');
+Route::get('/lotes/conferencia/addObs/{mp}/{lote}/{obs}', [LoteController::class, 'conferencia_addObs'])->name('lotes.conferencia_addObs');
+Route::get('/lotes/conferencia/addObsAnalise/{mp}/{lote}/{obs}/{analise}', [LoteController::class, 'conferencia_addObsAnalise'])->name('lotes.conferencia_addObsAnalise');
+Route::get('/lotes/conferencia/delObsAnalise/{mp}/{lote}/{obs}/{analise}', [LoteController::class, 'conferencia_delObsAnalise'])->name('lotes.conferencia_delObsAnalise');
+Route::get('/lotes/conferencia/delObs/{mp}/{lote}/{obs}', [LoteController::class, 'conferencia_delObs'])->name('lotes.conferencia_delObs');
 Route::match(['put','get'], '/lotes/conferencia/show_5/{mp}/{lote}', [LoteController::class, 'conferencia_show_5'])->name('lotes.conferencia_show_5');
 Route::resource('lotes', LoteController::class)->except(['index', 'show', 'create', 'store']);
 Route::get('/{mp}/lotes', [LoteController::class, 'index'])->name('lotes.index');

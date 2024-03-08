@@ -4,6 +4,7 @@
 
     use App\Models\Fornecedor;
     use App\Models\Armazenamento;
+    use App\Models\Observacao;
 
     $fornecedors = Fornecedor::all('id', 'nome');
     $armazenamentos = Armazenamento::all('id', 'nome');
@@ -110,6 +111,36 @@ Informações de Lote - {{ $lote->mp->nome }}
             </div>
         </div>
 
+        <hr>
+<div class="text-start ms-4">
+        <h5> Observações</h5><hr>
+</div>
+
+<table class="table table-striped table-hover m-2 align-middle">
+    <thead>
+        <tr>
+            <th style="width: 30%">Nome</th>
+            <th style="width: 60%">Observação</th>
+            <th style="width: 10%"></th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        @foreach ($obs as $ob)
+        <tr>
+            <td>{{ $ob->nome}}</td>
+            <td>{{ $ob->observacao}}</td>
+            <td><a href=" {{ route('lotes.conferencia_delObs', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $ob->id]) }} " class="list"> Excluir </a></td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>   
+<div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+    <button type="button" class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" data-bs-toggle="modal" data-bs-target="#modalObs">
+        Adicionar Nova Observação
+    </button>
+</div>
+
+
         <br>
         <div class="d-grid gap-4 d-md-flex justify-content-md-center">
             <a href="{{ route('lotes.conferencia_show_1', ['lote' => $lote->id]) }}">
@@ -122,5 +153,44 @@ Informações de Lote - {{ $lote->mp->nome }}
                 Próximo  <i class="material-icons">arrow_forward</i>
             </button>
         </form>
+
+        <div class="modal fade modal-xl" id="modalObs" tabindex="-1" aria-labelledby="modalObs" aria-hidden="true">
+            <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Observações de Matéria Prima</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <table class="table table-striped table-hover m-2 align-middle">
+                            <thead>
+                                <tr>
+                                    <th style="width: 20%">Nome</th>
+                                    <th style="width: 60%">Observação</th>
+                                    <th style="width: 20%"></th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider">
+                                @php
+                                    $obs = $obs->pluck('id')->toArray();
+                                    $observacaos = Observacao::where('tipo', 'Lote')->whereNotIn('id',(array)$obs)->get();
+                                @endphp
+                                @foreach ($observacaos as $observacao)
+                                <tr>
+                                    <td>{{ $observacao->nome }}</td>
+                                    <td>{{ $observacao->observacao }}</td>
+                                    <td><a href=" {{ route('lotes.conferencia_addObs', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $observacao->id]) }} " class="list"> Adicionar </a></td>
+                                </tr>
+                
+                                @endforeach
+                            </tbody>
+                        </table>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                </div>
+            </div>
+            </div>
+        </div>
 
 @endsection

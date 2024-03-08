@@ -17,13 +17,13 @@ return new class extends Migration
             $table->integer('codigo');
             $table->string('nome',100);
             $table->string('solicitante', 100);
-            $table->foreignId('setor_id')->constrained();
+            $table->foreignId('setor_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->string('lote', 100);
             $table->string('nf', 100);
             $table->string('horario_req', 20);
             $table->datetime('data_hora');
             $table->datetime('data_hora_atendimento');
-            $table->foreignId('usuario_id')->constrained();
+            $table->foreignId('usuario_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

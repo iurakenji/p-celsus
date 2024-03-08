@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('lotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mp_id')->constrained();
-            $table->foreignId('fornecedor_id')->constrained();
+            $table->foreignId('mp_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('fornecedor_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->enum('situacao',['Aguardando Conferência', 'Liberado', 'Em Espera'])->default('Aguardando Conferência');
             $table->double('quantidade');
             $table->date('validade');
@@ -27,9 +27,9 @@ return new class extends Migration
             $table->double('fc')->nullable();
             $table->double('umidade')->nullable();
             $table->double('teor')->nullable();
-            $table->foreignId('armazenamento_id')->nullable()->constrained();
-            $table->foreignId('resp_supri_id')->nullable()->constrained(table: 'usuarios', indexName: 'resp_supri_id');
-            $table->foreignId('resp_gq_id')->nullable()->constrained(table: 'usuarios', indexName: 'resp_gq_id');
+            $table->foreignId('armazenamento_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('resp_supri_id')->nullable()->constrained(table: 'usuarios', indexName: 'resp_supri_id')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('resp_gq_id')->nullable()->constrained(table: 'usuarios', indexName: 'resp_gq_id')->onUpdate('cascade')->onDelete('cascade');
             $table->dateTime('entrada', $precision = 0);
             $table->dateTime('liberacao_gq', $precision = 0)->nullable();
             $table->boolean('urgente')->default('0');

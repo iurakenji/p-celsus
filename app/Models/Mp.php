@@ -32,7 +32,7 @@ class Mp extends Model
 
     public function observacaos(): BelongsToMany
     {
-        return $this->belongsToMany(Observacao::class)->as('observacao')->wherePivot('mp_id',$this->id);
+        return $this->belongsToMany(Observacao::class)->as('observacaos');
     }
 
     public function tipo(): BelongsTo {

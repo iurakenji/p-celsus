@@ -14,19 +14,24 @@ class analise_lote extends Pivot
 {
     use HasFactory;
 
-    public function referencia(): BelongsTo
+    public function referencias(): BelongsTo
     {
         return $this->belongsTo(Referencia::class);
     }
 
-    public function analise(): BelongsTo
+    public function analises(): BelongsTo
     {
         return $this->belongsTo(Analise::class);
     }
 
-    public function lote(): BelongsTo
+    public function lotes(): BelongsTo
     {
         return $this->belongsTo(Lote::class);
+    }
+
+    public function observacaos(): BelongsToMany
+    {
+        return $this->belongsToMany(Observacao::class, 'analiselote_observacao', 'lote_id', 'analise_id', 'observacao_id');
     }
 
     protected $fillable = [

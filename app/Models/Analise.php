@@ -15,19 +15,22 @@ class Analise extends Model
 
     public function lotes(): BelongsToMany
     {
-        return $this->belongsToMany(Lote::class)->using(Analise_lote::class)->wherePivot('lote_id',$this->id)->withPivot('analise_lote.id','analise_id', 'lote_id', 'especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');;
+        return $this->belongsToMany(Lote::class)->using(Analise_lote::class)->wherePivot('lote_id',$this->id)->withPivot('analise_id', 'lote_id', 'especificacao','lim_sup', 'lim_inf', 'referencia_id', 'informativo','analise_cq');
     }
 
     public function tipo_mp(): BelongsTo {
         return $this->belongsTo(Tipo::class, 'tipo_id');
+    }
+    
+    public function observacaos(): BelongsToMany
+    {
+        return $this->belongsToMany(Observacao::class)->as('observacaos');
     }
 
     public function varCategoricas(): HasMany
     {
         return $this->hasMany(varCategorica::class);
     }
-
-
 
     protected $fillable = [
         'nome',
