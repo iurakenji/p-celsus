@@ -4,11 +4,17 @@
     
     use App\Models\Observacao;
     use Illuminate\Support\Carbon;
-
+    
+    $observacaos_mp = DB::table('mp_observacao')->join('observacaos', 'mp_observacao.observacao_id', '=', 'observacaos.id')->where('mp_id',$mp->id)->get();
+    $observacaos_lote = DB::table('lote_observacao')->join('observacaos', 'lote_observacao.observacao_id', '=', 'observacaos.id')->where('lote_id',$lote->id)->get();
+    foreach ($observacaos_lote as $observacao_lote) {
+        $observacaos_mp->merge($observacao_lote);
+    }
+    dd($observacaos_mp);
 @endphp
 
 @section('titulo')
-Observações - {{ $lote->mp->nome }}
+Visualização de Laudo - {{ $lote->mp->nome }}
 @endsection
 
 @section('conteudo')
@@ -21,7 +27,7 @@ Observações - {{ $lote->mp->nome }}
 </div>
 <page size="A4"></page>
 
-<div class="container shadow" style="height: 200vh">
+<div class="container shadow" style="height: 300vh">
    
     
     
@@ -54,6 +60,10 @@ Observações - {{ $lote->mp->nome }}
     <div class="row px-5">
         <div class="col border border-black border-top-0"><b>Armazenamento:</b> {{$lote->armazenamento->nome}}</div>
     </div>
+    <div class="row px-5">
+        <div class="col border border-black border-top-0"><b>Peso / volume:</b> {{$lote->quantidade}}g</div>
+        <div class="col border border-black border-top-0 border-start-0"><b>Periodicidade:</b> </div>
+    </div>
     @if ($mp->mp_vegetal == true)
         <div class="row px-5">
             <div class="col-7 align-text-top border border-black border-top-0"><b>Nome Popular / Científico:</b> {{$mp->nome_popular}}</div>
@@ -72,15 +82,53 @@ Observações - {{ $lote->mp->nome }}
         <div class="col text-center border border-black border-start-0 border-top-0"><b>Resultado</b> </div>
         <div class="col text-center border border-black border-start-0 border-top-0"><b>Referência</b> </div>
     </div>
-    @foreach ($lote->analises()->get() as $analise)
+        @foreach ($lote->analises()->get() as $analise)
+        <div class="row px-5">
+            <div class="col text-center border border-black border-top-0 py-3">{{$analise->nome}} </div>
+            @if ($analise->tipo == 'Categórica Nominal')
+                <div class="col text-center border border-black border-start-0 border-top-0 py-3">{{$analise->pivot->especificacao}} </div>
+            @endif
+            @if ($analise->tipo == 'Categórica Ordinal')
+                <div class="col text-center border border-black border-start-0 border-top-0 py-3">De {{DB::table('var_categoricas')->where('ordem',$analise->pivot->lim_inf)->value('nome')}} a {{DB::table('var_categoricas')->where('ordem',$analise->pivot->lim_sup)->value('nome')}} </div>
+            @endif
+            @if (($analise->tipo == 'Numérica Contínua') || ($analise->tipo == 'Numérica Ordinal'))
+                <div class="col text-center border border-black border-start-0 border-top-0 py-3">De {{$analise->pivot->lim_inf}}{{$analise->unidade}} até {{$analise->pivot->lim_sup}}{{$analise->unidade}} </div>
+            @endif
+            <div class="col text-center border border-black border-start-0 border-top-0 py-3"></div>
+            <div class="col text-center border border-black border-start-0 border-top-0 py-3">{{DB::table('referencias')->find($analise->pivot->referencia_id)->nome}} </div>
+        </div>
+        @endforeach
     <div class="row px-5">
-        <div class="col py-2 text-center border border-black border-top-0">{{$analise->nome}} </div>
-        <div class="col text-center border border-black border-top-0">{{$analise->nome}} </div>
-        <div class="col text-center border border-black border-start-0 border-top-0">{{$analise->nome}} </div>
-        <div class="col text-center border border-black border-start-0">{{$analise->nome}} </div>
+        <div class="col py-2 border border-black border-top-0"></div>
     </div>
-    @endforeach
-
+    <div class="row px-5">
+        <div class="col py-2 text-center border border-black border-top-0"><b>Aprovado: </b> <span class="me-3">(&nbsp;&nbsp;&nbsp;&nbsp;)  Sim </span>(&nbsp;&nbsp;&nbsp;&nbsp;) Não</div>
+    </div>
+    <div class="row px-5">
+        <div class="col-9 border border-black border-top-0 py-2"><b>Analisado por:</b></div>
+        <div class="col border border-black border-top-0 border-start-0 py-2"><b>Data:</b> </div>
+    </div>
+    <div class="row px-5">
+        <div class="col-9 border border-black border-top-0 py-2"><b>Aprovado por:</b></div>
+        <div class="col border border-black border-top-0 border-start-0 py-2"><b>Data:</b> </div>
+    </div>
+    <div class="row px-5">
+        <div class="col-9 border border-black border-top-0 py-2"><b>Liberado por:</b></div>
+        <div class="col border border-black border-top-0 border-start-0 py-2"><b>Data:</b> </div>
+    </div>
+    <div class="row px-5">
+        <div class="col border border-black border-top-0 py-2"><b>Obs:</b>
+            @foreach ($lote->analises()->get() as $analise)
+                
+            @endforeach
+            @foreach ($observacaos as $observacao)
+            @php
+                $observacaos_analise = DB::table('analise_observacao')->join('observacaos', 'analise_observacao.observacao_id', '=', 'observacaos.id')->where('analise_id',$analise->id)->get();
+            @endphp
+                    {{$observacao->observacao}}
+                @endforeach
+        </div>
+    </div>
     
 
 </div>

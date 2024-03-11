@@ -168,6 +168,7 @@ class MpSeeder extends Seeder
                     'analise_cq' => 1]);
                     echo traduzSol($mpAntigo->li_h2o).' - '.$mpAntigo->li_h2o;
                     echo traduzSol($mpAntigo->ls_h2o).' - '.$mpAntigo->ls_h2o;
+                    if (traduzSol($mpAntigo->ls_etoh) != 0) {
 /*Sol_ETOH*/    DB::table('analise_lote')->insert([
                     'lote_id' => $lote_id,
                     'analise_id' => 3,
@@ -179,6 +180,7 @@ class MpSeeder extends Seeder
                     'analise_cq' => 1]);}
                     echo traduzSol($mpAntigo->li_etoh).' - '.$mpAntigo->li_etoh." - ";
                     echo traduzSol($mpAntigo->ls_etoh).' - '.$mpAntigo->ls_etoh."\n";
+                        }
             if (isset($mpAntigo->ref_ph)) {
 /*pH*/          DB::table('analise_lote')->insert([
                     'lote_id' => $lote_id,

@@ -126,7 +126,7 @@ Informações de Lote - {{ $lote->mp->nome }}
     </button>
 </form>
 
-<div class="modal fade modal-xl" id="modalObsMp" tabindex="-1" aria-labelledby="modalObs" aria-hidden="true">
+<div class="modal fade modal-xl" id="modalObs" tabindex="-1" aria-labelledby="modalObs" aria-hidden="true">
     <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">
