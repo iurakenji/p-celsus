@@ -9,13 +9,10 @@
     use App\Models\Observacao;
     use App\Models\Analise_lote;
     use Illuminate\Support\Number;
-    use App\Models\Analise;
 
     $fornecedors = Fornecedor::all('id', 'nome');
     $armazenamentos = Armazenamento::all('id', 'nome');
     $referencias = Referencia::all('id', 'nome');
-    $lotesAdd = DB::table('analise_lote')->select('analise_id')->where('lote_id',$lote->id)->pluck('analise_id')->toArray();
-    $analises = Analise::where('tipo_id', $mp->tipo_id)->whereNotIn('id', (array)$lotesAdd)->get();
 
     switch ($lote->situacao) {
         case 'Liberado':
@@ -48,7 +45,7 @@ Informações de Lote - {{ $lote->mp->nome }}
     <h4> {{$mp->codigo.' - '.$mp->nome }}    </h4>
 </div><hr>
 <div class="text-start ms-4 my-4">
-        <h5> 3. Informações das Análises - {{$lote->id}}</h5>
+        <h5> 3. Informações das Análises</h5>
 </div>
 
 <div class="row">
@@ -68,7 +65,7 @@ Informações de Lote - {{ $lote->mp->nome }}
                           </div>
                       </button>
                     </h2>
-                    <div id="flush-{{$analise->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div id="flush-{{$analise->id}}" class="accordion-collapse collapse" data-bs-parent="#accordionFlush">
                       <div class="accordion-body">
                           @if ($analise->tipo == 'Categórica Nominal')
                           <div class="row mx-1 w-auto">
@@ -148,7 +145,11 @@ Informações de Lote - {{ $lote->mp->nome }}
                           </div>
                       </div>
 
-                      <table class="table table-striped table-hover m-2 align-middle">
+   {{-- Obs Análise --}}<hr>
+                      <div class="text-start mx-5 my-4">
+                        <h5> Observações do Método Analítico</h5>
+                      </div>
+                      <table class="table table-striped table-hover mx-5 m-2 align-middle">
                         <thead>
                             <tr>
                                 <th style="width: 30%">Nome</th>
@@ -158,16 +159,15 @@ Informações de Lote - {{ $lote->mp->nome }}
                         </thead>
                         <tbody class="table-group-divider">
                           @php
-                          $obs = DB::table('analiselote_observacao')->join('observacaos','observacao_id','=','observacaos.id')->where('lote_id', $lote->id)->where('analise_id', $analise->id)->get();
+                          $obs = $analise->observacaos()->get();
                           @endphp
                             @foreach ($obs as $ob)
                             <tr>
                                 <td>{{ $ob->nome}}</td>
                                 <td>{{ $ob->observacao}}</td>
-                                <td><a href=" {{ route('lotes.conferencia_delObsAnalise', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $ob->id, 'analise' => $analise->id]) }} " class="list"> Excluir </a></td>
+                                <td><a href=" {{ route('lotes.conferencia_delObsAnalise', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $ob->id, 'analise' => $analise->id, 'tipo' => 'MA']) }} " class="list"> Excluir </a></td>
                             </tr>
                             @endforeach
-                            
                         </tbody>
                     </table>   
                     <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
@@ -175,11 +175,43 @@ Informações de Lote - {{ $lote->mp->nome }}
                             Adicionar Nova Observação
                         </button>
                     </div>
+{{-- Obs Análise desse lote --}}<hr>
+                    <div class="text-start mx-5 my-4">
+                      <h5> Observações de Análise do Lote</h5>
+                    </div>
+                    <table class="table table-striped table-hover mx-5 m-2 align-middle">
+                      <thead>
+                          <tr>
+                              <th style="width: 30%">Nome</th>
+                              <th style="width: 60%">Observação</th>
+                              <th style="width: 10%"></th>
+                          </tr>
+                      </thead>
+                      <tbody class="table-group-divider">
+                        @php
+                          $obs_lote = DB::table('obs_add')->join('observacaos', 'observacao_id','observacaos.id')->where('relacao_id', $analise->id)->where('obs_add.tipo', 'Análise de Lote')->get();
+
+                          //dd($obs);
+                        @endphp
+                          @foreach ($obs_lote as $ob)
+                          <tr>
+                              <td>{{ $ob->nome}}</td>
+                              <td>{{ $ob->observacao}}</td>
+                              <td><a href=" {{ route('lotes.conferencia_delObsAnalise', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $ob->id, 'analise' => $analise->id, 'tipo' => 'AL']) }} " class="list"> Excluir </a></td>
+                          </tr>
+                          @endforeach
+                      </tbody>
+                  </table>   
+                  <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+                      <button type="button" class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" data-bs-toggle="modal" data-bs-target="#modalObsLote{{$analise->id}}">
+                          Adicionar Nova Observação
+                      </button>
+                  </div>
 
                     </div>
                   </div>
                       </form>
-
+{{-- Modal Análises --}}
                       <div class="modal fade modal-xl" id="modalObs{{$analise->id}}" tabindex="-1" aria-labelledby="modalObs" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
@@ -209,9 +241,8 @@ Informações de Lote - {{ $lote->mp->nome }}
                                             <tr>
                                                 <td>{{ $observacao->nome }}</td>
                                                 <td>{{ $observacao->observacao }}</td>
-                                                <td><a href=" {{ route('lotes.conferencia_addObsAnalise', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $observacao->id, 'analise' => $analise->id]) }} " class="list"> Adicionar </a></td>
+                                                <td><a href=" {{ route('lotes.conferencia_addObsAnalise', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $observacao->id, 'analise' => $analise->id, 'tipo' => 'MA']) }} " class="list"> Adicionar </a></td>
                                             </tr>
-                            
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -222,7 +253,54 @@ Informações de Lote - {{ $lote->mp->nome }}
                         </div>
                         </div>
                     </div>
+
+                    {{-- Modal Análises desse lote --}}
+                    <div class="modal fade modal-xl" id="modalObsLote{{$analise->id}}" tabindex="-1" aria-labelledby="modalObs" aria-hidden="true">
+                      <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="exampleModalLabel">Observações</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                                  <table class="table table-striped table-hover m-2 align-middle">
+                                      <thead>
+                                          <tr>
+                                              <th style="width: 20%">Nome</th>
+                                              <th style="width: 60%">Observação</th>
+                                              <th style="width: 20%"></th>
+                                          </tr>
+                                      </thead>
+                                      <tbody class="table-group-divider">
+                                          @php
+                                              if (isset($obs_lote)) {
+                                                $obs_lote = $obs_lote->pluck('id')->toArray();
+                                              } else {
+                                                $obs_lote = [];
+                                              }
+                                              $observacaos = Observacao::where('tipo', 'Método Analítico')->whereNotIn('id',(array)$obs_lote)->get();
+                                              $an_lote = DB::table('analise_lote')->select('id')->where('lote_id',$lote->id)->where('analise_id',$analise->id)->value('id');
+                                          @endphp
+                                          @foreach ($observacaos as $observacao)
+                                          <tr>
+                                              <td>{{ $observacao->nome }}</td>
+                                              <td>{{ $observacao->observacao }}</td>
+                                              <td><a href=" {{ route('lotes.conferencia_addObsAnalise', ['mp' => $mp->id, 'lote' => $lote->id, 'obs' => $observacao->id, 'analise' => $an_lote, 'tipo' => 'AL']) }} " class="list"> Adicionar </a></td>
+                                          </tr>
+                          
+                                          @endforeach
+                                      </tbody>
+                                  </table>
+                          </div>
+                          <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                          </div>
+                      </div>
+                      </div>
+                    </div>
+
                 @endforeach
+
                 @endif
                 <hr>
                 <div class="mx-4 gap-4 text-center">

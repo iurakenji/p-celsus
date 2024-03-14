@@ -64,13 +64,7 @@ Análises - Novo Registro
                 @endforeach
             </select>
             </div>
-        </div>
-        <div class="row m-2 w-auto">
-            <div class="col-12">
-            <label class="form-label" for='observacao'>Observação: </label>
-            <textarea class="form-control" placeholder="Observações" id="observacao" name="observacao"></textarea>
-            </div>
-        </div>
+        </div><br>
 
         <div class="d-grid gap-4 d-md-flex justify-content-md-center">
             <a href="{{ url()->previous() }}">

@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mp_observacao', function (Blueprint $table) {
+        Schema::create('obs_add', function (Blueprint $table) {
             $table->integer('relacao_id');
             $table->integer('observacao_id');
+            $table->enum('tipo',['Matéria-Prima','Método Analítico','Análise de Lote', 'Lote', 'Movimentação'])->default('Método Analítico');
             });
     }
 

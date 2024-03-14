@@ -13,45 +13,44 @@ Lotes
         <table class="table table-striped table-hover m-2 w-auto align-middle">
             <thead>
                 <tr>
-                    <th style="width: 20%">Situação</th>
-                    <th style="width: 30%">Fornecedor</th>
-                    <th style="width: 15%">Data de Entrada</th>
-                    <th style="width: 25%">Lote</th>
-                    <th style="width: 15%">NF</th>
-                    <th style="width: 15%"></th>
+                    <th scope="col" style="width: 20%">Situação</th>
+                    <th scope="col" style="width: 30%">Fornecedor</th>
+                    <th scope="col" style="width: 10%">Data de Entrada</th>
+                    <th scope="col" style="width: 20%">Lote</th>
+                    <th scope="col" style="width: 10%">NF</th>
+                    <th scope="col" style="width: 10%"></th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
                 @foreach ($lotes as $lote)
-                @php
-                switch ($lote->situacao) {
-                    case 'Liberado':
-                        $cor = 'LimeGreen';
-                        break;
+                    @php
+                        switch ($lote->situacao) {
+                            case 'Liberado':
+                                $cor = 'LimeGreen';
+                                break;
 
-                    case 'Aguardando Conferência':
-                        $cor = 'DarkGoldenRod';
-                        break;
+                            case 'Aguardando Conferência':
+                                $cor = 'DarkGoldenRod';
+                                break;
 
-                    case 'Em Espera':
-                        $cor = 'Maroon';
-                        break;
-                    default:
-                        $cor = 'Black';
-                        break;
-                }
-                @endphp
-                <tr>
-                    <td><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
-                    <td">{{ $lote->fornecedor->nome }}</td>
-                    <td>{{ $lote->entrada }}</td>
-                    <td>{{ $lote->lote }}</td>
-                    <td>{{ $lote->nf }}</td>
-                    <td><a href=" {{ route('lotes.show', ['mp' => $mp->id ,'lote' => $lote->id]) }} " class="list"> Detalhes </a></td>
-                </tr>
-
-        @endforeach
-    </tbody>
+                            case 'Em Espera':
+                                $cor = 'Maroon';
+                                break;
+                            default:
+                                $cor = 'Black';
+                                break;
+                        }
+                    @endphp
+                    <tr>
+                        <td><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
+                        <td>{{ $lote->fornecedor->nome }}</td>
+                        <td>{{ $lote->entrada }}</td>
+                        <td>{{ $lote->lote }}</td>
+                        <td>{{ $lote->nf }}</td>
+                        <td><a href=" {{ route('lotes.show', ['mp' => $mp->id ,'lote' => $lote->id]) }} " class="list"> Detalhes </a></td>
+                    </tr>                   
+                @endforeach
+            </tbody>
         </table>
     </div>
 

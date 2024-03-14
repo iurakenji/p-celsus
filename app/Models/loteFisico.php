@@ -10,13 +10,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class loteFisico extends Model
 {
-    public function lote(): HasOne {
-        return $this->hasOne(Lote::class);
-    }
 
     public function usuarios(): BelongsTo
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    public function lote(): BelongsTo
+    {
+        return $this->belongsTo(Lote::class);
     }
 
 
@@ -40,7 +42,6 @@ class loteFisico extends Model
         'envase_fim',
         'cond_aprovacao',
         'laudo_aprovado',
-        'cond_aprovacao',
         'aprovadoPor_id',
         'analisadoPor_id',
         'liberadoPor_id',
@@ -53,7 +54,7 @@ class loteFisico extends Model
 ];
 
 protected $primaryKey = 'id';
-
+protected $table = 'loteFisicos';
 
 protected $casts = [
         'entrada' => 'datetime:Y/m/d H:i:s',

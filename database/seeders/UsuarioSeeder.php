@@ -19,6 +19,12 @@ class UsuarioSeeder extends Seeder
         'password' => Hash::make('123456'),
         'slug' => 'kendjiiura', 'ativo' => true, 'protegido' => 0
             ]);
+        DB::table('usuarios')->insert(['login' => 'cristiane.hemsing','nome' => 'Cristiane Hemsing',
+        'tipo_acesso_id' => '2', 'conselho' => 'CRF/SC', 'registro' => '15900',
+        'genero' => 'F', 'titulo' => 'Farmacêutica', 'email' => 'cristiane.hemsing@essentia.com.br',
+        'password' => Hash::make('123456'),
+        'slug' => 'cristianehemsing', 'ativo' => true, 'protegido' => 0
+        ]);
         DB::table('usuarios')->insert(['login' => 'daiane.waltrick','nome' => 'Daiane Waltrick',
         'tipo_acesso_id' => '1', 'conselho' => null, 'registro' => null,
         'genero' => 'F', 'titulo' => 'Técnica', 'email' => null,

@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Lote extends Model
 {
@@ -43,7 +44,11 @@ class Lote extends Model
     }
     public function observacaos(): BelongsToMany
     {
-        return $this->belongsToMany(Observacao::class);
+        return $this->belongsToMany(Observacao::class, 'obs_add', 'relacao_id', 'observacao_id')->as('observacaos')->wherePivot('relacao_id',$this->id)->wherePivot('tipo','Lote');
+    }
+
+    public function loteFisico(): HasOne {
+        return $this->hasOne(LoteFisico::class);
     }
 
    public function getFc() {

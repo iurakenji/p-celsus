@@ -73,7 +73,7 @@ $user = Auth::user();
                     <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">CQ</a>
                       <ul class="dropdown-menu navbar-scroll ">
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Recebimento de Insumos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="{{ route('loteFisicos.index') }}">Recebimento de Insumos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Análises</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Consultar Insumos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Envase</a></li>

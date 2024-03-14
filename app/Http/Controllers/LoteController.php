@@ -6,9 +6,10 @@ use App\Models\Analise;
 use App\Models\Lote;
 use App\Models\Mp;
 use App\Models\Observacao;
+use App\Models\LoteFisico;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Redirect;
+use Illuminate\Support\Facades\Auth;
 
 //use Illuminate\Support\Facades\URL;
 
@@ -24,23 +25,13 @@ class LoteController extends Controller
     public function conferencia_addObs( Mp $mp, Lote $lote, Observacao $obs)
     {
         if ($obs->tipo == 'Matéria-Prima') {
-            $mp->observacaos()->attach($obs->id);
+            $mp->observacaos()->attach($obs->id, ['tipo' => 'Matéria-Prima']);
             return redirect()->route('lotes.conferencia_show_1', compact('mp','lote')); 
         }
         if ($obs->tipo == 'Lote') {
-            $lote->observacaos()->attach($obs->id);
+            $lote->observacaos()->attach($obs->id, ['tipo' => 'Lote']);
             return redirect()->route('lotes.conferencia_show_2', compact('mp','lote')); 
         }
-    }
-
-    public function conferencia_addObsAnalise( Mp $mp, Lote $lote, Observacao $obs, string $analise)
-    {
-            DB::table('analiselote_observacao')->insert([
-                'lote_id' => $lote->id,
-                'analise_id' => $analise,
-                'observacao_id' => $obs->id
-            ]);
-            return redirect()->route('lotes.conferencia_show_3', compact('mp','lote')); 
     }
 
     public function conferencia_delObs( Mp $mp, Lote $lote, Observacao $obs)
@@ -55,9 +46,29 @@ class LoteController extends Controller
         }
     }
 
-    public function conferencia_delObsAnalise( Mp $mp, Lote $lote, Observacao $obs, string $analise)
+    public function conferencia_addObsAnalise( Mp $mp, Lote $lote, Observacao $obs, Analise $analise, string $tipo)
     {
-            DB::table('analiselote_observacao')->where('lote_id', $lote->id)->where('analise_id', $analise)->where('observacao_id', $obs->id)->delete();
+        if ($tipo == 'MA'){
+            $analise->observacaos()->attach($obs->id);
+        }
+        if ($tipo == 'AL') {
+            DB::table('obs_add')->insert([
+                'relacao_id' => $analise->id,
+                'observacao_id' => $obs->id,
+                'tipo' => 'Análise de Lote'
+            ]);
+        }
+            return redirect()->route('lotes.conferencia_show_3', compact('mp','lote')); 
+    }
+
+    public function conferencia_delObsAnalise( Mp $mp, Lote $lote, Observacao $obs, Analise $analise, string $tipo)
+    {
+        if ($tipo == 'MA'){
+            $analise->observacaos()->detach($obs->id);
+        }
+        if ($tipo == 'AL') {
+            DB::table('obs_add')->where('relacao_id', $analise->id)->where('observacao_id',  $obs->id)->where('tipo', 'Análise de Lote')->delete();
+        }
             return redirect()->route('lotes.conferencia_show_3', compact('mp','lote')); 
     }
 
@@ -89,7 +100,8 @@ class LoteController extends Controller
         } else {
             $historico = false; 
         }
-        return view('lotes.conferencia_show_3', compact('mp','lote', 'historico'));
+        $analises = $lote->analises()->get();
+        return view('lotes.conferencia_show_3', compact('mp','lote', 'historico', 'analises'));
     }
 
     public function conferencia_show_3_save( Mp $mp, Lote $lote, Request $request)
@@ -280,16 +292,30 @@ class LoteController extends Controller
 
     public function conferencia_show_4( Mp $mp, Lote $lote)
     {
-        return view('lotes.conferencia_show_4', compact('mp','lote'));
+        $obs = DB::table('obs_add')->join('observacaos', 'observacao_id','observacaos.id')->where('relacao_id',$mp->id)->where('obs_add.tipo','Matéria-Prima')->get();
+        $obs = $obs->merge(DB::table('obs_add')->join('observacaos', 'observacao_id','observacaos.id')->where('relacao_id',$lote->id)->where('obs_add.tipo','Lote')->get());
+        $analises = $lote->analises()->get();
+        $obs_an = collect();
+        foreach ($analises as $analise) {
+            $obs_an = $obs_an->merge(DB::table('obs_add')->join('observacaos', 'observacao_id','observacaos.id')->where('relacao_id',$analise->id)->where('obs_add.tipo','Método Analítico')->get());
+            $an_lote = DB::table('analise_lote')->select('id')->where('lote_id',$lote->id)->where('analise_id',$analise->id)->value('id');
+            $obs_an = $obs_an->merge(DB::table('obs_add')->join('observacaos', 'observacao_id','observacaos.id')->where('relacao_id', $an_lote)->where('obs_add.tipo','Análise de Lote')->get());
+        }
+        $cont = 0;
+        foreach ($obs_an as $obs_a) {
+            $cont++;
+            $obs_a->indice = str_repeat('*', $cont);
+        }
+        //dd($obs_an);
+        return view('lotes.conferencia_show_4', compact('mp','lote', 'obs', 'obs_an'));
     }
 
-    public function conferencia_show_5( Mp $mp, Lote $lote, Request $request)
+    public function conferencia_show_5(Mp $mp, Lote $lote)
     {
-        if ($request->isMethod('put')){
-            $lote = Lote::updateorCreate($request->except('_token', '_method', 'bt_salvar'));
-            }
-        $analises = $mp->analises;
-        return view('lotes.conferencia_show_5', compact('mp','lote', 'analises'));
+        $usuario = Auth::user();
+        //dd($mp);
+        $lote->where('id', $mp->id)->update(['situacao' => 'Liberado', 'liberacao_gq' => now(), 'resp_gq_id' => $usuario->id]);
+        return redirect()->route('lotes.conferencia_index');
     }
 
     public function mp_index(Request $request)
@@ -326,10 +352,16 @@ class LoteController extends Controller
      */
     public function store(Request $request, Mp $mp)
     {
+        $usuario = Auth::user();
         $lote = $request->except('_token', '_method', 'bt_entrar');
+        $lote = $lote + (['resp_supri_id' => $usuario->id]);
+        //dd($lote);
         $lote = Lote::updateOrCreate($lote);
         $lote->fc = $lote->getFc();
         $lote->save();
+        $loteFisico = LoteFisico::create([
+            'lote_id' => $lote->id
+        ]);
 
         return redirect()->route('lotes.index', ['mp' => $lote->mp_id]);
     }

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class analise_lote extends Pivot
+class Analise_lote extends Pivot
 {
     use HasFactory;
 
@@ -31,7 +31,7 @@ class analise_lote extends Pivot
 
     public function observacaos(): BelongsToMany
     {
-        return $this->belongsToMany(Observacao::class, 'analiselote_observacao', 'lote_id', 'analise_id', 'observacao_id');
+        return $this->belongsToMany(Observacao::class, 'obs_add', 'relacao_id', 'observacao_id')->wherePivot('relacao_id',$this->id)->wherePivot('tipo','Análise de Lote');
     }
 
     protected $fillable = [
@@ -42,7 +42,12 @@ class analise_lote extends Pivot
         'lim_inf',
         'referencia_id',
         'informativo',
-        'analise_cq'
+        'analise_cq',
+        'resultado',
+        'aprovado',
+        'cond_aprovacao',
+        'obs',
+        'na'
 ];
 
     protected $primaryKey = 'id';

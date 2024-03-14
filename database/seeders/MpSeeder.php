@@ -57,7 +57,7 @@ class MpSeeder extends Seeder
 
             echo "Criando Lotes..."."\n";
 
-            $analises = DB::table('analisess')->select('situacao', 'cod_mp', 'situacao', 'fornecedor', 'quantidade', 'val', 'dt_mp', 'lote', 'nf', 'certificado', 'urgente', 'dt_laudo', 'situacao')->where('cod_mp',$mpAntigo->codigo)->orderby('cod_mp', 'asc')->get();
+            $analises = DB::table('analisess')->select('situacao', 'cod_mp', 'situacao', 'fornecedor', 'quantidade', 'val', 'dt_mp', 'lote', 'nf', 'certificado', 'urgente', 'dt_laudo', 'situacao', 'an_por', 'dt_analise', 'aprovado', 'cond_aprov','car_org','sol_h2o', 'sol_etoh', 'ph', 'densidade','pf')->where('cod_mp',$mpAntigo->codigo)->orderby('cod_mp', 'asc')->get();
             foreach ($analises as $analise) {
                 //dd($analise);
                 echo "Criando registro de lote ".$analise->lote."\n";
@@ -104,10 +104,10 @@ class MpSeeder extends Seeder
                         $situacao = 'Liberado';
                         break;
                     case 'Aguardando Laudo':
-                        $situacao = 'Aguardando Liberação';
+                        $situacao = 'Aguardando Conferência';
                         break;
                     default:
-                        $situacao = 'Aguardando Liberação';
+                        $situacao = '';
                         break;
                 }
 
@@ -137,6 +137,54 @@ class MpSeeder extends Seeder
 
             ]);
 
+            //Criar Lote Físico
+
+            $an_por = DB::table('usuarios')->select('id')->where('nome', $analise->an_por)->value('id');
+
+            switch ($analise->situacao) {
+                case 'Liberado':
+                    $situac = 'Liberado';
+                    break;
+                case 'Liberado com AR':
+                    $situac = 'Liberado com AR';
+                    break;
+                case 'Aprovação Pendente':
+                    $situac = 'Pendente';
+                    break;
+                case 'Reprovado':
+                    $situac = 'Reprovado';
+                    break;
+                case 'Devolvido':
+                    $situac = 'Devolvido';
+                    break;
+                case 'Aguardando Análise':
+                    $situac = 'Aguardando Análise';
+                    break;
+                case 'Aguardando Laudo':
+                    $situac = 'Aguardando Conferência';
+                    break;
+                default:
+                    $armazenamento = 1;
+                    break;
+            }
+
+            DB::table('loteFisicos')->insert([
+                'lote_id' => $lote_id,
+                'situacao' => $situac,
+                'entrada' => $analise->dt_mp,
+                'qt_usada' => $analise->quantidade,
+                'qt_ajustada' => $analise->quantidade,
+                'chegada' => $analise->dt_mp,
+                'liberacao' => $analise->dt_laudo,
+                'aprovacao' => $analise->dt_analise,
+                'mp_aprovada' => $analise->aprovado == 'Sim' ? 1 : 0,
+                'cond_aprovacao' => $analise->cond_aprov == 'Sim' ? 1 : 0,
+                'laudo_aprovado' => 1,
+                'aprovadoPor_id' => 1,
+                'analisadoPor_id' => $an_por,
+                'liberadoPor_id' => 2,
+            ]);
+
             //Início Análises
 
             $referencia_car = DB::table('referencias')->where('nome','=', $mpAntigo->ref_car_org)->get()->value('id');
@@ -155,7 +203,10 @@ class MpSeeder extends Seeder
                     'especificacao' => $mpAntigo->car_org,
                     'referencia_id' => $referencia_car,
                     'informativo' => 0,
-                    'analise_cq' => 1]);}
+                    'analise_cq' => 1,
+                    'resultado' => $analise->car_org,
+                    'aprovado' => 1,
+                ]);}
             if (isset($mpAntigo->ref_sol)) {
 /*Sol H2O*/     DB::table('analise_lote')->insert([
                     'lote_id' => $lote_id,
@@ -165,9 +216,10 @@ class MpSeeder extends Seeder
                     'especificacao' => null,
                     'referencia_id' => $referencia_sol,
                     'informativo' => 0,
-                    'analise_cq' => 1]);
-                    echo traduzSol($mpAntigo->li_h2o).' - '.$mpAntigo->li_h2o;
-                    echo traduzSol($mpAntigo->ls_h2o).' - '.$mpAntigo->ls_h2o;
+                    'analise_cq' => 1,
+                    'resultado' => $analise->sol_h2o != '' ? traduzSol($analise->sol_h2o) : null,
+                    'aprovado' => 1,
+                ]);
                     if (traduzSol($mpAntigo->ls_etoh) != 0) {
 /*Sol_ETOH*/    DB::table('analise_lote')->insert([
                     'lote_id' => $lote_id,
@@ -177,9 +229,10 @@ class MpSeeder extends Seeder
                     'especificacao' => null,
                     'referencia_id' => $referencia_sol,
                     'informativo' => 0,
-                    'analise_cq' => 1]);}
-                    echo traduzSol($mpAntigo->li_etoh).' - '.$mpAntigo->li_etoh." - ";
-                    echo traduzSol($mpAntigo->ls_etoh).' - '.$mpAntigo->ls_etoh."\n";
+                    'analise_cq' => 1,
+                    'resultado' => $analise->sol_etoh != '' ? traduzSol($analise->sol_etoh) : null,
+                    'aprovado' => 1,
+                ]);}
                         }
             if (isset($mpAntigo->ref_ph)) {
 /*pH*/          DB::table('analise_lote')->insert([
@@ -190,7 +243,10 @@ class MpSeeder extends Seeder
                     'especificacao' => null,
                     'referencia_id' => $referencia_ph,
                     'informativo' => 0,
-                    'analise_cq' => 1]);}
+                    'analise_cq' => 1,
+                    'resultado' => $analise->ph,
+                    'aprovado' => 1,
+                ]);}
             if (isset($mpAntigo->ref_dens)) {
 /*Dens*/        DB::table('analise_lote')->insert([
                     'lote_id' => $lote_id,
@@ -200,7 +256,10 @@ class MpSeeder extends Seeder
                     'especificacao' => null,
                     'referencia_id' => $referencia_dens,
                     'informativo' => 0,
-                    'analise_cq' => 1]);}
+                    'analise_cq' => 1,
+                    'resultado' => $analise->densidade,
+                    'aprovado' => 1,
+                ]);}
             if (isset($mpAntigo->ref_pf)) {
 /*PF*/          DB::table('analise_lote')->insert([
                     'lote_id' => $lote_id,
@@ -210,7 +269,10 @@ class MpSeeder extends Seeder
                     'especificacao' => null,
                     'referencia_id' => $referencia_pf,
                     'informativo' => 0,
-                    'analise_cq' => 1]);}
+                    'analise_cq' => 1,
+                    'resultado' => $analise->pf,
+                    'aprovado' => 1,
+                ]);}
 
             echo "... Sucesso\n";
 

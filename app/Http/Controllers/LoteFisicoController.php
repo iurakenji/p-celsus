@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\loteFisico;
+use App\Models\Mp;
+use App\Models\Lote;
 use Illuminate\Http\Request;
 
 class LoteFisicoController extends Controller
@@ -10,9 +12,14 @@ class LoteFisicoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+       $lotes = LoteFisico::where('situacao','Aguardando Análise')->orWhere('situacao','Aguardando Conferência')->paginate(15);
+
+            return view('loteFisicos.loteFisicos', compact('lotes'));
+
+        
     }
 
     /**

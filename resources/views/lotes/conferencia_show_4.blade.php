@@ -5,12 +5,6 @@
     use App\Models\Observacao;
     use Illuminate\Support\Carbon;
     
-    $observacaos_mp = DB::table('mp_observacao')->join('observacaos', 'mp_observacao.observacao_id', '=', 'observacaos.id')->where('mp_id',$mp->id)->get();
-    $observacaos_lote = DB::table('lote_observacao')->join('observacaos', 'lote_observacao.observacao_id', '=', 'observacaos.id')->where('lote_id',$lote->id)->get();
-    foreach ($observacaos_lote as $observacao_lote) {
-        $observacaos_mp->merge($observacao_lote);
-    }
-    dd($observacaos_mp);
 @endphp
 
 @section('titulo')
@@ -27,9 +21,7 @@ Visualização de Laudo - {{ $lote->mp->nome }}
 </div>
 <page size="A4"></page>
 
-<div class="container shadow" style="height: 300vh">
-   
-    
+<div class="container shadow" style="height: 205vh">    
     
     <div class="row text-center pt-5 px-5">
             <div class="col pt-3 border border-black"><img class="img-fluid" src=" {{asset("storage\img\Logo.png")}}" alt=" logo " style="width: 100% "></div>
@@ -86,13 +78,13 @@ Visualização de Laudo - {{ $lote->mp->nome }}
         <div class="row px-5">
             <div class="col text-center border border-black border-top-0 py-3">{{$analise->nome}} </div>
             @if ($analise->tipo == 'Categórica Nominal')
-                <div class="col text-center border border-black border-start-0 border-top-0 py-3">{{$analise->pivot->especificacao}} </div>
+                <div class="col text-center border border-black border-start-0 border-top-0 py-3">{{$analise->pivot->especificacao}}{{$obs_an->where('relacao_id',$analise->id)->value('indice')}} </div>
             @endif
             @if ($analise->tipo == 'Categórica Ordinal')
-                <div class="col text-center border border-black border-start-0 border-top-0 py-3">De {{DB::table('var_categoricas')->where('ordem',$analise->pivot->lim_inf)->value('nome')}} a {{DB::table('var_categoricas')->where('ordem',$analise->pivot->lim_sup)->value('nome')}} </div>
+                <div class="col text-center border border-black border-start-0 border-top-0 py-3">De {{DB::table('var_categoricas')->where('ordem',$analise->pivot->lim_inf)->value('nome')}} a {{DB::table('var_categoricas')->where('ordem',$analise->pivot->lim_sup)->value('nome')}}{{$obs_an->where('relacao_id',$analise->id)->value('indice')}} </div>
             @endif
             @if (($analise->tipo == 'Numérica Contínua') || ($analise->tipo == 'Numérica Ordinal'))
-                <div class="col text-center border border-black border-start-0 border-top-0 py-3">De {{$analise->pivot->lim_inf}}{{$analise->unidade}} até {{$analise->pivot->lim_sup}}{{$analise->unidade}} </div>
+                <div class="col text-center border border-black border-start-0 border-top-0 py-3">De {{$analise->pivot->lim_inf}}{{$analise->unidade}} até {{$analise->pivot->lim_sup}}{{$analise->unidade}}{{$obs_an->where('relacao_id',$analise->id)->value('indice')}} </div>
             @endif
             <div class="col text-center border border-black border-start-0 border-top-0 py-3"></div>
             <div class="col text-center border border-black border-start-0 border-top-0 py-3">{{DB::table('referencias')->find($analise->pivot->referencia_id)->nome}} </div>
@@ -117,19 +109,17 @@ Visualização de Laudo - {{ $lote->mp->nome }}
         <div class="col border border-black border-top-0 border-start-0 py-2"><b>Data:</b> </div>
     </div>
     <div class="row px-5">
-        <div class="col border border-black border-top-0 py-2"><b>Obs:</b>
-            @foreach ($lote->analises()->get() as $analise)
-                
+        <div class="col border border-black border-top-0 py-2 fs-6 lh-sm"><b>Obs:</b>
+            <small>
+            @foreach ($obs as $ob)
+                {{$ob->observacao}}
             @endforeach
-            @foreach ($observacaos as $observacao)
-            @php
-                $observacaos_analise = DB::table('analise_observacao')->join('observacaos', 'analise_observacao.observacao_id', '=', 'observacaos.id')->where('analise_id',$analise->id)->get();
-            @endphp
-                    {{$observacao->observacao}}
-                @endforeach
+            @foreach ($obs_an as $ob)
+                <b>{{$ob->indice}}</b>{{$ob->observacao}}
+            @endforeach
+            </small>
         </div>
     </div>
-    
 
 </div>
 
@@ -144,8 +134,8 @@ Visualização de Laudo - {{ $lote->mp->nome }}
                 </div>  
             </a>
             <a href="{{ route('lotes.conferencia_show_5', ['mp' => $mp->id, 'lote' => $lote->id]) }}">
-            <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
-                Próximo  <i class="material-icons">arrow_forward</i>
+            <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-success-subtle border border-success-subtle rounded-3">
+                Liberar Lote Para Análise  <i class="material-icons">arrow_forward</i>
             </div>
           </a>
         </div>

@@ -2,6 +2,7 @@
 
 @php
     use App\Models\Tipo;
+    use App\Models\Observacao;
 
     $tipos = Tipo::all();
 @endphp
@@ -69,13 +70,34 @@ Análises - {{ $analise->nome }}
             </select>
             </div>
         </div>
-        <div class="row m-2 w-auto">
-            <div class="col-12">
-            <label class="form-label" for='observacao'>Observação: </label>
-            <textarea class="form-control" placeholder="Observações" id="observacao" name="observacao">{{ $analise->observacao }}</textarea>
-            </div>
+        <div class="text-start ms-4 my-4">
+            <h5> Observações</h5>
+    </div>
+        <table class="table table-striped table-hover m-2 align-middle">
+            <thead>
+                <tr>
+                    <th style="width: 30%">Nome</th>
+                    <th style="width: 60%">Observação</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                @foreach ($obs as $ob)
+                <tr>
+                    <td>{{ $ob->nome}}</td>
+                    <td>{{ $ob->observacao}}</td>
+                    <td><a href=" {{ route('analises.delObs', ['analise' => $analise->id, 'observacao' => $ob->id]) }} " class="list"> Excluir </a></td>
+                </tr>
+                @endforeach
+                <hr>
+            </tbody>
+        </table>   
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center mb-3">
+            <button type="button" class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" data-bs-toggle="modal" data-bs-target="#modalObs{{$analise->id}}">
+                Adicionar Nova Observação
+            </button>
         </div>
-
+<hr>
         <div class="d-grid gap-4 d-md-flex justify-content-md-center">
             <a href="{{ route('analises.index', ['$tipo_id' => '0']) }}">
                 <div class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
@@ -96,4 +118,47 @@ Análises - {{ $analise->nome }}
         </form>
     </div>
 <br>
+
+<div class="modal fade modal-xl" id="modalObs{{$analise->id}}" tabindex="-1" aria-labelledby="modalObs" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Observações</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+                <table class="table table-striped table-hover m-2 align-middle">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">Nome</th>
+                            <th style="width: 60%">Observação</th>
+                            <th style="width: 20%"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @php
+                            if (isset($obs)) {
+                              $obs = $obs->pluck('id')->toArray();
+                            } else {
+                              $obs = [];
+                            }
+                            $observacaos = Observacao::where('tipo', 'Método Analítico')->whereNotIn('id',(array)$obs)->get();
+                        @endphp
+                        @foreach ($observacaos as $observacao)
+                        <tr>
+                            <td>{{ $observacao->nome }}</td>
+                            <td>{{ $observacao->observacao }}</td>
+                            <td><a href=" {{ route('analises.addObs', ['analise' => $analise->id, 'observacao' => $observacao->id]) }} " class="list"> Adicionar </a></td>
+                        </tr>
+        
+                        @endforeach
+                    </tbody>
+                </table>
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        </div>
+    </div>
+    </div>
+</div>
 @endsection

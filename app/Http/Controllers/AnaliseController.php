@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Analise;
+use App\Models\Observacao;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -47,8 +48,8 @@ class AnaliseController extends Controller
        $margem == null ? $analise->margem  = 0 : $analise->margem  = $request->margem;
        $valor_ar = $request->valor_ar;
        $valor_ar == null ? $analise->valor_ar  = 0 : $analise->valor_ar  = $request->valor_ar;
-       $analise->observacao = $request->observacao;
        $analise->tipo_id = $request->tipo_id;
+       $analise->protegido = 0;
 
        $analise->save();
 
@@ -60,7 +61,20 @@ class AnaliseController extends Controller
      */
     public function show(Analise $analise)
     {
-        return view('analises.show', compact('analise'));
+        $obs = $analise->observacaos()->get();
+        return view('analises.show', compact('analise', 'obs'));
+    }
+
+    public function addObs(Analise $analise, Observacao $observacao)
+    {
+        $analise->observacaos()->attach($observacao, ['tipo' => 'Método Analítico']);
+        return redirect()->route('analises.show', compact('analise')); 
+    }
+
+    public function delObs(Analise $analise, Observacao $observacao)
+    {
+        $analise->observacaos()->detach($observacao);
+        return redirect()->route('analises.show', compact('analise')); 
     }
 
     /**
@@ -78,16 +92,8 @@ class AnaliseController extends Controller
     {
        $analise = Analise::find($analise);
 
-       $analise->nome = $request->nome;
-       $analise->tipo = $request->tipo;
-       $analise->unidade = $request->unidade;
-       $analise->margem = $request->margem;
-       $analise->valor_ar = $request->valor_ar;
-       $analise->observacao = $request->observacao;
-       //dd($analise);
-
-       $analise->save();
-
+       //dd($request->except('_token', '_method', 'bt_entrar'));
+       $analise->update($request->except('_token', '_method', 'bt_entrar'));
        return redirect('/analises');
     }
 
