@@ -6,6 +6,10 @@ use Controllers\PagesController;
 use Illuminate\Support\Facades\Auth;
 
 $user = Auth::user();
+//dd($user);
+if ($user == null) {
+  route('login.logout');
+}
 ?>
 
 <!DOCTYPE html>

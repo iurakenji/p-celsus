@@ -6,7 +6,24 @@ Matérias-Primas
 
 @section('conteudo')
 
-<x-mps.query/>
+
+<div class="row mx-3  align-items-center w-auto">
+    <div class="col-10">
+        <form action=" {{ route('mps.query') }} " method="post" >
+            @csrf
+        <div class="input-field">
+            <label class="col-form-label" for='codigo'>Pesquisar: </label>
+            <input class="form-control" type="text" id="chave" name="chave">
+        </div>
+    </div>
+    <div class="col text-center mt-4">
+        <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle 
+    border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Pesquisar">
+        <i class="material-icons">search</i>  Pesquisar
+    </button>
+    </div>
+</form>
+</div>
 <hr>
     <div class="text-center">
         <h4>Matérias-Primas</h4>

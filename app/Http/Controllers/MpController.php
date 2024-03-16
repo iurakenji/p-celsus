@@ -207,22 +207,22 @@ class MpController extends Controller
      * Display a listing of the resource.
      */
 
-    public function index()
+    public function index(string $chave = null)
     {
-        $mps = Mp::paginate(10);
+        if ($chave) {
+            $mps = Mp::where('nome','like','%'.$chave.'%')->orWhere('nome_fc','like','%'.$chave.'%')->orWhere('nome_popular','like','%'.$chave.'%')->orWhere('cas','like','%'.$chave.'%')->orWhere('codigo','like','%'.$chave.'%')->paginate(20);
+        } else {
+            $mps = Mp::paginate(20);
+        }
         return view('mps.mps', compact('mps'));
     }
 
     public function query(Request $request)
     {
-        $mps = Mp::where('nome','like','%'.$request->chave.'%')->orWhere('nome_fc','like','%'.$request->chave.'%')->orWhere('nome_popular','like','%'.$request->chave.'%')->orWhere('cas','like','%'.$request->chave.'%')->orWhere('codigo','like','%'.$request->chave.'%')->paginate(10);
-        
-        return view('mps.mps', compact('mps'));
+        $chave = $request->chave;
+        return redirect()->route('mps.index', compact('chave'));
     }
 
-        /**
-     * Display the specified resource.
-     */
     public function show(Mp $mp)
     {
         return view('mps.show', compact('mp'));

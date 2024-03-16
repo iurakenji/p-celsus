@@ -12,7 +12,7 @@ Riscos
 
 
     <div class="row w-100">
-        <x-mps.analises :mp="$mp->id" />
+        <x-mps.lotes :mp="$mp->id" />
         <x-mps.observacoes :mp="$mp->id" />
         <x-mps.infos :mp="$mp->id" />
         <x-mps.setores :mp="$mp->id" />
