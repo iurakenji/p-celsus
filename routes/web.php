@@ -84,7 +84,12 @@ Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
 
-Route::get('/LoteFisicos', [loteFisicoController::class, 'index', ])->name('loteFisicos.index')->middleware('auth');
+Route::post('/loteFisicos/{origem}', [LoteFisicoController::class, 'query'])->name('loteFisicos.query')->middleware('auth');
+Route::get('/LoteFisicos/{chave?}', [loteFisicoController::class, 'index', ])->name('loteFisicos.index')->middleware('auth');
+Route::get('/loteFisicos/mp_index/{chave?}', [LoteFisicoController::class, 'mp_index'])->name('loteFisicos.mp_index')->middleware('auth');
+Route::get('/loteFisicos/edit/{mp}/{loteFisico?}', [LoteFisicoController::class, 'edit'])->name('loteFisicos.edit')->middleware('auth');
+Route::get('/loteFisicos/create/{mp}', [LoteFisicoController::class, 'create'])->name('loteFisicos.create')->middleware('auth');
+Route::match(['put','post'], '/loteFisicos/store/{loteFisico?}', [LoteFisicoController::class, 'store'])->name('loteFisicos.store')->middleware('auth');
 
 Route::get('/{analise}/varCategoricas/', [varCategoricaController::class, 'index', ])->name('varCategoricas.index')->middleware('auth');
 Route::get('/varCategoricas/{analise}/create/', [VarCategoricaController::class, 'create'])->name('varCategoricas.create')->middleware('auth');
@@ -99,7 +104,9 @@ Route::get('/analises/addObs/{analise}/{observacao}', [AnaliseController::class,
 Route::get('/analises/delObs/{analise}/{observacao}', [AnaliseController::class, 'delObs'])->name('analises.delObs')->middleware('auth');
 
 
-Route::match(['get','post'],'/lotes/mp_index/{query?}', [LoteController::class, 'mp_index'])->name('lotes.mp_index')->middleware('auth');
+Route::get('/lotes/mp_index/{chave?}', [LoteController::class, 'mp_index'])->name('lotes.mp_index')->middleware('auth');
+Route::post('/lotes/mp_index', [LoteController::class, 'query'])->name('lotes.query')->middleware('auth');
+
 Route::get('/lotes/conferencia_index', [LoteController::class, 'conferencia_index'])->name('lotes.conferencia_index')->middleware('auth');
 Route::get('/lotes/conferencia/show_1/{lote}', [LoteController::class, 'conferencia_show_1'])->name('lotes.conferencia_show_1')->middleware('auth');
 Route::match(['put','get'],'/lotes/conferencia/show_2/{mp}/{lote}', [LoteController::class, 'conferencia_show_2'])->name('lotes.conferencia_show_2')->middleware('auth');

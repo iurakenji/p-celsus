@@ -318,20 +318,23 @@ class LoteController extends Controller
         return redirect()->route('lotes.conferencia_index');
     }
 
-    public function mp_index(Request $request)
+    public function mp_index(string $chave = null)
     {
-        //URL::previous()
-        if (is_null($request)) {
-        $mps = Mp::paginate(15);
+        if ($chave) {
+            $mps = Mp::where('nome','like','%'.$chave.'%')->orWhere('nome_fc','like','%'.$chave.'%')->orWhere('nome_popular','like','%'.$chave.'%')->orWhere('cas','like','%'.$chave.'%')->orWhere('codigo','like','%'.$chave.'%')->paginate(20);
         } else {
-        $mps = Mp::where('nome','like','%'.$request->chave.'%')->orWhere('nome_fc','like','%'.$request->chave.'%')->orWhere('nome_popular','like','%'.$request->chave.'%')->orWhere('cas','like','%'.$request->chave.'%')->orWhere('codigo','like','%'.$request->chave.'%')->paginate(10);
+            $mps = Mp::paginate(20);
         }
             return view('lotes.mp_index', compact('mps'));
 
     }
-     /**
-     * Display a listing of the resource.
-     */
+
+    public function query(Request $request)
+    {
+        $chave = $request->chave;
+        return redirect()->route('lotes.mp_index', compact('chave'));
+    }
+
     public function index(Mp $mp)
     {
         $lotes = Lote::where('mp_id', $mp->id)->paginate(15);
@@ -339,23 +342,16 @@ class LoteController extends Controller
         return view('lotes.lotes', compact('lotes', 'mp'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create(Mp $mp)
     {
         return view('lotes.create', compact('mp'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, Mp $mp)
     {
         $usuario = Auth::user();
         $lote = $request->except('_token', '_method', 'bt_entrar');
         $lote = $lote + (['resp_supri_id' => $usuario->id]);
-        //dd($lote);
         $lote = Lote::updateOrCreate($lote);
         $lote->fc = $lote->getFc();
         $lote->save();
@@ -366,25 +362,16 @@ class LoteController extends Controller
         return redirect()->route('lotes.index', ['mp' => $lote->mp_id]);
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Mp $mp, Lote $lote)
     {
         return view('lotes.show', compact('lote'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(Lote $lote)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         $lote = $request->except('_token', '_method', 'bt_entrar');
@@ -395,9 +382,6 @@ class LoteController extends Controller
         return redirect()->route('lotes.index', ['mp' => $lote->mp_id]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         $mp = Lote::where('id',$id)->value('mp_id');

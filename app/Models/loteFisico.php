@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class loteFisico extends Model
+class LoteFisico extends Model
 {
 
     public function usuarios(): BelongsTo
@@ -53,7 +53,7 @@ class loteFisico extends Model
         'observacao',
 ];
 
-protected $primaryKey = 'id';
+protected $primaryKey = 'lote_id';
 protected $table = 'loteFisicos';
 
 protected $casts = [

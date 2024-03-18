@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('mp_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
             $table->foreignId('fornecedor_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->enum('situacao',['Aguardando Conferência', 'Liberado', 'Em Espera'])->default('Aguardando Conferência');
+            $table->enum('situacao',['Aguardando Conferência', 'Liberado', 'Em Espera', 'Recebido no CQ'])->default('Aguardando Conferência');
             $table->double('quantidade');
             $table->date('validade');
             $table->date('fabricacao');

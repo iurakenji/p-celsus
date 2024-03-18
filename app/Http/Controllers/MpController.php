@@ -135,9 +135,7 @@ class MpController extends Controller
 
     public function risco_index(Mp $mp)
     {
-
         $riscos = $mp->riscos->all();
-
         return view('mps.risco_index', compact('riscos','mp'));
     }
 

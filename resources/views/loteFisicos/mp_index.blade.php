@@ -9,7 +9,7 @@ Lotes: Selecionar Matéria-Prima
 
 <div class="row mx-3  align-items-center w-auto">
     <div class="col-10">
-        <form action=" {{ route('lotes.query') }} " method="post" >
+        <form action=" {{ route('loteFisicos.query', ['origem' => '2']) }} " method="post" >
             @csrf
         <div class="input-field">
             <label class="col-form-label" for='codigo'>Pesquisar: </label>
@@ -45,7 +45,7 @@ Lotes: Selecionar Matéria-Prima
                     <td style="width: 50%">{{ $mp->nome }}</td>
                     <td style="width: 20%">{{ $mp->tipo->nome }}</td>
                     <td style="width: 15%">{{ $mp->forma }}</td>
-                    <td style="width: 20%"><a href=" {{ route('lotes.index', ['mp' => $mp->id]) }} " class="list"> Visualizar</a></td>
+                    <td style="width: 20%"><a href=" {{ route('loteFisicos.create', ['mp' => $mp->id]) }} " class="list"> Selecionar</a></td>
                 </tr>
 
         @endforeach
