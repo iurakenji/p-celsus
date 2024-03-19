@@ -7,6 +7,7 @@ use App\Models\Mp;
 use App\Models\Lote;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class LoteFisicoController extends Controller
 {
@@ -27,9 +28,9 @@ class LoteFisicoController extends Controller
             $lotes = Lote::select('id')->whereIn('mp_id', $mps)->orderBy('id');
             $loteFisicos = LoteFisico::where(function (Builder $query) {
                 $query->where('situacao','Aguardando Análise')->orWhere('situacao','Aguardando Conferência');
-            })->whereIn('lote_id', $lotes)->paginate(15);
+            })->whereIn('lote_id', $lotes)->whereNull('chegada')->paginate(15);
         } else {
-            $loteFisicos = LoteFisico::where('situacao','Aguardando Análise')->orderBy('lote_id', 'asc')->paginate(15);
+            $loteFisicos = LoteFisico::where('situacao','Aguardando Conferência')->whereNull('chegada')->orderBy('lote_id', 'asc')->paginate(15);
         }
         return view('loteFisicos.loteFisicos', compact('loteFisicos'));
     }
@@ -54,15 +55,20 @@ class LoteFisicoController extends Controller
      */
     public function store(Request $request, LoteFisico $loteFisico = null)
     {
+        $usuario = Auth::user();
         if ($request->isMethod('put')){
             $loteFisico = $loteFisico->where('id',$loteFisico->id)->update($request->except('_token', '_method', 'bt_salvar'));
-            dd('não deu');
         }
         if ($request->isMethod('post')){
-            $lote = Lote::insert($request->except('_token', '_method', 'bt_salvar'));
-            dd($lote);
+            $lote = Lote::create($request->except('_token', '_method', 'bt_salvar'));
+            $loteFisico = LoteFisico::create([
+                'lote_id' => $lote->id,
+                'situacao' => 'Aguardando Conferência',
+                'entrada' => now(),
+                'chegada' => now(),
+                'recebidoPor_id' => $usuario->id,
+            ]);
         }
-        dd('não deu mesmo');
         return route('loteFisicos.index');
     }
 
@@ -77,7 +83,7 @@ class LoteFisicoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Mp $mp, LoteFisico $loteFisico = null)
+    public function edit(LoteFisico $loteFisico = null)
     {
         return view('loteFisicos.edit', compact('loteFisico'));
     }

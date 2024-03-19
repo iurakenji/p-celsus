@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('loteFisicos', function (Blueprint $table) {
-            $table->foreignId('lote_id')->constrained();
+            $table->foreignId('lote_id')->unique('lote_id')->constrained();
             $table->enum('situacao',['Aguardando Conferência','Aguardando Análise','Aguardando Envase', 'Aguardando Tratamento', 'Aguardando Produção', 'Pendente', 'Aguardando Aprovação', 'Aguardando Liberação', 'Liberado com AR', 'Reprovado', 'Devolvido', 'Descartado', 'Segregado', 'Liberado']);
             $table->dateTime('entrada', $precision = 0)->nullable();
             $table->double('qt_usada')->nullable();
             $table->double('qt_ajustada')->nullable();
             $table->dateTime('chegada', $precision = 0)->nullable();
+            $table->dateTime('conferido', $precision = 0)->nullable();
             $table->dateTime('tratamento_inicio', $precision = 0)->nullable();
             $table->dateTime('tratamento_fim', $precision = 0)->nullable();
             $table->dateTime('analise_inicio', $precision = 0)->nullable();

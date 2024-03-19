@@ -84,12 +84,12 @@ Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name
 Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
 Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');*/
 
-Route::post('/loteFisicos/{origem}', [LoteFisicoController::class, 'query'])->name('loteFisicos.query')->middleware('auth');
-Route::get('/LoteFisicos/{chave?}', [loteFisicoController::class, 'index', ])->name('loteFisicos.index')->middleware('auth');
-Route::get('/loteFisicos/mp_index/{chave?}', [LoteFisicoController::class, 'mp_index'])->name('loteFisicos.mp_index')->middleware('auth');
-Route::get('/loteFisicos/edit/{mp}/{loteFisico?}', [LoteFisicoController::class, 'edit'])->name('loteFisicos.edit')->middleware('auth');
-Route::get('/loteFisicos/create/{mp}', [LoteFisicoController::class, 'create'])->name('loteFisicos.create')->middleware('auth');
 Route::match(['put','post'], '/loteFisicos/store/{loteFisico?}', [LoteFisicoController::class, 'store'])->name('loteFisicos.store')->middleware('auth');
+Route::get('/LoteFisicos/{chave?}', [loteFisicoController::class, 'index', ])->name('loteFisicos.index')->middleware('auth');
+Route::post('/loteFisicos/{origem}', [LoteFisicoController::class, 'query'])->name('loteFisicos.query')->middleware('auth');
+Route::get('/loteFisicos/mp_index/{chave?}', [LoteFisicoController::class, 'mp_index'])->name('loteFisicos.mp_index')->middleware('auth');
+Route::get('/loteFisicos/edit/{loteFisico}', [LoteFisicoController::class, 'edit'])->name('loteFisicos.edit')->middleware('auth');
+Route::get('/loteFisicos/create/{mp}', [LoteFisicoController::class, 'create'])->name('loteFisicos.create')->middleware('auth');
 
 Route::get('/{analise}/varCategoricas/', [varCategoricaController::class, 'index', ])->name('varCategoricas.index')->middleware('auth');
 Route::get('/varCategoricas/{analise}/create/', [VarCategoricaController::class, 'create'])->name('varCategoricas.create')->middleware('auth');

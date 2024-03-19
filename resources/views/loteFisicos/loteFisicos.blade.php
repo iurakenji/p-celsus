@@ -26,9 +26,17 @@ Lotes
 </div>
 <hr>
 
+<div class="col text-center mt-4">
+    <a href="{{ route('loteFisicos.mp_index') }}">
+    <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Pesquisar">
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/><path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/></svg>
+    Nova Entrada
+    </button>
+</a>
+</div><br>
 <div class="text-center">
     <h4>Lotes Pendentes</h4>
-</div>
+</div><hr>
 
 
     <table class="table table-striped table-hover m-2 align-middle">
@@ -68,7 +76,7 @@ Lotes
                 <td style="width: 15%">{{ $loteFisico->lote->fornecedor->nome }}</td>
                 <td style="width: 15%">{{ $loteFisico->entrada }}</td>
                 <td style="width: 15%">{{ $loteFisico->lote->mp->tipo->nome }}</td>
-                <td class="text-center" style="width: 10%"><a href="{{ route('loteFisicos.edit', ['mp' => $loteFisico->lote->mp->id, 'loteFisico' => $loteFisico->lote_id]) }}" class="list"> Adicionar Recebimento </a></td>
+                <td class="text-center" style="width: 10%"><a href="{{ route('loteFisicos.edit', ['loteFisico' => $loteFisico->lote_id]) }}" class="list"> Adicionar Recebimento </a></td>
             </tr>
 
     @endforeach
@@ -80,13 +88,4 @@ Lotes
 
 {{ $loteFisicos->links('includes.pagination') }}
     </div>
-
-    <div class="col text-center mt-4">
-        <a href="{{ route('loteFisicos.mp_index') }}">
-        <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Pesquisar">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-journal-plus" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 5.5a.5.5 0 0 1 .5.5v1.5H10a.5.5 0 0 1 0 1H8.5V10a.5.5 0 0 1-1 0V8.5H6a.5.5 0 0 1 0-1h1.5V6a.5.5 0 0 1 .5-.5"/><path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/><path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/></svg>
-        Nova Entrada
-        </button>
-    </a>
-    </div><br>
 @endsection

@@ -24,7 +24,7 @@ Entrada de Lote Físico
 
     <form action=" {{ route('loteFisicos.store')}} " method="post">
         @csrf
-
+        <input type="hidden" name="mp_id" value="{{$mp->id}}">
         <div class="row mx-1 w-auto">
             <div class="col-4">
                 <label class="form-label" for='fornecedor'>Fornecedor: </label>

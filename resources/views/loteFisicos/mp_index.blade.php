@@ -6,7 +6,6 @@ Lotes: Selecionar Matéria-Prima
 
 @section('conteudo')
 
-
 <div class="row mx-3  align-items-center w-auto">
     <div class="col-10">
         <form action=" {{ route('loteFisicos.query', ['origem' => '2']) }} " method="post" >
@@ -26,7 +25,7 @@ Lotes: Selecionar Matéria-Prima
 </div>
 <hr>
     <div class="text-center">
-        <h4>Lotes: Selecionar Matéria-Prima</h4>
+        <h4>Chegada de Lotes: Selecionar Matéria-Prima</h4>
     </div>
         <table class="table table-striped table-hover m-2 w-auto">
             <thead>
@@ -54,5 +53,13 @@ Lotes: Selecionar Matéria-Prima
     </div>
 
 {{ $mps->links('includes.pagination') }}
-
+<hr>
+<div class="col text-center mt-4">
+    <a href="{{ route('loteFisicos.index') }}">
+    <button class="btn btn-primary shadow icon-link text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3" type="submit" name="bt_entrar" value="Pesquisar">
+        <i class="material-icons">arrow_back</i>
+    Voltar
+    </button>
+</a>
+</div><br>
 @endsection

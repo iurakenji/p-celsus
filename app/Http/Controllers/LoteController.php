@@ -17,7 +17,7 @@ class LoteController extends Controller
 {
     public function conferencia_index()
     {
-        $lotes = Lote::where('situacao','Aguardando Conferência')->orWhere('situacao','Em Espera')->paginate(10);
+        $lotes = Lote::where('situacao','Aguardando Conferência')->orWhere('situacao','Em Espera')->orderBy('urgente', 'desc')->paginate(10);
 
             return view('lotes.conferencia_index', compact('lotes'));
     }
@@ -313,8 +313,8 @@ class LoteController extends Controller
     public function conferencia_show_5(Mp $mp, Lote $lote)
     {
         $usuario = Auth::user();
-        //dd($mp);
-        $lote->where('id', $mp->id)->update(['situacao' => 'Liberado', 'liberacao_gq' => now(), 'resp_gq_id' => $usuario->id]);
+        $lote->update(['situacao' => 'Liberado', 'liberacao_gq' => now(), 'resp_gq_id' => $usuario->id]);
+        LoteFisico::where('lote_id',$lote->id)->update(['situacao' => 'Aguardando Análise', 'conferido' => now()]);
         return redirect()->route('lotes.conferencia_index');
     }
 
@@ -356,7 +356,9 @@ class LoteController extends Controller
         $lote->fc = $lote->getFc();
         $lote->save();
         $loteFisico = LoteFisico::create([
-            'lote_id' => $lote->id
+            'lote_id' => $lote->id,
+            'situacao' => 'Aguardando Conferência',
+            'entrada' => now(),
         ]);
 
         return redirect()->route('lotes.index', ['mp' => $lote->mp_id]);
