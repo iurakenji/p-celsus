@@ -78,12 +78,13 @@ if ($user == null) {
                       <a class="nav-link dropdown-toggle text-white" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">CQ</a>
                       <ul class="dropdown-menu navbar-scroll ">
                         <li><a class="dropdown-item icon-link icon-link-hover" href="{{ route('loteFisicos.index') }}">Recebimento de Insumos</a></li>
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Análises</a></li>
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Consultar Insumos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="{{ route('loteFisicos.analises_index') }}">Análises</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Tratamento Farmacotécnico</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Envase</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Revisão de Laudos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Liberação de Laudos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Solicitações de Insumos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Consultar Insumos</a></li>
                       </ul>
                     </li>
           </ul>

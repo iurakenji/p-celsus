@@ -313,8 +313,8 @@ class LoteController extends Controller
     public function conferencia_show_5(Mp $mp, Lote $lote)
     {
         $usuario = Auth::user();
-        $lote->update(['situacao' => 'Liberado', 'liberacao_gq' => now(), 'resp_gq_id' => $usuario->id]);
-        LoteFisico::where('lote_id',$lote->id)->update(['situacao' => 'Aguardando Análise', 'conferido' => now()]);
+        $lote->update(['situacao' => 'Aguardando Análise', 'liberacao_gq' => now(), 'resp_gq_id' => $usuario->id]);
+        LoteFisico::where('lote_id',$lote->id)->update(['conferido' => now()]);
         return redirect()->route('lotes.conferencia_index');
     }
 

@@ -56,7 +56,7 @@ class Lote extends Model
     $teor = $this->teor;
     $umidade = $this->umidade;
 
-    if ($teor == null || $umidade == null) {
+    if (is_null($teor) || is_null($umidade)) {
         return 1;
     }
 

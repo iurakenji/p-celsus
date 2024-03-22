@@ -51,9 +51,9 @@ Lotes
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach ($loteFisicos as $loteFisico)
+            @foreach ($lotes as $lote)
             @php
-            switch ($loteFisico->situacao) {
+            switch ($lote->situacao) {
                 case 'Aguardando Análise':
                     $cor = 'LimeGreen';
                     break;
@@ -71,12 +71,12 @@ Lotes
             }
             @endphp
             <tr>
-                <td style="width: 10%"><span style="color: {{ $cor }}">{{ $loteFisico->situacao }}</span></td>
-                <td style="width: 30%">{!! ($loteFisico->urgente == 1 ? "<b class='text-danger'>URGENTE! - </b>" : '').$loteFisico->lote->mp->codigo.' - '.$loteFisico->lote->mp->nome !!}</td>
-                <td style="width: 15%">{{ $loteFisico->lote->fornecedor->nome }}</td>
-                <td style="width: 15%">{{ $loteFisico->entrada }}</td>
-                <td style="width: 15%">{{ $loteFisico->lote->mp->tipo->nome }}</td>
-                <td class="text-center" style="width: 10%"><a href="{{ route('loteFisicos.edit', ['loteFisico' => $loteFisico->lote_id]) }}" class="list"> Adicionar Recebimento </a></td>
+                <td style="width: 10%"><span style="color: {{ $cor }}">{{ $lote->situacao }}</span></td>
+                <td style="width: 30%">{!! ($lote->urgente == 1 ? "<b class='text-danger'>URGENTE! - </b>" : '').$lote->mp->codigo.' - '.$lote->mp->nome !!}</td>
+                <td style="width: 15%">{{ $lote->fornecedor->nome }}</td>
+                <td style="width: 15%">{{ $lote->entrada }}</td>
+                <td style="width: 15%">{{ $lote->mp->tipo->nome }}</td>
+                <td class="text-center" style="width: 10%"><a href="{{ route('loteFisicos.edit', ['lote' => $lote->id]) }}" class="list"> Adicionar Recebimento </a></td>
             </tr>
 
     @endforeach
@@ -86,6 +86,6 @@ Lotes
 
     <div class="row center">
 
-{{ $loteFisicos->links('includes.pagination') }}
+{{ $lotes->links('includes.pagination') }}
     </div>
 @endsection

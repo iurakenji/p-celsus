@@ -33,6 +33,9 @@ return new class extends Migration
             $table->boolean('tintura')->default('0');
             $table->boolean('producao')->default('0');
             $table->boolean('micronizado')->default('0');
+            $table->boolean('colorido')->default('0');
+            $table->boolean('odor')->default('0');
+            $table->tinyInteger('puro_diluido')->default('0');
             $table->foreignId('grupodescarte_id')->nullable()->constrained();
             $table->boolean('patenteado')->default('0');
             $table->foreignId('fornecedor_id')->nullable()->constrained();

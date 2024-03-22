@@ -44,6 +44,10 @@ class MpSeeder extends Seeder
                     'enzima' => ($mpAntigo->enzima == 'Sim' ? 1 : 0),
                     'producao' => ($mpAntigo->producao == 'Sim' ? 1 : 0),
                     'micronizado' => ($mpAntigo->micronizado == 'Sim' ? 1 : 0),
+                    'colorido' => ($mpAntigo->colorido == 'Sim' ? 1 : 0),
+                    'odor' => ($mpAntigo->odor == 'Sim' ? 1 : 0),
+                    'puro_diluido' => ($mpAntigo->diluido == 'Sim' ? 1 : 0),
+                    
                     'p344' => ($mpAntigo->controlado == 'Sim' ? 1 : 0),
                     'pf' => ($mpAntigo->pfed == 'Sim' ? 1 : 0),
                     'pc' => ($mpAntigo->pc == 'Sim' ? 1 : 0),
@@ -92,13 +96,13 @@ class MpSeeder extends Seeder
                         $situacao = 'Liberado';
                         break;
                     case 'Aprovação Pendente':
-                        $situacao = 'Liberado';
+                        $situacao = 'Pendente';
                         break;
                     case 'Reprovado':
-                        $situacao = 'Liberado';
+                        $situacao = 'Reprovado';
                         break;
                     case 'Aguardando Análise':
-                        $situacao = 'Liberado';
+                        $situacao = 'Aguardando Análise';
                         break;
                     case 'Devolvido':
                         $situacao = 'Liberado';
@@ -141,36 +145,8 @@ class MpSeeder extends Seeder
 
             $an_por = DB::table('usuarios')->select('id')->where('nome', $analise->an_por)->value('id');
 
-            switch ($analise->situacao) {
-                case 'Liberado':
-                    $situac = 'Liberado';
-                    break;
-                case 'Liberado com AR':
-                    $situac = 'Liberado com AR';
-                    break;
-                case 'Aprovação Pendente':
-                    $situac = 'Pendente';
-                    break;
-                case 'Reprovado':
-                    $situac = 'Reprovado';
-                    break;
-                case 'Devolvido':
-                    $situac = 'Devolvido';
-                    break;
-                case 'Aguardando Análise':
-                    $situac = 'Aguardando Análise';
-                    break;
-                case 'Aguardando Laudo':
-                    $situac = 'Aguardando Conferência';
-                    break;
-                default:
-                    $armazenamento = 1;
-                    break;
-            }
-
             DB::table('loteFisicos')->insert([
                 'lote_id' => $lote_id,
-                'situacao' => $situac,
                 'entrada' => $analise->dt_mp,
                 'qt_usada' => $analise->quantidade,
                 'qt_ajustada' => $analise->quantidade,
