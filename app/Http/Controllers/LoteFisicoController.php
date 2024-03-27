@@ -8,9 +8,20 @@ use App\Models\Lote;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class LoteFisicoController extends Controller
 {
+    public function urgencia(Lote $lote)
+    {
+        $lote->update(['urgente' => 1]);
+        return redirect()->route('loteFisicos.analises_index');
+    }
+
+    public function resultado(Lote $lote)
+    {
+        return view('loteFisicos.resultado', compact('lote'));
+    }
     public function query(string $origem, Request $request)
     {
         if ($origem == 1) {
@@ -46,15 +57,13 @@ class LoteFisicoController extends Controller
     public function mp_index(string $chave = null)
     {
         if ($chave) {
-            $mps = Mp::select('id')->whereAny([
-                'nome',
-                'nome_fc',
-                'nome_popular',
-                'cas',
-                'codigo',
-                'lote',
-                'nf',
-            ],'LIKE', '%'.$chave.'%')->get();
+            $mps = Mp::where(function (Builder $q) use ($chave){
+                return $q->where('nome','LIKE', '%'.$chave.'%')
+                ->orWhere('nome_fc','LIKE', '%'.$chave.'%')
+                ->orWhere('nome_popular','LIKE', '%'.$chave.'%')
+                ->orWhere('cas','LIKE', '%'.$chave.'%')
+                ->orWhere('codigo','LIKE', '%'.$chave.'%');
+            })->paginate(20);
         } else {
             $mps = Mp::paginate(20);
         }
@@ -63,23 +72,77 @@ class LoteFisicoController extends Controller
 
     public function analises_index(Request $request)
     {
-        $situacao = $request->situacao;
+        /*$mps =  Mp::select('id')
+            ->when(isset($request->chave), function(Builder $q) use ($chave){
+                return $q->where('nome','LIKE','%'.$chave.'%')
+                ->orWhere('nome_fc','LIKE','%'.$chave.'%')
+                ->orWhere('nome_popular','LIKE','%'.$chave.'%')
+                ->orWhere('cas','LIKE','%'.$chave.'%')
+                ->orWhere('codigo','LIKE','%'.$chave.'%');
+            },function(Builder $q){
+                return $q->where('nome','LIKE','%');
+            })
+            ->when($request->forma != 'Todas', function (Builder $q) use ($forma){
+                return $q->where('forma', $forma);
+            }, function(Builder $q){
+                return $q->where('forma','LIKE','%');
+            })
+            ->when($request->tipo != 'Todos', function (Builder $q) use ($tipo_id){
+                return $q->where('tipo_id', $tipo_id);
+            }, function(Builder $q){
+                return $q->where('tipo','LIKE','%');
+            });*/
+
+        $tipo_id = $request->tipo_id;
+        $forma = $request->forma;
         $chave = $request->chave;
+
         if ($request->isMethod('post')) {
+            if ($request->chave) {
+            $chave = 'nome LIKE "%'.$request->chave.'%"';
+            } else {
+                $chave = 'nome LIKE "%"';
+            }
+            if ($request->forma != 'Todas') {
+                $chave = $chave.' AND forma = "'.$request->forma.'"';
+                }
+            if ($request->tipo_id != 'Todos') {
+                $chave = $chave.' AND tipo_id = "'.$request->tipo_id.'"';
+                }
+            if ($request->tratado) {
+                $chave = $chave.' AND tratado = 1';
+                }
+            if ($request->lacto) {
+                $chave = $chave.' AND lacto = 1';
+                }
+            if ($request->tintura) {
+                $chave = $chave.' AND tintura = 1';
+                }
+            if ($request->micronizado) {
+                $chave = $chave.' AND micronizado = 1';
+                }
+            if ($request->colorido) {
+                $chave = $chave.' AND colorido = 1';
+                }
+            if ($request->odor) {
+                $chave = $chave.' AND odor = 1';
+                }
 
-        $mps =  Mp::select('id')->where('nome','LIKE','%'.$request->chave.'%')
-                ->orWhere('nome_fc','LIKE','%'.$request->chave.'%')
-                ->orWhere('nome_popular','LIKE','%'.$request->chave.'%')
-                ->orWhere('cas','LIKE','%'.$request->chave.'%')
-                ->orWhere('codigo','LIKE','%'.$request->chave.'%')->get();
+            $mps = Mp::select('id')->whereRaw($chave);
 
-        $lotes = Lote::when($request->situacao != 'Todas', function(Builder $query) {
-                $query->where('situacao', 'Aguardando Análise');
-                })
-            ->paginate(20);
+            $lotes = Lote::whereIn('mp_id', $mps)
+            ->where(function (Builder $q) {
+                $q->where('situacao', 'Aguardando Conferência')
+                ->orWhere('situacao', 'Aguardando Análise');
+            })->paginate(20);
             return view('loteFisicos.analises', compact('lotes'));
+
         } else {
-            $lotes = Lote::where('situacao', 'Aguardando Análise')->paginate(20);
+            $lotes = Lote::where(function (Builder $q) {
+                $q->where('situacao', 'Aguardando Conferência')
+                ->orWhere('situacao', 'Aguardando Análise');
+            })
+            ->paginate(20);
             return view('loteFisicos.analises', compact('lotes'));
         }
     }

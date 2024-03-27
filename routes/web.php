@@ -44,8 +44,8 @@ Route::get('/', [PagesController::class, 'index'])->name('index');
 Route::post('/login/authenticate', [LoginController::class, 'authenticate'])->name('login.authenticate');
 Route::get('/login/logout', [LoginController::class, 'logout'])->name('login.logout');
 
-Route::get('/mps/{chave?}', [MpController::class, 'index'])->name('mps.index')->middleware('auth');
 Route::resource('mps', MpController::class)->except(['index'])->middleware('auth');
+Route::get('/mps/{chave?}', [MpController::class, 'index'])->name('mps.index')->middleware('auth');
 Route::post('/mps', [MpController::class, 'query'])->name('mps.query')->middleware('auth');
 
 Route::get('/mps/{mp}/{analise}/analiseobs_index', [MpController::class, 'analiseobs_index'])->name('mps.analiseobs_index')->middleware('auth');
@@ -91,6 +91,8 @@ Route::get('/LoteFisicos/{chave?}', [loteFisicoController::class, 'index', ])->n
 Route::post('/loteFisicos/{origem}', [LoteFisicoController::class, 'query'])->name('loteFisicos.query')->middleware('auth');
 Route::get('/loteFisicos/mp_index/{chave?}', [LoteFisicoController::class, 'mp_index'])->name('loteFisicos.mp_index')->middleware('auth');
 Route::get('/loteFisicos/edit/{lote}', [LoteFisicoController::class, 'edit'])->name('loteFisicos.edit')->middleware('auth');
+Route::get('/loteFisicos/resultado/{lote}', [LoteFisicoController::class, 'resultado'])->name('loteFisicos.resultado')->middleware('auth');
+Route::get('/loteFisicos/urgencia/{lote}', [LoteFisicoController::class, 'urgencia'])->name('loteFisicos.urgencia')->middleware('auth');
 Route::get('/loteFisicos/create/{mp}', [LoteFisicoController::class, 'create'])->name('loteFisicos.create')->middleware('auth');
 
 Route::get('/{analise}/varCategoricas/', [varCategoricaController::class, 'index', ])->name('varCategoricas.index')->middleware('auth');

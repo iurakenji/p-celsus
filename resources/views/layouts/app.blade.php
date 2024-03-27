@@ -84,7 +84,7 @@ if ($user == null) {
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Revisão de Laudos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Liberação de Laudos</a></li>
                         <li><a class="dropdown-item icon-link icon-link-hover" href="#">Solicitações de Insumos</a></li>
-                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Consultar Insumos</a></li>
+                        <li><a class="dropdown-item icon-link icon-link-hover" href="#">Histórico de Análises</a></li>
                       </ul>
                     </li>
           </ul>

@@ -42,17 +42,8 @@ Lotes
           </h2>
           <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                <div class="row mx-1 w-95">
-                    <div class="col-4">
-                        <label class="form-label" for='situacao'>Situação: </label>
-                        <select class="form-select" id="situacao" name="situacao">
-                                <option value="todas">Todas</option>
-                            @foreach ($situacaos as $situacao)
-                                <option value="{{ $situacao }}">{{ $situacao }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                <div class="col-4">
+                <div class="row mx-1 d-flex justify-content-evenly">
+                <div class="col-5">
                     <label class="form-label" for='forma'>Forma: </label>
                     <select class="form-select" id="forma" name="forma">
                             <option value="Sólido" >Todas</option>
@@ -64,7 +55,7 @@ Lotes
                             <option value="Outros">Outros</option>
                     </select>
                 </div>
-                <div class="col-4">
+                <div class="col-5">
                     <label class="form-label" for='tipo_id'>Tipo: </label>
                     <select class="form-select" id="tipo_id" name="tipo_id">
                             <option value="Todos">Todos</option>
@@ -170,7 +161,22 @@ Lotes
                 <td style="width: 15%">{{ $lote->fornecedor->nome }}</td>
                 <td style="width: 15%">{{ $lote->entrada }}</td>
                 <td style="width: 15%">{{ $lote->mp->tipo->nome }}</td>
-                <td class="text-center" style="width: 10%"><a href="{{ route('loteFisicos.edit', ['lote' => $lote->id]) }}" class="list"> Adicionar Resultados </a></td>
+                        @if ($lote->situacao == 'Aguardando Conferência' && $lote->urgente == 0)
+                        <td class="text-center">
+                            <a class="link-danger link-underline-danger" href="{{ route('loteFisicos.urgencia', ['lote' => $lote->id]) }}" class="list">  
+                            Solicitar Urgência  
+                        </a></td>
+                        @endif 
+                        @if ($lote->situacao == 'Aguardando Conferência' && $lote->urgente == 1)
+                        <td class="text-center"> 
+                            Solicitado Urgência   
+                        </td>
+                        @endif
+                        @if ($lote->situacao == 'Aguardando Análise')
+                        <td class="text-center"><a href="{{ route('loteFisicos.resultado', ['lote' => $lote->id]) }}" class="list">  
+                            Adicionar Resultados
+                        </a></td>
+                        @endif
             </tr>
 
     @endforeach
