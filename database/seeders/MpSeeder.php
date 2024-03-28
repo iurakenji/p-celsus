@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\VarCategorica;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +20,7 @@ class MpSeeder extends Seeder
         DB::unprepared(file_get_contents('storage\app\public\analisess.sql'));
         $mp_id = 0;
         $lote_id = 0;
-        $mpAntigos = DB::table('mp')->select('codigo','nome','nome_fc','tipo','cas','nome_popular','parte_usada','mp_vegetal','dcb_dci','m_potes', 'hormonio', 'citostatico', 'controlado', 'pfed', 'pc', 'exercito','micronizado', 'lacto', 'tintura', 'enzima', 'producao', 'li_h2o', 'ls_h2o', 'li_etoh', 'ls_etoh', 'li_ph', 'ls_ph', 'li_densidade', 'ls_densidade', 'li_pf', 'ls_pf', 'ref_car_org', 'ref_sol', 'ref_dens','ref_ph', 'ref_pf', 'car_org','armazenamento')->orderby('nome', 'asc')->get();
+        $mpAntigos = DB::table('mp')->select('codigo','nome','nome_fc','tipo','cas','nome_popular','parte_usada','mp_vegetal','dcb_dci','m_potes', 'hormonio', 'citostatico', 'controlado', 'pfed', 'pc', 'exercito','micronizado', 'lacto', 'tintura', 'enzima', 'producao', 'li_h2o', 'ls_h2o', 'li_etoh', 'ls_etoh', 'li_ph', 'ls_ph', 'li_densidade', 'ls_densidade', 'li_pf', 'ls_pf', 'ref_car_org', 'ref_sol', 'ref_dens','ref_ph', 'ref_pf', 'car_org','armazenamento','colorido','odor','diluido')->orderby('nome', 'asc')->get();
             foreach ($mpAntigos as $mpAntigo) {
                 ++$mp_id;
                 echo "Criando registro ".$mp_id." - ";
@@ -47,7 +48,6 @@ class MpSeeder extends Seeder
                     'colorido' => ($mpAntigo->colorido == 'Sim' ? 1 : 0),
                     'odor' => ($mpAntigo->odor == 'Sim' ? 1 : 0),
                     'puro_diluido' => ($mpAntigo->diluido == 'Sim' ? 1 : 0),
-                    
                     'p344' => ($mpAntigo->controlado == 'Sim' ? 1 : 0),
                     'pf' => ($mpAntigo->pfed == 'Sim' ? 1 : 0),
                     'pc' => ($mpAntigo->pc == 'Sim' ? 1 : 0),
@@ -267,5 +267,26 @@ class MpSeeder extends Seeder
 
         Schema::drop('analisess');
         Schema::drop('mp');
+    $varCategoricas = VarCategorica::all();
+    foreach ($varCategoricas as $varCategorica) {
+        switch ($varCategorica->analise_id) {
+            case '2':
+                $varCategorica->update(['nome' => $varCategorica->nome.' em água']);
+                break;
+            case '3':
+                $varCategorica->update(['nome' => $varCategorica->nome.' em etanol']);
+                break;
+            case '7':
+                $varCategorica->update(['nome' => $varCategorica->nome.' em água quente']);
+                break;
+            case '8':
+                $varCategorica->update(['nome' => $varCategorica->nome.' em isopropanol']);
+                break;
+            default:
+                # code...
+                break;
+        }
+    }
+
     }
 }
